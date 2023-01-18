@@ -75,12 +75,21 @@ WSGI_APPLICATION = 'MJ.wsgi.application'
 
 DATABASES = {
     'default': {
+<<<<<<< HEAD
         'ENGINE': 'django.db.backends.postgresql',
         #'NAME': os.path.join(BASE_DIR, 'infodb'),
         'NAME': 'infodb',
         'USER': 'admin',
         'PASSWORD': 'P@ssw0rd',
         'HOST': 'localhost',
+=======
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'infodb', 
+        'USER': 'admin',
+        'PASSWORD': 'P@ssw0rd',
+        'HOST': 'localhost', 
+>>>>>>> 23d73d2add935a713f83480a623a2a4010863ea1
         'PORT': '',
     }
 }
