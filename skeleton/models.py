@@ -24,7 +24,7 @@ class Patient(models.Model):
     home_phone = models.BigIntegerField()
     date_of_admission = models.DateTimeField(default = timezone.now)
     file_number = models.CharField(max_length=300) 
-    doctor_name = models.CharField(max_length=100)
+    docter_name = models.CharField(max_length=100)
     description = models.TextField()
     
     
