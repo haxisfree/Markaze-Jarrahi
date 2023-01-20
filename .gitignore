@@ -1,1 +1,4 @@
 my_venv/
+MJ/__pycache__/
+skeletom/__pycache__/
+skeleton/migrations/
