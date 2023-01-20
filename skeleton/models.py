@@ -13,6 +13,7 @@ class Patient(models.Model):
         ('F', 'Female')
     )
 
+    id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=200)    
     father_name = models.CharField(max_length=100)
@@ -23,7 +24,7 @@ class Patient(models.Model):
     home_phone = models.BigIntegerField()
     date_of_admission = models.DateTimeField(default = timezone.now)
     file_number = models.CharField(max_length=300) 
-    docter_name = models.CharField(max_length=100)
+    doctor_name = models.CharField(max_length=100)
     description = models.TextField()
     
     
