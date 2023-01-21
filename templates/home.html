@@ -2,11 +2,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for patient in object_list %}
+   
         <div class="post-entry">
-            <h2><a href="{% url 'patient_info' patient.pk %}">{{ patient.last_name }}</a></h2>
+            <h2><a href="{% url 'patients_list' %}">list of patients</a></h2>
             
         </div>
-    {% endfor %}
+
 {% endblock content %}
 
