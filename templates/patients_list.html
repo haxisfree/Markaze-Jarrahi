@@ -16,10 +16,10 @@
         {% for patient in object_list %}
         <!-- <a href="{% url 'patient_info' patient.pk %}"> -->
         <tr class="patient" onclick="window.location='#';">
-          <td>{{ patient.first_name }} {{ patient.last_name }}</td>
+          <td href="{% url 'patient_info' patient.pk %}" >{{ patient.first_name }} {{ patient.last_name }}</td>
           <td>{{patient.date_of_admission}}</td>
           <td>{{patient.docter_name}}</td>
-          <td class="button"><button class="show-patient">مشاهده</button></td>
+          <td href="{% url 'patient_info' patient.pk %}" class="button"><button class="show-patient">مشاهده</button></td>
           <td class="button"><button class="delete-patient">حذف</button></td>
         </tr>
         </a>
