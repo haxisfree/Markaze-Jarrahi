@@ -5,15 +5,20 @@
 <html>
     <head>
         <title>base app</title>
+        <link rel="stylesheet" href="static/css/base.css">
     </head>
     <body>
-        <header>
-            <h1><a href="{% url 'home' %}">Patient List</a></h1>
-        </header>
-        <div>
-            {% block content %}
-            {% endblock content %}
+        <div class="sidebar">
+            <img id="logo" src="">
+            <div class="menu">
+                <a href="#"><img class="icon" src="">صفحه ی اصلی</a>
+                <a href="#" class="active"><img class="icon" src="">لیست بیماران</a>
+                <a href="#"><img class="icon" src="">پشتیبانی</a>
+            </div>
         </div>
+              
+        {% block content %}
+        {% endblock content %}
     </body>
 </html>
     
