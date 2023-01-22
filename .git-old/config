@@ -1,0 +1,14 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "MJremote"]
+	url = git@github.com:haxisfree/Markaze-Jarrahi.git
+	fetch = +refs/heads/*:refs/remotes/MJremote/*
+[branch "main"]
+	remote = MJremote
+	merge = refs/heads/main
+[branch "nmain"]
+	remote = MJremote
+	merge = refs/heads/nmain
