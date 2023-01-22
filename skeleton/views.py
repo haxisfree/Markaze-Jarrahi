@@ -4,6 +4,7 @@ from django.shortcuts import render
 # Create your views here.
 
 from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic.edit import CreateView
 from .models import Patient
 
 class HomeView(TemplateView):
@@ -19,3 +20,9 @@ class PatientInfoView(DetailView):
 class PatientsListView(ListView):
     model = Patient
     template_name = 'patients_list.html'
+
+
+class PatientCreateView(CreateView):
+    model = Patient
+    template_name = 'new_patient.html'
+    fields='__all__'

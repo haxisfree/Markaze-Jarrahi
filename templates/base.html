@@ -19,6 +19,7 @@
         <div class="sidebar">
             <img id="logo" src="">
             <div class="menu">
+                <a href="{% url 'new_patient' %}">new patient</a>
                 <a href="{% url 'home' %}"><img class="icon" src="">صفحه ی اصلی</a>
                 <a href="{% url 'patients_list' %}" class="active"><img class="icon" src="">لیست بیماران</a>
                 <a href="#"><img class="icon" src="">پشتیبانی</a>
@@ -29,4 +30,3 @@
         {% endblock content %}
     </body>
 </html>
-    
