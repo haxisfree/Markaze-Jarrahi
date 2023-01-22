@@ -1,5 +1,131 @@
+:root {
+    --white: #ffffff;
+    --blue: #2a78ff;
+    --light-blue: #f0f5ff;
+    --black: #212529;
+    --gray: #6c757d;
+    --light-gray:#f9f9f9;
+}
+body {
+    box-sizing: border-box;
+    font-family: "Lato", sans-serif;
+    text-align: right;
+    direction: rtl;
+}
+            
+.sidebar {
+  height: 100%;
+  width: 18%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: var(--white);
+  overflow-x: hidden;
+  padding: 2%;
+}
 
-header h1 a {
-    color: red;
+.sidebar a {
+  text-decoration: none;
+  font-size: 20px;
+  color: var(--gray);
+  display: block;
+  padding: 14px;
+  margin: 20px 0px;
+  border-right: 6px solid var(--white);
+  transition: 0.3s;
+}
+
+.sidebar a:hover, .sidebar a.active {
+  color: var(--blue);
+  border-radius: 5px;
+  background-color: var(--light-blue);
+  border-right: 6px solid var(--blue);
+}
+
+#logo{
+    width: 100%;
+    height: 100px;
+    margin: 20px 0 35px 0;
+}
+
+.main {
+    height: 100%;
+    width: 72%;
+    position: fixed;
+    top: 0;
+    right: 22%;
+    padding: 3%;
+    background-color: var(--light-gray);
+}
+
+#search {
+    width: 400px;
+    background-color: var(--white);
+    background-image: url('');
+    background-position: 380px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 12px 40px 12px 20px;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.01), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.01);
+    border-radius: 5px;
+    border: unset;
+}
+
+#search:focus-visible{
+    outline: unset;
+}
+
+#patientslist{
+    border-radius: 10px;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.01), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.01);
+    width: 100%;
+    overflow: hidden;
+    margin: 3.5% 0%;
+}
+
+#patientslist table{
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+#patientslist table tr {
+    border-bottom: 4px solid var(--light-gray);
+}
+ #patientslist table tr:last-child {
+    border-bottom: unset;
+}
+
+#patientslist table th, #patientslist table td {
+    padding: 15px;
+    text-align: right;
+    color: var(--gray);
+    width: 31%;
+    background-color: var(--white);
+}
+  
+#patientslist table th {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+tr.patient td:first-child {
+    color: var(--black) !important;
+}
+
+td button{
+    color: var(--white);
+    text-align: center;
+    border: unset;
+    border-radius: 5px;
+    padding: 7px 14px;
+}
+
+.show-patient{
+    background-color: var(--blue);
+}
+
+.delete-patient{
+    background-color: red;
 }
 

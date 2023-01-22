@@ -2,10 +2,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for patient in object_list %}
-        <div class="post-entry">
-            <h2><a href="{% url 'patient_info' patient.pk %}">{{ patient.last_name }}</a></h2>
-            
-        </div>
-    {% endfor %}
+<div class="main">
+    <input type="text" id="search" onkeyup="myFunction()" placeholder="جستوجو ...">
+    <div id="patientslist">
+    <table>
+        <tr>
+          <th>نام بیمار</th>
+          <th> تاریخ پذیرش</th>
+          <th>نام پزشک</th>
+          <th></th>
+          <th></th>
+        </tr>
+        {% for patient in object_list %}
+        <!-- <a href="{% url 'patient_info' patient.pk %}"> -->
+        <tr class="patient" onclick="window.location='#';">
+          <td>{{ patient.first_name }} {{ patient.last_name }}</td>
+          <td>{{patient.date_of_admission}}</td>
+          <td>{{patient.docter_name}}</td>
+          <td class="button"><button class="show-patient">مشاهده</button></td>
+          <td class="button"><button class="delete-patient">حذف</button></td>
+        </tr>
+        </a>
+        {% endfor %}
+    </table>
+    </div>
+</div>
 {% endblock content %}
