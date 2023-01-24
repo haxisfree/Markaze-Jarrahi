@@ -6,9 +6,12 @@
     <div class="post-entry">
         <h2>{{ patient.first_name }}</h2>
         <p>{{ patient.last_name }}</p>
-        <p>{{ patient.last_name }}</p>
+        <p>{{ patient.docter_name }}</p>
         <p>{{ patient.father_name }}</p>
         <p>{{ patient.birth_date }}</p>
     </div>
-{% endblock content %}
+
+    <p><a href="{% url 'patient_edit' patient.pk %}">+ Edit Patient</a></p>
+    <p><a href="{% url 'patient_delete' patient.pk %}">+ Delete Blog Post</a></p>
+    {% endblock content %}
 
