@@ -14,22 +14,12 @@
           <th></th>
         </tr>
         {% for patient in object_list %}
-<<<<<<< HEAD
-        <!-- <a href="{% url 'patient_info' patient.pk %}"> -->
-        <tr class="patient" onclick="window.location='#';">
-          <td><a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a></td>
-          <td>{{patient.date_of_admission}}</td>
-          <td>{{patient.docter_name}}</td>
-          <td class="button"><button class="show-patient"><a href="{% url 'patient_info' patient.pk %}">مشاهده</a></button></td>
-          <td class="button"><button class="delete-patient"><a href="{% url 'patient_delete' patient.pk %}">حذف</a></button></td>
-=======
         <tr class="patient">
           <td><a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a></td>
           <td>{{patient.date_of_admission}}</td>
           <td>{{patient.docter_name}}</td>
           <td class="button"><a href="{% url 'patient_info' patient.pk %}"><button class="show-patient">مشاهده</button></a></td>
-          <td class="button"><button class="delete-patient">حذف</button></td>
->>>>>>> front
+          <td class="button"><button class="delete-patient"><a href="{% url 'patient_delete' patient.pk %}">حذف</a></button></td>
         </tr>
         
         {% endfor %}
