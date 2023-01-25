@@ -4,7 +4,9 @@
     --light-blue: #f0f5ff;
     --black: #212529;
     --gray: #6c757d;
-    --light-gray:#f9f9f9;
+    --light-gray:#f3f5f7;
+    --red:#ff2c2c;
+    --light-red:#fff3f4;
 }
 body {
     box-sizing: border-box;
@@ -12,17 +14,26 @@ body {
     text-align: right;
     direction: rtl;
 }
-            
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+button{
+    cursor: pointer;
+}
+
 .sidebar {
   height: 100%;
-  width: 18%;
+  width: 20%;
   position: fixed;
   z-index: 1;
   top: 0;
   right: 0;
   background-color: var(--white);
   overflow-x: hidden;
-  padding: 2%;
+  padding: 3%;
 }
 
 .sidebar a {
@@ -50,13 +61,14 @@ body {
 }
 
 .main {
-    height: 100%;
-    width: 72%;
+    height: 92%;
+    width: 68%;
     position: fixed;
     top: 0;
-    right: 22%;
+    right: 26%;
     padding: 3%;
     background-color: var(--light-gray);
+    overflow: scroll;
 }
 
 #search {
@@ -67,7 +79,7 @@ body {
     background-repeat: no-repeat;
     font-size: 16px;
     padding: 12px 40px 12px 20px;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.01), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.01);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.03);
     border-radius: 5px;
     border: unset;
 }
@@ -78,7 +90,7 @@ body {
 
 #patientslist{
     border-radius: 10px;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.01), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.01);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.03);
     width: 100%;
     overflow: hidden;
     margin: 3.5% 0%;
@@ -114,7 +126,6 @@ tr.patient td:first-child {
 }
 
 td button{
-    color: var(--white);
     text-align: center;
     border: unset;
     border-radius: 5px;
@@ -122,10 +133,64 @@ td button{
 }
 
 .show-patient{
-    background-color: var(--blue);
+    background-color: var(--light-blue);
+    color: var(--blue);
 }
 
 .delete-patient{
-    background-color: red;
+    background-color: var(--light-red);
+    color: var(--red);
 }
 
+.add-patient{
+    color: var(--white);
+    text-align: center;
+    border: unset;
+    border-radius: 5px;
+    padding: 12px 24px;
+    background-color: var(--blue);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.03);
+    float: left;
+}
+
+form input, form textarea {
+    border: unset;
+    border-radius: 7px;
+    padding: 12px 18px;
+    width: 450px;
+    background-color: #f3f5f7;
+    color: black;
+    height: 50px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 15px;
+    color: #020202;
+    margin-top: 45px;
+  }
+
+form input:focus-visible {
+    border: 2px solid var(--blue);
+    outline: unset;
+    background-color: var(--light-blue);
+}
+
+
+#newform {
+    background-color: white;
+    padding: 60px 100px;
+    margin: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.03);
+}
+
+#newform > h1 {
+    margin-bottom: 70px;
+}
+
+input[type="submit"] {
+    background-color: var(--blue);
+    margin-top: 40px;
+    color: var(--white);
+  }
