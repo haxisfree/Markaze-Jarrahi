@@ -3,11 +3,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<div id="editform">
     <h1>Edit Patient</h1>
         <form action="" method="post">{% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Update" />
         </form>
-
+    </div>
 {% endblock content %}
