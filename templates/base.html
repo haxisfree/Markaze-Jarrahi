@@ -12,15 +12,21 @@
         <script src="{% static 'js/base.js' %}"></script>
         
 
-        <img src="{% static 'icon/img1.jpg' %}" alt="Girl with ampool" width="500" height="200">
+        <!-- <img src="{% static 'icon/img1.jpg' %}" alt="Girl with ampool" width="500" height="200"> -->
 
     </head>
     <body>
         <div class="sidebar">
             <img id="logo" src="">
             <div class="menu" onload="setActiveClass()">
-                <a href="{% url 'home' %}" id="home" onclick="setActiveClass()"><img class="icon" src="">صفحه ی اصلی</a>
-                <a href="{% url 'patients_list' %}" id="patients" onclick="setActiveClass()"><img class="icon" src="">لیست بیماران</a>
+                <a href="{% url 'home' %}" 
+                {% if request.path == "/" %}
+                    class="home active"
+                {% else %}
+                    class="home"
+                {% endif %}
+                ><img class="icon" src="">صفحه ی اصلی</a>
+                <a href="{% url 'patients_list' %}"><img class="icon" src="">لیست بیماران</a>
                 <a href="#"><img class="icon" src="">پشتیبانی</a>
             </div>
         </div>

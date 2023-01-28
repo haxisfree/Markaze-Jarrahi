@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <button onclick="window.print()">Print this page</button>
+    <img src="{% static 'icon/img1.jpg' %}" alt="Girl with ampool" width="500" height="200">
+
+
+    <div class="post-entry">
+        <h2>{{ patient.first_name }}</h2>
+        <p>{{ patient.last_name }}</p>
+        <p>{{ patient.docter_name }}</p>
+        <p>{{ patient.father_name }}</p>
+        <p>{{ patient.birth_date }}</p>
+    </div>
+
+{% endblock content %}
+
