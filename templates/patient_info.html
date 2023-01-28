@@ -2,7 +2,21 @@
 
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
+
+    <!-- <button onclick="window.print()">Print this page</button> -->
+    <!-- <img src="{% static 'icon/img1.jpg' %}" alt="Girl with ampool" width="500" height="200"> -->
+
+
+    <p><a href="{% url 'admission_form' patient.pk %}">Admission Form</a></p>
+    <p><a href="{% url 'anesthesia_form' patient.pk %}">Anesthesia Form</a></p>
+    <p><a href="{% url 'bills_form' patient.pk %}">Bills Form</a></p>
+    <p><a href="{% url 'surgery_report_form' patient.pk %}">Surgery Report Form</a></p>
+
+
+
     <div class="post-entry">
         <h2>{{ patient.first_name }}</h2>
         <p>{{ patient.last_name }}</p>
