@@ -13,7 +13,7 @@
           <th></th>
           <th></th>
         </tr>
-        {% for patient in object_list %}
+        {% for patient in patient %}
         <tr class="patient">
           <td><a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a></td>
           <td>{{patient.date_of_admission}}</td>
@@ -25,6 +25,67 @@
         {% endfor %}
     </table>
 </div>
+
+
+<!-- <div class="pagination">
+  <span class="step-links">
+      {% if patient.has_next %}
+          <a class="btn btn-primary float-right" href="?page={{patient.next_page_number}}">&larr; previous patients</a>
+      {% endif %}
+      
+      <span class="current">
+          | Page {{ patient.number }} of {{ patient.paginator.num_pages }} |
+      </span>
+
+      {% if patient.has_previous %}
+          <a class="btn btn-primary float-right" href="?page={{patient.previous_page_number}}">next patients&rarr;</a>
+      {% endif %}
+  </span>
+</div>     -->
+
+
+
+
+ <!-- start of pagination -->
+
+ <div class="pagination">
+    {% if patient.has_previous %}
+        <a href="?page={{ patient.previous_page_number }}">&laquo;</a>
+    {% else %}
+        <a class="disabled" href="#" tabindex="-1" aria-disabled="True">&laquo;</a>
+    {% endif %}
+
+  {% if patient.number|add:'-4' > 1 %}
+     <a class="page-link" href="?page={{ patient.number|add:'-5' }}">&hellip;</a>
+  {% endif %}
+
+  {% for i in patient.paginator.page_range %}
+      {% if patient.number == i %}
+              <a class="active">{{ i }}</a>
+      {% elif i > patient.number|add:'-5' and i < patient.number|add:'5' %}
+              <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+      {% endif %}
+  {% endfor %}
+
+  {% if patient.paginator.num_pages > patient.number|add:'4' %}
+      <a class="page-link" href="?page={{ patient.number|add:'5' }}">&hellip;</a>
+  {% endif %}
+
+  {% if patient.has_next %}
+      <a class="page-link" href="?page={{ patient.next_page_number }}">&raquo;</a>
+  {% else %}
+      <a class="disabled" href="#" tabindex="-1" aria-disabled="True">&raquo;</a>
+  {% endif %}
+</div> 
+
+
+<!-- end of pagination -->
+
+
+
+
+
+
 {% endblock content %}
 
-<a href="{% url 'patient_delete' patient.pk %}">+ Delete Blog Post</a>
+<!-- <a href="{% url 'patient_delete' patient.pk %}">+ Delete Blog Post</a> -->

@@ -7,6 +7,21 @@ from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Patient
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
+
+
+
+
+def Pagination(request, page=1):
+    
+    patient_list = Patient.objects.all()
+    paginator = Paginator(patient_list, 1)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
+    context = {
+        "patient" : page_obj
+        }
+    return render(request, 'patients_list.html', context)
 
 class HomeView(TemplateView):
     model = Patient
@@ -54,3 +69,5 @@ class BillsFormView(TemplateView):
 class SurgeryReportFormView(TemplateView):
     model = Patient
     template_name = 'surgery_report_form.html'
+
+

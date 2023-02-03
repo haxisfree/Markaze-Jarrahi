@@ -27,6 +27,9 @@ class Patient(models.Model):
     file_number = models.CharField(max_length=300) 
     docter_name = models.CharField(max_length=100)
     description = models.TextField()
+        
+    class Meta: 
+        ordering = ['-date_of_admission']
     
     
     
