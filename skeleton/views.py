@@ -8,6 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Patient
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
+from .forms import PatientForm
 
 
 
@@ -41,12 +42,14 @@ class PatientsListView(ListView):
 class PatientCreateView(CreateView):
     model = Patient
     template_name = 'new_patient.html'
-    fields='__all__'
+    # fields='__all__'
+    form_class = PatientForm
 
 class PatientUpdateView(UpdateView):
     model = Patient
     template_name = 'patient_edit.html'
-    fields = '__all__'
+    # fields = '__all__'
+    form_class = PatientForm
 
 class PatientDeleteView(DeleteView):
     model = Patient
