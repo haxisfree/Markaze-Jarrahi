@@ -9,7 +9,11 @@ from .models import Patient
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
 from .forms import PatientForm
+from jalali_date import datetime2jalali, date2jalali
 
+
+def my_view(request):
+	jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
 
 
 
@@ -44,12 +48,14 @@ class PatientCreateView(CreateView):
     template_name = 'new_patient.html'
     # fields='__all__'
     form_class = PatientForm
+    # jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
 
 class PatientUpdateView(UpdateView):
     model = Patient
     template_name = 'patient_edit.html'
     # fields = '__all__'
     form_class = PatientForm
+    # jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
 
 class PatientDeleteView(DeleteView):
     model = Patient
