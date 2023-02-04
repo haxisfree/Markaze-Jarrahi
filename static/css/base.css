@@ -1,13 +1,37 @@
 @media print {
-    img {
-       visibility: hidden;
+    @page{
+        margin: 0;
     }
     button {
-        visibility: hidden;
-     }
- 
-}
+        display: none;
+    }
+    .sidebar{
+        display: none !important;
+    }
+    .main{
+        padding: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        top: 0 !important;
+        right: 0 !important;
+    }
+    .container {
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: unset !important;
+    }
+    .container h1{
+        display: none;
+    }
+    .forms{
+        margin: 0 !important;
+    }
 
+}
+@font-face {
+    font-family: iransans;
+    src: url();
+}
 :root {
     --white: #ffffff;
     --blue: #2a78ff;
@@ -23,6 +47,7 @@ body {
     font-family: "Lato", sans-serif;
     text-align: right;
     direction: rtl;
+    margin: 0;
 }
 
 a {
@@ -92,6 +117,9 @@ button{
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.03);
     border-radius: 5px;
     border: unset;
+    line-height: 1.5;
+    font-size: 16px;
+    display: block;
 }
 
 #search:focus-visible{
@@ -142,6 +170,10 @@ td button{
     padding: 7px 14px;
 }
 
+tr.empty{
+    display: none;
+}
+
 .show-patient{
     background-color: var(--light-blue);
     color: var(--blue);
@@ -152,15 +184,16 @@ td button{
     color: var(--red);
 }
 
-.add-patient{
+.btn-primary{
     color: var(--white);
     text-align: center;
     border: unset;
-    border-radius: 5px;
-    padding: 12px 24px;
+    border-radius: 0.3rem;
     background-color: var(--blue);
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.03);
-    float: left;
+    box-shadow: 0 0.125rem 0.375rem rgba(0 0 0 / 5%), 0 0.5rem 1.2rem rgba(0 0 0 / 5%);
+    line-height: 1.5;
+    font-size: 16px;
+    padding: 0.75rem 2rem;
 }
 
 form input, form textarea {
@@ -168,17 +201,18 @@ form input, form textarea {
     border-radius: 7px;
     padding: 12px 18px;
     width: 450px;
-    background-color: #f3f5f7;
-    color: black;
+    background-color: var(--light-gray);
+    border: 2px solid var(--light-gray);
+    color: var(--black);
     line-height: 25px;
 }
 
 form label {
     display: block;
     margin-bottom: 15px;
-    color: #020202;
+    color: var(--black);
     margin-top: 45px;
-  }
+}
 
 form input:focus-visible {
     border: 2px solid var(--blue);
@@ -187,7 +221,7 @@ form input:focus-visible {
 }
 
 
-#newform, #editform {
+.container {
     background-color: white;
     padding: 5% 8%;
     margin: 4%;
@@ -195,12 +229,219 @@ form input:focus-visible {
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.03);
 }
 
-#newform > h1, #editform > h1{
+.mb-70{
     margin-bottom: 70px;
+}
+
+.float-left{
+    float: left;
 }
 
 input[type="submit"] {
     background-color: var(--blue);
     margin-top: 40px;
     color: var(--white);
+}
+
+#admission-form {
+    background-image: url("http://127.0.0.1:8000/static/pic/BG/admission_form.jpg");
+}
+#anesthesia-form{
+    background-image: url("http://127.0.0.1:8000/static/pic/BG/anesthesia_form.jpg");
+}
+#bills-form{
+    background-image: url("http://127.0.0.1:8000/static/pic/BG/bills_form.jpg");
+}
+#surgery-report-form{
+    background-image: url("http://127.0.0.1:8000/static/pic/BG/surgery_report_form.jpg");
+}
+.forms{
+    height: 1118px;
+    width: 791px;
+    margin: 2% auto;
+    background-size: cover;
+}
+
+.forms p{
+    position: relative;
+    font-size: 12px;
+}
+
+.btn-print{
+    margin: 1% 85% 1% 0%;
+}
+
+
+#admission-form .patient-name {
+    right: 259px;
+    top: 100px;
+}
+#admission-form .father-name {
+    right: 408px;
+    top: 73px;
+}
+#admission-form .phone-number {
+    top: 38px;
+    right: 615px;
+}
+#admission-form .admission-date {
+    top: 84px;
+    right: 589px;
+}
+#admission-form .file-number {
+    top: 59px;
+    right: 130px;
+}
+#admission-form .birth-date {
+    top: 93px;
+    right: 196px;
+}
+#admission-form .national-code {
+    top: 66px;
+    right: 400px;
+}
+
+#anesthesia-form .file-number {
+    top: 75px;
+    right: 60px;
+}
+#anesthesia-form .patient-firstname {
+  top: 132px;
+  right: 223px;
+}
+#anesthesia-form .patient-lastname {
+    top: 106px;
+    right: 105px;
+}
+#anesthesia-form .admission-date {
+    top: 42px;
+    right: 549px;
+}
+
+#anesthesia-form  .birth-date {
+    top: 68px;
+    right: 257px;
+}
+#anesthesia-form .father-name {
+    top: 94px;
+    right: 60px;
+}
+#anesthesia-form .doctor-name {
+    top: 80px;
+    right: 547px;
+}
+#bills-form .file-number {
+    top: 131px;
+    right: 61px;
+}
+#bills-form .patient-name {
+    top: 160px;
+    right: 170px;
+}
+#bills-form .doctor-name {
+    top: 196px;
+    right: 613px;
+}
+#bills-form .father-name {
+    top: 138px;
+    right: 95px;
+}
+#bills-form .birth-date {
+    top: 109px;
+    right: 587px;
   }
+#bills-form  .national-code {
+    top: 52px;
+    right: 620px;
+  }
+#bills-form  .admission-date {
+    top: 89px;
+    right: 132px;
+  }
+#surgery-report-form .file-number {
+    top: 120px;
+    right: 91px;
+  }
+#surgery-report-form  .patient-firstname {
+    top: 178px;
+    right: 238px;
+  }
+#surgery-report-form  .patient-lastname {
+    top: 152px;
+    right: 135px;
+  }
+#surgery-report-form  .doctor-name {
+    top: 125px;
+    right: 544px;
+  }
+#surgery-report-form  .father-name {
+    top: 148px;
+    right: 100px;
+  }
+#surgery-report-form  .birth-date {
+    top: 121px;
+    right: 265px;
+  }
+#surgery-report-form  .admission-date {
+    top: 94px;
+    right: 541px;
+  }
+
+#filter {
+    margin-top: 20px;
+    margin-right: 5px;
+}
+#filter label{
+    margin-left: 18px;
+    color: var(--black);
+}
+#filter input{
+    accent-color: var(--blue);
+    width: 18px;
+    height: 18px;
+    vertical-align: bottom;
+}
+#filter div{
+    margin-bottom: 18px;
+    color: var(--black);
+}
+
+#min, #max {
+    width: 160px;
+    background-color: var(--white);
+    background-image: url('');
+    background-position: 380px 12px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 20px;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.03);
+    border-radius: 5px;
+    border: unset;
+    font-size: 16px;
+    margin-top: 30px;
+  }
+
+
+
+.row::after{
+    content: ' ';
+    display: block;
+    clear: both;
+}
+[class^="col-"]{
+    float: right;
+    box-sizing: border-box;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.col-12{
+    width: 100%;
+}
+.col-9{
+    width: 75%;
+}
+.col-6{
+    width: 50%;
+}
+.col-3{
+    width: 25%;
+}

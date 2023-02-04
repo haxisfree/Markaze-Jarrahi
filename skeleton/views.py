@@ -39,18 +39,18 @@ class PatientDeleteView(DeleteView):
     success_url = reverse_lazy('home')
 
 
-class AdmissionFormView(TemplateView):
+class AdmissionFormView(DetailView):
     model = Patient
     template_name = 'admission_form.html'
 
-class AnesthesiaFormView(TemplateView):
+class AnesthesiaFormView(DetailView):
     model = Patient
     template_name = 'anesthesia_form.html'
 
-class BillsFormView(TemplateView):
+class BillsFormView(DetailView):
     model = Patient
     template_name = 'bills_form.html'
 
-class SurgeryReportFormView(TemplateView):
+class SurgeryReportFormView(DetailView):
     model = Patient
     template_name = 'surgery_report_form.html'

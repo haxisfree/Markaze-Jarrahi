@@ -5,29 +5,28 @@
 <html>
     <head>
         <title>base app</title>
-     
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         
-
-        <script src="{% static 'js/base.js' %}"></script>
-        
-
-        <!-- <img src="{% static 'icon/img1.jpg' %}" alt="Girl with ampool" width="500" height="200"> -->
-
     </head>
     <body>
         <div class="sidebar">
             <img id="logo" src="">
-            <div class="menu" onload="setActiveClass()">
+            <div class="menu">
+
                 <a href="{% url 'home' %}" 
                 {% if request.path == "/" %}
-                    class="home active"
-                {% else %}
-                    class="home"
+                    class="active"
                 {% endif %}
                 ><img class="icon" src="">صفحه ی اصلی</a>
-                <a href="{% url 'patients_list' %}"><img class="icon" src="">لیست بیماران</a>
+
+                <a href="{% url 'patients_list' %}"
+                {% if request.path == "/patientslist/" %}
+                    class="active"
+                {% endif %}
+                ><img class="icon" src="">لیست بیماران</a>
+
                 <a href="#"><img class="icon" src="">پشتیبانی</a>
+                
             </div>
         </div>
         <div class="main">
@@ -35,4 +34,6 @@
             {% endblock content %}
         </div>   
     </body>
+    <script src="{% static 'js/jQuery.js' %}"></script>
+    <script src="{% static 'js/base.js' %}"></script>
 </html>

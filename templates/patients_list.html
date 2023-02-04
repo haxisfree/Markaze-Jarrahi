@@ -2,28 +2,54 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<input type="text" id="search" onkeyup="searchPatient()" placeholder="جستوجو ...">
-<a href="{% url 'new_patient' %}"><button class="add-patient">افزودن بیمار جدید</button></a>
-<div id="patientslist">
-    <table>
-        <tr>
-          <th>نام بیمار</th>
-          <th> تاریخ پذیرش</th>
-          <th>نام پزشک</th>
-          <th></th>
-          <th></th>
-        </tr>
-        {% for patient in object_list %}
-        <tr class="patient">
-          <td><a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a></td>
-          <td>{{patient.date_of_admission}}</td>
-          <td>{{patient.docter_name}}</td>
-          <td class="button"><a href="{% url 'patient_info' patient.pk %}"><button class="show-patient">مشاهده</button></a></td>
-          <td class="button"><button class="delete-patient"><a href="{% url 'patient_delete' patient.pk %}">حذف</a></button></td>
-        </tr>
-        
-        {% endfor %}
-    </table>
+<div class="row">
+  <div class="col-9">
+    <input type="text" id="search" onkeyup="filterPatient()" placeholder="جستوجو ...">
+
+    <div id="filter">
+      <div>جستوجو بر اساس:</div>
+      <input type="radio" id="search-patient" name="filter" value="patient-name" checked onclick="filterPatient()">
+      <label for="html">نام بیمار</label>
+      <input type="radio" id="search-date" name="filter" value="date_of_admission" onclick="filterPatient()">
+      <label for="css">تاریخ پذیرش</label>
+      <input type="radio" id="search-doctor" name="filter" value="docter_name" onclick="filterPatient()">
+      <label for="javascript">نام پزشک</label>
+    </div>
+
+    <input type="text" id="min" name="min" onkeyup="searchDate()">
+    <input type="text" id="max" name="max" onkeyup="searchDate()">
+  </div>
+  <div class="col-3">
+    <a href="{% url 'new_patient' %}"><button class="btn-primary float-left">افزودن بیمار جدید</button></a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div id="patientslist">
+        <table>
+          <thead>
+            <tr>
+              <th>نام بیمار</th>
+              <th> تاریخ پذیرش</th>
+              <th>نام پزشک</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for patient in object_list %}
+            <tr class="patient">
+              <td><a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a></td>
+              <td>{{patient.date_of_admission}}</td>
+              <td>{{patient.docter_name}}</td>
+              <td class="button"><a href="{% url 'patient_info' patient.pk %}"><button class="show-patient">مشاهده</button></a></td>
+              <td class="button"><button class="delete-patient"><a href="{% url 'patient_delete' patient.pk %}">حذف</a></button></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+  </div>
 </div>
 {% endblock content %}
 
