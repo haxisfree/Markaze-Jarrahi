@@ -3,18 +3,18 @@
 {% load static %}
 
 {% block content %}
-
-    <button onclick="window.print()">Print this page</button>
-    <img src="{% static 'icon/img1.jpg' %}" alt="Girl with ampool" width="500" height="200">
-
-
-    <div class="post-entry">
-        <h2>{{ patient.first_name }}</h2>
-        <p>{{ patient.last_name }}</p>
-        <p>{{ patient.docter_name }}</p>
-        <p>{{ patient.father_name }}</p>
-        <p>{{ patient.birth_date }}</p>
+<div class="container">
+    <h1>فرم پذیرش</h1>
+    <button onclick="window.print()" class="btn-primary btn-print"><img src="">پرینت</button>
+    <div id="admission-form" class="forms">
+        <p class="admission-date">{{ patient.date_of_admission }}</p>
+        <p class="file-number">{{ patient.file_number }}</p>
+        <p class="patient-name">{{ patient.first_name }} {{ patient.last_name }}</p>
+        <p class="father-name">{{ patient.father_name }}</p>
+        <p class="birth-date">{{ patient.birth_date }}</p>
+        <p class="national-code">{{ patient.national_code }}</p>
+        <p class="phone-number">{{ patient.phone_number }}</p>
     </div>
-
+</div>
 {% endblock content %}
 
