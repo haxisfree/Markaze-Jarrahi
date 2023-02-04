@@ -28,7 +28,7 @@ class PatientForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(PatientForm, self).__init__(*args, **kwargs)
-        self.fields['birth_date'] = JalaliDateField(label=('birth_date'),
+        self.fields['birth_date'] = JalaliDateField(label=('تاریخ تولد'),
             widget=AdminJalaliDateWidget
         )
 
@@ -36,7 +36,7 @@ class PatientForm(forms.ModelForm):
         #     widget=AdminSplitJalaliDateTime # required, for decompress DatetimeField to JalaliDateField and JalaliTimeField
         # )
         
-        self.fields['date_of_admission'] = JalaliDateField(label=('date_of_admission'), # date format is  "yyyy-mm-dd"
+        self.fields['date_of_admission'] = JalaliDateField(label=('تاریخ پذیرش'), # date format is  "yyyy-mm-dd"
             widget=AdminJalaliDateWidget # optional, to use default datepicker
         )
 

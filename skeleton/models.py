@@ -10,23 +10,23 @@ from django.urls import reverse
 class Patient(models.Model):
 
     SEX_CHOICES = (
-        ('M', 'Male') , 
-        ('F', 'Female')
+        ('M', 'مرد') , 
+        ('F', 'زن'),
     )
 
-    id = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=200)    
-    father_name = models.CharField(max_length=100)
-    sex = models.CharField(max_length=1, choices=SEX_CHOICES)    
-    birth_date = models.DateTimeField()
-    national_code = models.BigIntegerField()
-    phone_number = models.BigIntegerField()
-    home_phone = models.BigIntegerField()
-    date_of_admission = models.DateTimeField(default = timezone.now)
-    file_number = models.CharField(max_length=300) 
-    docter_name = models.CharField(max_length=100)
-    description = models.TextField()
+    id = models.AutoField(primary_key=True, verbose_name="شناسه")
+    first_name = models.CharField(max_length=100, verbose_name="نام")
+    last_name = models.CharField(max_length=200, verbose_name="نام خانوادگی")    
+    father_name = models.CharField(max_length=100, verbose_name="نام پدر")
+    sex = models.CharField(max_length=1, choices=SEX_CHOICES, verbose_name="جنسیت")    
+    birth_date = models.DateTimeField(verbose_name="تاریخ تولد")
+    national_code = models.BigIntegerField(verbose_name="کد ملی")
+    phone_number = models.BigIntegerField(verbose_name="تلفن همراه")
+    home_phone = models.BigIntegerField(verbose_name="تلفن ثابت")
+    date_of_admission = models.DateTimeField(default = timezone.now, verbose_name="تاریخ پذیزش")
+    file_number = models.CharField(max_length=300, verbose_name="شماره پرونده") 
+    docter_name = models.CharField(max_length=100, verbose_name="نام پزشک")
+    description = models.TextField(verbose_name="توضیحات")
         
     class Meta: 
         ordering = ['-date_of_admission']
