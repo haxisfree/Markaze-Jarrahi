@@ -17,15 +17,15 @@
                 {% if request.path == "/" %}
                     class="active"
                 {% endif %}
-                ><img class="icon" src="">صفحه ی اصلی</a>
+                ><img class="icon" src="{% static 'pic/icon/home.png' %}">صفحه ی اصلی</a>
 
                 <a href="{% url 'patients_list' %}"
                 {% if request.path == "/patientslist/" %}
                     class="active"
                 {% endif %}
-                ><img class="icon" src="">لیست بیماران</a>
+                ><img class="icon" src="{% static 'pic/icon/list.png' %}">لیست بیماران</a>
 
-                <a href="#"><img class="icon" src="">پشتیبانی</a>
+                <a href="#"><img class="icon" src="{% static 'pic/icon/chat.png' %}">پشتیبانی</a>
                 
             </div>
         </div>
