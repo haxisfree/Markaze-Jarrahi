@@ -7,13 +7,24 @@
 
 {% block content %}
 
+{% load jalali_tags %}
+<p>{{ request.user.date_joined|to_jalali:'%y/%m/%d _ %H:%M:%S' }}</p>
 
 
 <div class="container">
     <h1 class="mb-70">Edit Patient</h1>
         <form action="" method="post">{% csrf_token %}
+            {{ form.media }}
             {{ form.as_p }}
             <input type="submit" value="Update" />
         </form>
     </div>
+
+
+
+
+
+    
+
+    
 {% endblock content %}

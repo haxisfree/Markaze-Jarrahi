@@ -228,8 +228,8 @@ form input:focus-visible {
 
 .container {
     background-color: white;
-    padding: 5% 8%;
-    margin: 4%;
+    padding: 60px 100px;
+    margin: 50px;
     border-radius: 10px;
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.03);
 }
