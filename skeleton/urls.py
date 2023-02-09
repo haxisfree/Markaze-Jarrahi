@@ -10,6 +10,7 @@ from .views import ( PatientsListView,
                     BillsFormView,
                     SurgeryReportFormView,
                     Pagination,
+                    searchbar,
 )
 
 
@@ -25,6 +26,7 @@ urlpatterns = [
     path('patient/<int:pk>/anesthesia_form/', AnesthesiaFormView.as_view(), name='anesthesia_form'),
     path('patient/<int:pk>/bills_form/', BillsFormView.as_view(), name='bills_form'),
     path('patient/<int:pk>/surgery_report_form/', SurgeryReportFormView.as_view(), name='surgery_report_form'),
+    path('search/', searchbar, name='search'),
 
 ]
 

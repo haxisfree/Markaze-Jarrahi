@@ -1,0 +1,33 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- <center>
+        {% if  searched %}
+        
+            <h1>You Searched For ...  {{ searched }}</h1>
+            <br/>
+            {% for patient in mltsr%}
+                <a href="{% url 'patient_info' patient.pk %}"> {{ patient }} </a> 
+                <br/>
+
+            {% endfor %}
+        
+            {% else %}
+        <h1>You forgot to search ... </h1>
+        {% endif %}
+    </center> -->
+
+
+
+    {% for patient in queryset %}
+  
+            <a href="{% url 'patient_info' patient.pk %}"> {{ patient }} </a>
+
+
+    {% endfor %}
+
+
+ 
+
+{% endblock content %}

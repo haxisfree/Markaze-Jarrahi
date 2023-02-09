@@ -2,6 +2,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+{% load jalali_tags %}
 <div class="row">
   <div class="col-9">
     <input type="text" id="search" onkeyup="filterPatient()" placeholder="جستوجو ...">
@@ -36,11 +38,72 @@
               <th></th>
             </tr>
           </thead>
+  
+          <!-- <form action="" method="GET">
+            <input type="text" name="q" />
+            <button type="submit">search</button>
+          </form>
+         -->
+
+
+
+
+
+
+
+
+            <!-- search part -->
+        
+            <!-- <form class="d-flex" method=POST 
+              action="{% url 'search' %}">
+                {% csrf_token %}
+              <input class="form-control me-2"
+              type="search" placeholder="Search" aria-label="Search"
+              name="searched">
+
+              <button class="btn btn-outline-secondary" type="submit">
+                Search
+              </button> -->
+
+
+            </form>
+   <!-- <p>{{ request.user.date_joined|to_jalali:'%y/%m/%d _ %H:%M:%S' }}</p> -->
+   
+   
+            <form method="GET" action="{% url 'search' %}">
+              {% csrf_token %}
+              <input class="form-control py-2"
+              type="search" placeholder="name Search" aria-label="Search"
+              name="name search">
+
+              <input class="form-control py-2"
+              type="search" placeholder="national code Search" aria-label="Search"
+              name="national code search">
+
+              <input class="form-control py-2"
+              type="search" placeholder="file number Search" aria-label="Search"
+              name="file number search">
+
+              <input type="date" class="form-control" id="publishDateMin" name="date_min">
+              <input type="date" class="form-control" id="publishDateMax" name="date_max">
+              
+              <button class="btn btn-primary" type="submit">
+                Search
+              </button>
+
+            </form>
+        
+        
+        
+            <!-- end of search part -->
+
+
+
           <tbody>
             {% for patient in patient %}
             <tr class="patient">
               <td><a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a></td>
-              <td>{{patient.date_of_admission}}</td>
+              <td>{{patient.date_of_admission|to_jalali:'%y/%m/%d'}}</td>
               <td>{{patient.docter_name}}</td>
               <td class="button"><a href="{% url 'patient_info' patient.pk %}"><button class="show-patient">مشاهده</button></a></td>
               <td class="button"><button class="delete-patient"><a href="{% url 'patient_delete' patient.pk %}">حذف</a></button></td>
