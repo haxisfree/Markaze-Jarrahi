@@ -20,7 +20,7 @@
     <input type="text" id="max" name="max" onkeyup="searchDate()"> -->
   </div>
   <div class="col-3">
-    <a href="{% url 'new_patient' %}"><button class="btn-primary float-left">افزودن بیمار جدید</button></a>
+    <a href="{% url 'new_patient' %}"><button class="btn btn-primary float-left">افزودن بیمار جدید</button></a>
   </div>
 </div>
 <div class="row">
@@ -73,37 +73,37 @@
 
 
  <!-- start of pagination -->
+<div class="flex">
+  <div class="pagination">
+      {% if patient.has_previous %}
+          <a href="?page={{ patient.previous_page_number }}">&laquo;</a>
+      {% else %}
+          <a class="disabled" href="#" tabindex="-1" aria-disabled="True">&laquo;</a>
+      {% endif %}
 
- <div class="pagination">
-    {% if patient.has_previous %}
-        <a href="?page={{ patient.previous_page_number }}">&laquo;</a>
-    {% else %}
-        <a class="disabled" href="#" tabindex="-1" aria-disabled="True">&laquo;</a>
+    {% if patient.number|add:'-4' > 1 %}
+      <a class="page-link" href="?page={{ patient.number|add:'-5' }}">&hellip;</a>
     {% endif %}
 
-  {% if patient.number|add:'-4' > 1 %}
-     <a class="page-link" href="?page={{ patient.number|add:'-5' }}">&hellip;</a>
-  {% endif %}
+    {% for i in patient.paginator.page_range %}
+        {% if patient.number == i %}
+                <a class="active">{{ i }}</a>
+        {% elif i > patient.number|add:'-5' and i < patient.number|add:'5' %}
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        {% endif %}
+    {% endfor %}
 
-  {% for i in patient.paginator.page_range %}
-      {% if patient.number == i %}
-              <a class="active">{{ i }}</a>
-      {% elif i > patient.number|add:'-5' and i < patient.number|add:'5' %}
-              <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-      {% endif %}
-  {% endfor %}
+    {% if patient.paginator.num_pages > patient.number|add:'4' %}
+        <a class="page-link" href="?page={{ patient.number|add:'5' }}">&hellip;</a>
+    {% endif %}
 
-  {% if patient.paginator.num_pages > patient.number|add:'4' %}
-      <a class="page-link" href="?page={{ patient.number|add:'5' }}">&hellip;</a>
-  {% endif %}
-
-  {% if patient.has_next %}
-      <a class="page-link" href="?page={{ patient.next_page_number }}">&raquo;</a>
-  {% else %}
-      <a class="disabled" href="#" tabindex="-1" aria-disabled="True">&raquo;</a>
-  {% endif %}
-</div> 
-
+    {% if patient.has_next %}
+        <a class="page-link" href="?page={{ patient.next_page_number }}">&raquo;</a>
+    {% else %}
+        <a class="disabled" href="#" tabindex="-1" aria-disabled="True">&raquo;</a>
+    {% endif %}
+  </div> 
+</div>
 
 <!-- end of pagination -->
 

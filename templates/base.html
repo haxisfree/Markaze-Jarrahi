@@ -6,8 +6,11 @@
     <head>
         <title>base app</title>
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <script src="{% static 'js/jQuery.min.js' %}"></script>
         <link rel="stylesheet" href="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}">
         <script src="{% static 'admin/js/django_jalali.min.js' %}"></script>
+        <script src="{% static 'js/base.js' %}"></script>
+        
         
     </head>
     <body>
@@ -36,7 +39,5 @@
             {% endblock content %}
         </div>   
     </body>
-    <script src="{% static 'js/jQuery.js' %}"></script>
-    <script src="{% static 'js/base.js' %}"></script>
 </html>
 

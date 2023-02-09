@@ -167,7 +167,9 @@ button{
 tr.patient td:first-child {
     color: var(--black) !important;
 }
-
+.patient td:nth-child(4) {
+    padding-left: 0 !important;
+  }
 td button{
     text-align: center;
     border: unset;
@@ -188,19 +190,27 @@ tr.empty{
     background-color: var(--light-red);
     color: var(--red);
 }
-
-.btn-primary{
-    color: var(--white);
+.btn{
     text-align: center;
     border: unset;
     border-radius: 0.3rem;
-    background-color: var(--blue);
-    box-shadow: 0 0.125rem 0.375rem rgba(0 0 0 / 5%), 0 0.5rem 1.2rem rgba(0 0 0 / 5%);
     line-height: 1.5;
     font-size: 16px;
     padding: 0.75rem 2rem;
 }
-
+.btn-primary{
+    color: var(--white);
+    background-color: var(--blue);
+}
+.btn-secondary{
+    background-color: var(--light-blue) !important;
+    color: var(--blue) !important;
+}
+.back {
+    position: relative;
+    top: 25px;
+    right: 1090px;
+}
 form input, form textarea {
     border: unset;
     border-radius: 7px;
@@ -237,7 +247,10 @@ form input:focus-visible {
 .mb-70{
     margin-bottom: 70px;
 }
-
+.center{
+    text-align: center;
+    margin: auto;
+}
 .float-left{
     float: left;
 }
@@ -246,6 +259,9 @@ input[type="submit"] {
     background-color: var(--blue);
     margin-top: 40px;
     color: var(--white);
+    font-size: 16px;
+    font-weight: bold;
+    border: unset;
 }
 
 #admission-form {
@@ -433,7 +449,66 @@ input[type="submit"] {
 a.active .icon, a:hover .icon {
     filter: invert(43%) sepia(90%) saturate(2970%) hue-rotate(205deg) brightness(96%) contrast(112%);
 }
-
+.pagination {
+    display: inline-block;
+    margin: auto;
+}
+  
+  .pagination a {
+    padding: 6px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+  }
+  
+  .pagination a.active {
+    background-color: var(--blue);
+    color: white;
+    border-radius:5px;
+  }
+  
+  .pagination a:hover:not(.active) {
+  background-color: var(--light-blue);
+  border-radius:5px;
+  }
+.flex{
+    display: flex;
+}
+.avatar{
+    width: 180px;
+    height: 180px;
+    background-color: #f0f5ff;
+    padding: 20px 15px 0 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+  }
+.avatar img{
+    width: 180px;
+    filter: invert(43%) sepia(90%) saturate(2970%) hue-rotate(205deg) brightness(96%) contrast(112%);  
+}
+.patient-header .col-9 {
+    padding-right: 40px;
+  }
+  .row.patient-forms img {
+    filter: invert(43%) sepia(90%) saturate(2970%) hue-rotate(205deg) brightness(96%) contrast(112%);
+  }
+  .row.patient-forms p {
+    font-size: 18px;
+  }
+  .sub-title {
+    color: var(--gray);
+    width: 150px;
+    display: inline-block;
+  }
+  .col-12 h2 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  hr{
+    border: 1px solid var(--light-gray);
+  }
+  .row.patient-forms p a:hover {
+    color: var(--blue);
+  }
 
 .row::after{
     content: ' ';

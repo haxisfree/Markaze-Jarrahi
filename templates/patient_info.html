@@ -10,22 +10,52 @@
     <!-- <img src="{% static 'icon/img1.jpg' %}" alt="Girl with ampool" width="500" height="200"> -->
 
 
-    <p><a href="{% url 'admission_form' patient.pk %}">Admission Form</a></p>
-    <p><a href="{% url 'anesthesia_form' patient.pk %}">Anesthesia Form</a></p>
-    <p><a href="{% url 'bills_form' patient.pk %}">Bills Form</a></p>
-    <p><a href="{% url 'surgery_report_form' patient.pk %}">Surgery Report Form</a></p>
 
-
-
-    <div class="post-entry">
-        <h2>{{ patient.first_name }}</h2>
-        <p>{{ patient.last_name }}</p>
-        <p>{{ patient.docter_name }}</p>
-        <p>{{ patient.father_name }}</p>
-        <p>{{ patient.birth_date }}</p>
+    <div class="container">
+        <div class="row patient-header">
+            <div class="col-3">
+                <div class="avatar">
+                    <img src="{% static 'pic/icon/avatar.png' %}">
+                </div>
+            </div>
+            <div class="col-9">
+                <h2>{{ patient.first_name }} {{ patient.docter_name }}</h2>
+                <p> شماره پرونده &nbsp; {{ patient.file_number }}</p>
+                </br>
+                <a href="{% url 'patient_edit' patient.pk %}"><button class="btn btn-primary">ویرایش</button></a>
+                &nbsp;
+                <a href="{% url 'patient_delete' patient.pk %}"></a><button class="btn btn-secondary">حذف</button></a>
+            </div>
+        </div>
+        <br>
+        </br>
+        <hr>
+        <div class="row">
+            <div class="col-12">
+                <h2>اطلاعات بیمار</h2>
+                <p><span class="sub-title">نام پدر</span>{{ patient.father_name}}</p>
+                <p><span class="sub-title">تاریخ تولد</span>{{ patient.birth_date }}</p>
+                <p><span class="sub-title">شماره تماس</span>{{ patient.phone_number }}</p>
+                <p><span class="sub-title">نام پزشک</span>{{ patient.docter_name }}</p>
+                <p><span class="sub-title">تاریخ پذیرش </span>{{ patient.date_of_admission }}</p>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div class="row patient-forms">
+            <div class="col-12">
+                <h2>فرم های بیمار</h2>
+                <p><a href="{% url 'admission_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">فرم پذیرش</a></p>
+                <p><a href="{% url 'anesthesia_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">برگه بیهوشی</a></p>
+                <p><a href="{% url 'bills_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">صورت حساب بیمار</a></p>
+                <p><a href="{% url 'surgery_report_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">گزارش عمل جراحی</a></p>
+            </div>
+        </div>
     </div>
+    
 
-    <p><a href="{% url 'patient_edit' patient.pk %}">+ Edit Patient</a></p>
-    <p><a href="{% url 'patient_delete' patient.pk %}">+ Delete Blog Post</a></p>
+
+
+
     {% endblock content %}
 
