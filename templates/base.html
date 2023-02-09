@@ -39,7 +39,7 @@
                 ><img class="icon" src="{% static 'pic/icon/home.png' %}">صفحه ی اصلی</a>
 
                 <a href="{% url 'patients_list' %}"
-                {% if request.path == "/patientslist/" %}
+                {% if request.path == "/patientslist" %}
                     class="active"
                 {% endif %}
                 ><img class="icon" src="{% static 'pic/icon/list.png' %}">لیست بیماران</a>
