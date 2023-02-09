@@ -125,7 +125,7 @@ class PatientUpdateView(UpdateView):
 class PatientDeleteView(DeleteView):
     model = Patient
     template_name = 'delete_patient.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('patients_list')
 
 
 class AdmissionFormView(DetailView):
