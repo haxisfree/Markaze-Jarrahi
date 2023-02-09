@@ -1,0 +1,4 @@
+2023-02-09 17:01:27.017 [info] Started initializing default profile extensions in extensions installation folder. file:///root/.vscode/extensions
+2023-02-09 17:01:27.083 [info] Completed initializing default profile extensions in extensions installation folder. file:///root/.vscode/extensions
+2023-02-09 17:01:30.013 [info] [perf] Render performance baseline is 84ms
+2023-02-09 17:01:59.210 [error] RequestService#request (browser) - error https://vscodeexperiments.azureedge.net/experiments/vscode-experiments.json {}
