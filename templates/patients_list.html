@@ -85,7 +85,7 @@
               name="file number search">
 
               <input type="date" class="form-control" id="publishDateMin" name="date_min">
-              <input type="date" class="form-control" id="publishDateMax" name="date_max">
+              <input class="form-control" id="publishDateMax" name="date_max" data-jdp onclick="datePicker()">
               
               <button class="btn btn-primary" type="submit">
                 Search
@@ -172,6 +172,29 @@
 
 
 
+
+
+
+    <script>
+        jalaliDatepicker.startWatch({
+            minDate: "attr",
+            maxDate: "attr",
+            minTime: "attr",
+            maxTime: "attr",
+            hideAfterChange: false,
+            autoHide: false,
+            showTodayBtn: true,
+            showEmptyBtn: true,
+            topSpace: 10,
+            bottomSpace: 30,
+            dayRendering(opt,input){
+                return {
+                    isHollyDay:opt.day==1
+                }
+            }
+        });
+        
+    </script>
 
 
 

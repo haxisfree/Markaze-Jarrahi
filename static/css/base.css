@@ -533,3 +533,93 @@ a.active .icon, a:hover .icon {
 .col-3{
     width: 25%;
 }
+
+
+
+
+
+
+#home{
+    background-image: url("../pic/BG/hospital.png");
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: -240px;
+}
+
+[class^="h-"] {
+    position: fixed;
+    opacity: 0.8;
+}
+a[class^="h-"]:hover{
+    opacity: 1;
+}
+.h-one {
+    top: 86px;
+    right: 330px;
+  }
+.h-two {
+    top: 190px;
+    right: 126px;
+}
+.h-three{
+    top: 394px;
+    right: 126px;
+}
+.h-four{
+    top: 498px;
+    right: 330px;
+}
+.h-five{
+    top: 394px;
+    right: 534px;
+}
+.h-six{
+    top: 190px;
+    right: 534px;
+}
+.h-seven{
+    top: 292px;
+    right: 330px;
+}
+
+.hexagon {
+    position: relative;
+    width: 140px;
+    height: 200px;
+    background: var(--blue);
+    color: var(--white);
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.hexagon:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -60px;
+    width: 0px;
+    height: 0px;
+    border-right: 60px solid var(--blue);
+    border-top: 100px solid transparent;
+    border-bottom: 100px solid transparent;
+}
+
+.hexagon:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -60px;
+    width: 0px;
+    height: 0px;
+    border-left: 60px solid var(--blue);
+    border-top: 100px solid transparent;
+    border-bottom: 100px solid transparent;
+}
+.home-icon{
+    display: block;
+    width: 50px;
+    padding: 45px 40px 20px 40px;
+    filter: invert(100%) sepia(0%) saturate(7496%) hue-rotate(138deg) brightness(102%) contrast(102%);
+}

@@ -1,10 +1,43 @@
+{% load static %}
 
-{% extends 'base.html' %}
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <script src="{% static 'js/base.js' %}"></script>
+    </head>
+    <body>
+        <div class="row" id="home">
+            <div class="col-6">
+                <a class="h-one" href="{% url 'patients_list' %}">
+                    <div class="hexagon"> <img class="home-icon" src="{% static 'pic/icon/multiple-users-silhouette.png' %}">لیست بیماران</div>
+                </a>
+                <a class="h-two">
+                    <div class="hexagon"><img class="home-icon" src="{% static 'pic/icon/business-and-trade.png' %}">لیست بیمه</div>
+                </a>
+                <a class="h-three">
+                    <div class="hexagon"><img class="home-icon" src="{% static 'pic/icon/file.png' %}">گزارش گیری</div>
+                </a>
+                <a class="h-four">
+                    <div class="hexagon"><img class="home-icon" src="{% static 'pic/icon/wallet-filled-money-tool.png' %}">تن خواه</div>
+                </a>
+                <a class="h-five">
+                    <div class="hexagon"><img class="home-icon" src="{% static 'pic/icon/help.png' %}">بشتیبانی</div>
+                </a>
+                <a class="h-six" href="{% url 'new_patient' %}">
+                    <div class="hexagon"><img class="home-icon" src="{% static 'pic/icon/patient.png' %}">افزودن بیمار </div>
+                </a>
+                <div class="h-seven">
+                    <div class="hexagon"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
 
-{% block content %}
 
 
- 
 
-{% endblock content %}
+
+
 
