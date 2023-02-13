@@ -1,0 +1,29 @@
+
+
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+
+{% load jalali_tags %}
+<!-- {{ request.user.date_joined|to_jalali:'%y/%m/%d _ %H:%M:%S' }} -->
+<button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
+<div class="container">
+    <h1 class="mb-70">Edit Patient</h1>
+        <form action="" method="POST">{% csrf_token %}
+            <!-- {{ form.media }} -->
+            {{ inform.as_p }}
+            <input type="submit" value="‌ذخیره" />
+        </form>
+    </div>
+
+
+
+
+
+    
+
+    
+{% endblock content %}

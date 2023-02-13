@@ -11,6 +11,19 @@ from .views import ( PatientsListView,
                     SurgeryReportFormView,
                     Pagination,
                     searchbar,
+
+
+                    InsuranceListView, 
+                    InsuranceInfoView,  
+                    # InsuranceCreateView, 
+                    # InsuranceUpdateView,
+                    InsuranceDeleteView,
+                    # insurancelist,
+                    # edit,
+                    InsuranceCreate,
+                    InsuranceUpdate,
+                    # PatientInsuranceDetailView,
+                    insurance_filter,
 )
 
 
@@ -27,6 +40,16 @@ urlpatterns = [
     path('patient/<int:pk>/bills_form/', BillsFormView.as_view(), name='bills_form'),
     path('patient/<int:pk>/surgery_report_form/', SurgeryReportFormView.as_view(), name='surgery_report_form'),
     path('search/', searchbar, name='search'),
+
+
+
+
+    path('insurance/<slug:pk>/', InsuranceInfoView.as_view(), name='insurance_info'),
+    path('insurancelist', InsuranceListView.as_view(), name='insurance_list'),
+    path('new_insurance/', InsuranceCreate, name='new_insurance'),
+    path('insurance/<slug:pk>/edit/', InsuranceUpdate, name='insurance_edit'),
+    path('insurance/<slug:pk>/delete/', InsuranceDeleteView.as_view(), name='insurance_delete'),
+    path('insurance/<slug:pk>/patients/', insurance_filter, name='patient_insurance'),
 
 ]
 

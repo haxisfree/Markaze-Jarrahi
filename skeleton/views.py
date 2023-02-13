@@ -5,14 +5,28 @@ from django.shortcuts import render
 
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Patient
+from .models import Patient, Insurance
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
-from .forms import PatientForm
+from .forms import PatientForm, InsuranceForm
 from jalali_date import datetime2jalali, date2jalali
 from django.db.models import Q 
 import datetime
 from datetime import date, datetime
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_list_or_404, get_object_or_404
+
+
+
+
+
+
+
+
+
+
+
 
 def is_valid_queryparam(param):
     return param != '' and param is not None
@@ -50,30 +64,6 @@ def searchbar(request):
     return render(request, 
                     'search.html',
                     context)
-
-
-# def search(request):
-#     if request.method == "POST":
-#         from_date = request.POST['from_date']
-#         to_date = request.POST['to_date']
-#         searched = request.POST['searched']
-#         mltsr = (Patient.objects.filter(first_name__icontains=searched) |
-#             Patient.objects.filter(last_name__icontains=searched) |
-#             Patient.objects.filter(national_code__icontains=searched) |
-#             Patient.objects.filter(phone_number__icontains=searched) |
-#             Patient.objects.filter(file_number__icontains=searched) | 
-#             Patient.objects.filter(date_of_admission__gte = from_date) , 
-#             Patient.objects.filter(date_of_admission__lte = to_date) )
-#         return render(request, 
-#                     'search.html',
-#                     {'searched' : searched, 'mltsr':mltsr, "from_date" : from_date , "to_date" : to_date})
-#     else:
-
-#         return render(request, 
-#                     'search.html',
-#                     {})
-
-
 
 
 
@@ -143,5 +133,87 @@ class BillsFormView(DetailView):
 class SurgeryReportFormView(DetailView):
     model = Patient
     template_name = 'surgery_report_form.html'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class InsuranceInfoView(DetailView):
+    model = Insurance
+    template_name = 'insurance_info.html'
+
+
+class InsuranceListView(ListView):
+    model = Insurance
+    template_name = 'insurance_list.html'
+    context_object_name = 'insurance_obj'
+
+
+class InsuranceDeleteView(DeleteView):
+    model = Insurance
+    template_name = 'delete_insurance.html'
+    success_url = reverse_lazy('insurance_list')
+
+
+
+
+def InsuranceCreate(request):
+    if request.method == 'POST':
+        insurance_form = InsuranceForm(request.POST)
+        if insurance_form.is_valid():
+            insurance_form.save()
+            return HttpResponseRedirect(reverse('insurance_list'))
+    else:
+        insurance_form = InsuranceForm()
+    return render(request, 'new_insurance.html', {'iform': insurance_form})
+
+
+def InsuranceUpdate( request, pk):
+    data = get_object_or_404(Insurance, slug=pk)
+
+    if request.method == 'POST':
+        insurance_form = InsuranceForm(instance=data)
+        if insurance_form.is_valid():
+            insurance_form.save()
+            return HttpResponseRedirect("insurance_list")
+    else:
+            insurance_form = InsuranceForm(instance=data)
+        
+        
+    return render(request, 'insurance_edit.html', {'inform' : insurance_form})
+
+
+
+
+def insurance_filter(request, pk):
+    
+    qh = request.GET.get('x')
+    qs = Patient.objects.all().filter(basic_insurance_id__exact=qh)
+
+    context = {'querys' : qs}
+    return render(request, 
+                    'patient_insurance.html',
+                    context)
+
+
+
+
+
+
+
+
 
 

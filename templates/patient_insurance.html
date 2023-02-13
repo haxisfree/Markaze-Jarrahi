@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+    <!-- {% for y in queryset %}
+        <a href="{% url '#'">{{ y.first_name }}</a>
+ 
+    {% endfor %} -->
+
+    {% for patient in querys %}
+  
+            <a href="#"> {{ patient }} </a>
+
+
+    {% endfor %}
+
+
+{% endblock content %}
+
