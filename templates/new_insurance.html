@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
+<div class="container">
+    <h1 class="mb-70">اطلاعات بیمار</h1>
+    <form action="" method="post">{% csrf_token %}
+        <!-- {{ insurance_form.as_p }} -->
+        {{ iform.as_p }}
+        <!-- {{ form.bank_account }} -->
+        <input type="submit" value="ذخیره" />
+    </form>
+</div>
+{% endblock content %}

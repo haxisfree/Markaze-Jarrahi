@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load jalali_tags %}
+{% load humanize %}
 
 <html>
     <head>
@@ -31,6 +32,13 @@
                     class="active"
                 {% endif %}
                 ><img class="icon" src="{% static 'pic/icon/list.png' %}">لیست بیماران</a>
+
+
+                <a href="{% url 'insurance_list' %}" 
+                {% if request.path == "/insurancelist" %}
+                    class="active"
+                {% endif %}
+                ><img class="icon" src="{% static 'pic/icon/list.png' %}">لیست شرکت های بیمه</a>
 
                 <a href="#"><img class="icon" src="{% static 'pic/icon/chat.png' %}">پشتیبانی</a>
                 
