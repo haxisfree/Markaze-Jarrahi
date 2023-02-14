@@ -207,9 +207,9 @@ tr.empty{
     color: var(--blue) !important;
 }
 .back {
-    position: relative;
-    top: 25px;
-    right: 1090px;
+    float: left;
+    margin-left: 50px;
+    margin-bottom: -30px;
 }
 form input, form textarea {
     border: unset;
