@@ -112,6 +112,34 @@ class PatientUpdateView(UpdateView):
     form_class = PatientForm
     # jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
 
+class MedicalUpdateView(UpdateView):
+    model = Patient
+    template_name = 'medical_info_list.html'
+    form_class = PatientForm
+    success_url = reverse_lazy('patients_info')
+
+
+
+
+# def MedicalUpdateView( request, pk):
+#     data = get_object_or_404(Patient, pk=pk)
+
+#     if request.method == 'POST':
+#         patient_form = PatientForm(instance=data)
+#         if patient_form.is_valid():
+#             patient_form.save()
+#             return HttpResponseRedirect("patients_info")
+#     else:
+#             patient_form = PatientForm(instance=data)
+        
+        
+#     return render(request, 'medical_info_list.html', {'form' : patient_form})
+
+
+
+
+
+
 class PatientDeleteView(DeleteView):
     model = Patient
     template_name = 'delete_patient.html'

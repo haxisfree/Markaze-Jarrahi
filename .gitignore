@@ -1,5 +1,5 @@
 my_venv/
 MJ/__pycache__/
 skeleton/__pycache__/
-skeleton/migrations/
+skeleton/migrations/__pycache__/
 .git-old/

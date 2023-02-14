@@ -22,7 +22,7 @@ from .views import ( PatientsListView,
                     # edit,
                     InsuranceCreate,
                     InsuranceUpdate,
-                    # PatientInsuranceDetailView,
+                    MedicalUpdateView,
                     insurance_filter,
 )
 
@@ -32,6 +32,7 @@ urlpatterns = [
     path('patientslist', Pagination, name='patients_list'),
     path('new_patient/', PatientCreateView.as_view(), name='new_patient'),
     path('patient/<int:pk>/edit/', PatientUpdateView.as_view(), name='patient_edit'),
+    path('patient/<int:pk>/medical_edit/', MedicalUpdateView.as_view(), name='medical_edit'),
     path('patient/<int:pk>/delete/', PatientDeleteView.as_view(), name='patient_delete'),
     path('', HomeView.as_view(), name='home'),
     path('page/<int:page>', Pagination, name='patients_list'),
