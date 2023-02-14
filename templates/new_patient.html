@@ -8,7 +8,27 @@
 <div class="container">
     <h1 class="mb-70">اطلاعات بیمار</h1>
     <form action="" method="post">{% csrf_token %}
-        {{ form.as_p }}
+        <!-- {{ form.as_p }} -->
+
+        <a>نام: {{ form.first_name }}</a>
+        <a>نام خانوادگی: {{ form.last_name }}</a>
+        <a>نام پدر: {{ form.father_name }}</a>
+        <a>تاریخ تولد: {{ form.birth_date }}</a>
+        <a>جنسیت: {{ form.sex }}</a>
+        <a>کد ملی: {{ form.national_code }}</a>
+        <a>تلفن همراه: {{ form.phone_number }}</a>
+        <a>تلفن ثابت: {{ form.home_phone }}</a>
+        <a>آدرس: {{ form.address }}</a>
+        <a>نام پزشک معرف: {{ form.docter_name }}</a>
+        <a>نام معرف: {{ form.presenter }}</a>
+        <a>شماره پرونده: {{ form.file_number }}</a>
+        <a>تاریخ پذیرش: {{ form.date_of_admission }}</a>
+        <a>توضیحات: {{ form.description }}</a>
+
+
+
+
+
         <input type="submit" value="ذخیره" />
     </form>
 </div>
