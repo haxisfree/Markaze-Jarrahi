@@ -64,3 +64,23 @@ class InsuranceForm(forms.ModelForm):
     class Meta:
         model = Insurance
         fields = "__all__"
+
+
+
+class MedicalForm(forms.ModelForm):
+    class Meta:
+        model = Patient
+        fields = ["anesthesia_doctor_name", 'operator', 'basic_insurance', 'supplementary_insurance', 'date_of_hospitalization', 'date_of_discharge', 'type_of_surgery']
+
+    def __init__(self, *args, **kwargs):
+        super(MedicalForm, self).__init__(*args, **kwargs)
+
+        self.fields['date_of_hospitalization'] = JalaliDateField(label=('تاریخ بستری'), # date format is  "yyyy-mm-dd"
+            widget=AdminJalaliDateWidget # optional, to use default datepicker
+        )
+        self.fields['date_of_hospitalization'].required = False
+        
+        self.fields['date_of_discharge'] = JalaliDateField(label=('تاریخ ترخیص'),
+            widget=AdminJalaliDateWidget # optional, to use default datepicker
+        )
+        self.fields['date_of_discharge'].required = False

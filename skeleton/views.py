@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 # Create your views here.
@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Patient, Insurance
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
-from .forms import PatientForm, InsuranceForm
+from .forms import PatientForm, InsuranceForm, MedicalForm
 from jalali_date import datetime2jalali, date2jalali
 from django.db.models import Q 
 import datetime
@@ -115,27 +115,10 @@ class PatientUpdateView(UpdateView):
 class MedicalUpdateView(UpdateView):
     model = Patient
     template_name = 'medical_info_list.html'
-    form_class = PatientForm
-    success_url = reverse_lazy('patients_info')
-
-
-
-
-# def MedicalUpdateView( request, pk):
-#     data = get_object_or_404(Patient, pk=pk)
-
-#     if request.method == 'POST':
-#         patient_form = PatientForm(instance=data)
-#         if patient_form.is_valid():
-#             patient_form.save()
-#             return HttpResponseRedirect("patients_info")
-#     else:
-#             patient_form = PatientForm(instance=data)
-        
-        
-#     return render(request, 'medical_info_list.html', {'form' : patient_form})
-
-
+    form_class = MedicalForm
+    def get_success_url(self):
+          patientid=self.kwargs['pk']
+          return reverse_lazy('patient_info', kwargs={'pk': patientid})
 
 
 
@@ -209,21 +192,36 @@ def InsuranceCreate(request):
     return render(request, 'new_insurance.html', {'iform': insurance_form})
 
 
-def InsuranceUpdate( request, pk):
-    data = get_object_or_404(Insurance, slug=pk)
+# def InsuranceUpdate( request, pk):
+#     data = get_object_or_404(Insurance, slug=pk)
 
-    if request.method == 'POST':
-        insurance_form = InsuranceForm(instance=data)
-        if insurance_form.is_valid():
-            insurance_form.save()
-            return HttpResponseRedirect("insurance_list")
-    else:
-            insurance_form = InsuranceForm(instance=data)
+#     if request.method == 'POST':
+#         insurance_form = InsuranceForm(instance=data)
+#         if insurance_form.is_valid():
+#             insurance_form.save()
+#             return HttpResponseRedirect("insurance_list")
+#     else:
+#             insurance_form = InsuranceForm(instance=data)
         
         
-    return render(request, 'insurance_edit.html', {'inform' : insurance_form})
+#     return render(request, 'insurance_edit.html', {'inform' : insurance_form})
+
+# class InsuranceUpdateView(UpdateView):
+#     model = Patient
+#     template_name = 'medical_info_list.html'
+#     form_class = MedicalForm
+#     def get_success_url(self):
+#           patientid=self.kwargs['pk']
+#           return reverse_lazy('patient_info', kwargs={'pk': patientid})
 
 
+class InsuranceUpdateView(UpdateView):
+    model = Insurance
+    template_name = 'insurance_edit.html'
+    form_class = InsuranceForm
+    def get_success_url(self):
+          insuranceid=self.kwargs['pk']
+          return reverse_lazy('insurance_info', kwargs={'pk': insuranceid})
 
 
 def insurance_filter(request, pk):

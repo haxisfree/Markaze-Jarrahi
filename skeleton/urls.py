@@ -15,15 +15,12 @@ from .views import ( PatientsListView,
 
                     InsuranceListView, 
                     InsuranceInfoView,  
-                    # InsuranceCreateView, 
-                    # InsuranceUpdateView,
                     InsuranceDeleteView,
-                    # insurancelist,
-                    # edit,
                     InsuranceCreate,
-                    InsuranceUpdate,
+                    # InsuranceUpdate,
                     MedicalUpdateView,
                     insurance_filter,
+                    InsuranceUpdateView,
 )
 
 
@@ -48,7 +45,7 @@ urlpatterns = [
     path('insurance/<slug:pk>/', InsuranceInfoView.as_view(), name='insurance_info'),
     path('insurancelist', InsuranceListView.as_view(), name='insurance_list'),
     path('new_insurance/', InsuranceCreate, name='new_insurance'),
-    path('insurance/<slug:pk>/edit/', InsuranceUpdate, name='insurance_edit'),
+    path('insurance/<slug:pk>/edit/', InsuranceUpdateView.as_view(), name='insurance_edit'),
     path('insurance/<slug:pk>/delete/', InsuranceDeleteView.as_view(), name='insurance_delete'),
     path('insurance/<slug:pk>/patients/', insurance_filter, name='patient_insurance'),
 
