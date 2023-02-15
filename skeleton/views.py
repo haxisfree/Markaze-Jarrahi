@@ -5,10 +5,10 @@ from django.shortcuts import render, redirect
 
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Patient, Insurance
+from .models import Patient, Insurance, Tariff
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
-from .forms import PatientForm, InsuranceForm, MedicalForm
+from .forms import PatientForm, InsuranceForm, MedicalForm, TariffForm
 from jalali_date import datetime2jalali, date2jalali
 from django.db.models import Q 
 import datetime
@@ -101,14 +101,12 @@ class PatientsListView(ListView):
 class PatientCreateView(CreateView):
     model = Patient
     template_name = 'new_patient.html'
-    # fields='__all__'
     form_class = PatientForm
     # jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
 
 class PatientUpdateView(UpdateView):
     model = Patient
     template_name = 'patient_edit.html'
-    # fields = '__all__'
     form_class = PatientForm
     # jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
 
@@ -192,29 +190,6 @@ def InsuranceCreate(request):
     return render(request, 'new_insurance.html', {'iform': insurance_form})
 
 
-# def InsuranceUpdate( request, pk):
-#     data = get_object_or_404(Insurance, slug=pk)
-
-#     if request.method == 'POST':
-#         insurance_form = InsuranceForm(instance=data)
-#         if insurance_form.is_valid():
-#             insurance_form.save()
-#             return HttpResponseRedirect("insurance_list")
-#     else:
-#             insurance_form = InsuranceForm(instance=data)
-        
-        
-#     return render(request, 'insurance_edit.html', {'inform' : insurance_form})
-
-# class InsuranceUpdateView(UpdateView):
-#     model = Patient
-#     template_name = 'medical_info_list.html'
-#     form_class = MedicalForm
-#     def get_success_url(self):
-#           patientid=self.kwargs['pk']
-#           return reverse_lazy('patient_info', kwargs={'pk': patientid})
-
-
 class InsuranceUpdateView(UpdateView):
     model = Insurance
     template_name = 'insurance_edit.html'
@@ -237,7 +212,38 @@ def insurance_filter(request, pk):
 
 
 
+class TariffListView(ListView):
+    model = Tariff
+    context_object_name = 'tariff_obj'
+    template_name = 'tariff_list.html'
 
+
+
+class TariffInfoView(DetailView):
+    model = Tariff
+    template_name = 'tariff_info.html'
+
+
+
+
+class TariffCreateView(CreateView):
+    model = Tariff
+    template_name = 'new_tariff.html'
+    form_class = TariffForm
+    success_url = reverse_lazy('tariff_list')
+
+class TariffUpdateView(UpdateView):
+    model = Tariff
+    template_name = 'tariff_edit.html'
+    form_class = TariffForm
+    def get_success_url(self):
+          tariffid=self.kwargs['pk']
+          return reverse_lazy('tariff_info', kwargs={'pk': tariffid})
+
+class TariffDeleteView(DeleteView):
+    model = Tariff
+    template_name = 'delete_tariff.html'
+    success_url = reverse_lazy('tariff_list')
 
 
 

@@ -1,0 +1,18 @@
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
+</div>
+<div class="container">
+    <h2 class="center">آیا از حذف تعرفه <a href="{% url 'tariff_info' tariff.pk %}" style="color: var(--blue);">{{ tariff.slug }}</a> مطمئن هستید؟ </h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="flex">
+            <input type="submit" value="تایید" class="center btn-secondary"/>
+        </div>
+    </form>
+</div>    
+{% endblock content %}

@@ -1,0 +1,50 @@
+
+
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+{% block content %}
+{% load humanize %}
+
+    <!-- <button onclick="window.print()">Print this page</button> -->
+    <!-- <img src="{% static 'icon/img1.jpg' %}" alt="Girl with ampool" width="500" height="200"> -->
+
+
+    <div class="row">
+        <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
+    </div>
+    <div class="container">
+        <div class="row patient-header">
+            <div class="col-3">
+                <div class="avatar">
+                    <img src="{% static 'pic/icon/avatar.png' %}">
+                </div>
+            </div>
+            <div class="col-9">
+                <h2>{{ tariff.pk }}</h2>
+                </br>
+                <a href="{% url 'tariff_edit' tariff.pk %}"><button class="btn btn-primary">ویرایش</button></a>
+                &nbsp;
+                <a href="{% url 'tariff_delete' tariff.pk %}"><button class="btn btn-secondary">حذف</button></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <h2>اطلاعات تعرفه</h2>
+                <p><span class="sub-title">نام تعرفه</span>{{ tariff.tariff}}</p>
+                <p><span class="sub-title">حق العمل سنگ شکنی</span>{{ tariff.kidney_crusher_cost | intcomma:False }}</p>
+                <p><span class="sub-title">حق العمل بیهوشی</span>{{ tariff.anesthetic_cost | intcomma:False }}</p>
+                <p><span class="sub-title">دارو و لوازم مصرفی</span>{{ tariff.drug_and_consumables_cost | intcomma:False }}</p>
+                <p><span class="sub-title">جمع تعرفه ها بدون دارو </span>{{ tariff.TotalTariffWithoutMedicine | intcomma:False}}</p>
+                <p><span class="sub-title">جمع تعرفه ها با دارو </span>{{ tariff.TotalSumForCenter | intcomma:False }}</p>
+            </div>
+        </div>
+
+
+
+
+
+    {% endblock content %}
+

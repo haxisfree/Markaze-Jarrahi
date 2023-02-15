@@ -9,6 +9,42 @@ from django.core.validators import validate_comma_separated_integer_list
 
 
 
+
+class Tariff(models.Model):
+    tariff = models.SlugField(primary_key=True,max_length=100, verbose_name="نام تعرفه به انگلیسی")
+    kidney_crusher_cost = models.BigIntegerField(verbose_name="حق العمل سنگ شکنی", blank=True, null=True)
+    anesthetic_cost = models.BigIntegerField(verbose_name="حق العمل بیهوشی", blank=True, null=True)
+    drug_and_consumables_cost = models.BigIntegerField(verbose_name="هزینه دارو و لوازم مصرفی", blank=True, null=True)
+
+    @property
+    def TotalTariffWithoutMedicine(self):
+
+        ttwm = self.kidney_crusher_cost + self.anesthetic_cost
+
+        return ttwm
+
+
+    @property
+    def TotalSumForCenter(self):
+
+        ttsfc = self.TotalTariffWithoutMedicine + self.drug_and_consumables_cost
+
+        return ttsfc
+
+
+
+
+
+    def __str__(self):
+        return self.tariff
+
+    def get_absolute_url(self):
+        return reverse('tariff_page', args=[str(self.slug)])
+
+
+
+
+
 class Insurance (models.Model):
 
     slug = models.SlugField(primary_key=True,max_length=100, verbose_name="نام انگلیسی بیمه")
@@ -18,7 +54,6 @@ class Insurance (models.Model):
     bank_card_num = models.BigIntegerField(verbose_name="شماره حساب", blank=True, null=True)
     branchs_name = models.CharField(max_length=100, verbose_name="نام شعبه")
     total_debits_and_credits = models.BigIntegerField(verbose_name="مجموع بدهکاری و بستانکاری", blank=True, null=True)
-
 
 
     def __str__(self):
@@ -65,7 +100,6 @@ class Patient(models.Model):
 
 
 
-
     id = models.AutoField(primary_key=True, verbose_name="شناسه")
     first_name = models.CharField(max_length=100, verbose_name="نام")
     last_name = models.CharField(max_length=200, verbose_name="نام خانوادگی")    
@@ -89,9 +123,35 @@ class Patient(models.Model):
     date_of_hospitalization = models.DateTimeField(verbose_name="تاریخ بستری", blank=True, null=True)
     date_of_discharge = models.DateTimeField(verbose_name="تاریخ ترخیص", blank=True, null=True)
     type_of_surgery = models.CharField(max_length=100, verbose_name="نوع عمل", blank=True, null=True)
+    payment_tariff = models.ForeignKey(Tariff, blank=True, null=True, on_delete=models.CASCADE)
 
- 
-    salary = models.CharField(validators=[validate_comma_separated_integer_list],max_length=200, blank=True, null=True,default='', verbose_name="دستمزد")
+
+
+
+
+    @property
+    def Franchise(self):
+
+        first_tariff_object = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
+        f = first_tariff_object.TotalTariffWithoutMedicine * self.basic_insurance.franchising
+
+        return f
+
+
+
+    @property
+    def InsurancePremium(self):
+
+        second_tariff_object = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
+        ip = second_tariff_object.TotalTariffWithoutMedicine - self.Franchise
+
+        return ip
+
+
+
+
+
+
 
 
     class Meta: 
@@ -110,11 +170,3 @@ class Patient(models.Model):
 
     
 
-
-
-
-
-
-
-
-        

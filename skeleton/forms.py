@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from django.contrib.admin.widgets import AdminDateWidget
-from .models import Patient, Insurance
+from .models import Patient, Insurance, Tariff
 from jalali_date.fields import JalaliDateField, SplitJalaliDateTimeField
 from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
 
@@ -84,3 +84,11 @@ class MedicalForm(forms.ModelForm):
             widget=AdminJalaliDateWidget # optional, to use default datepicker
         )
         self.fields['date_of_discharge'].required = False
+
+
+
+
+class TariffForm(forms.ModelForm):
+    class Meta:
+        model = Tariff
+        fields = "__all__"

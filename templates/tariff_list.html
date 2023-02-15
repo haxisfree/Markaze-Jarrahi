@@ -1,0 +1,43 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load jalali_tags %}
+<div class="row">
+  <div class="col-9">
+  </div>
+  <div class="col-3">
+    <a href="{% url 'new_tarrif' %}"><button class="btn btn-primary float-left">افزودن تعرفه جدید</button></a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div id="patientslist">
+        <table>
+          <thead>
+            <tr>
+              <th>نام تعرفه</th>
+              <th></th>
+                {% for t in tariff_obj %}
+                <tr class="patient">
+                  <td><a href="{% url 'tariff_info' t.pk %}">{{ t.pk }}</a></td>
+                </tr>
+                {% endfor %}
+              <th></th>
+            </tr>
+          </thead>
+  
+
+          <tbody>
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock content %}

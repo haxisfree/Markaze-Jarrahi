@@ -40,6 +40,13 @@
                 {% endif %}
                 ><img class="icon" src="{% static 'pic/icon/list.png' %}">لیست شرکت های بیمه</a>
 
+                <a href="{% url 'tariff_list' %}" 
+                {% if request.path == "/tarifflist" %}
+                    class="active"
+                {% endif %}
+                ><img class="icon" src="{% static 'pic/icon/list.png' %}">لیست تعرفه ها</a>
+
+
                 <a href="#"><img class="icon" src="{% static 'pic/icon/chat.png' %}">پشتیبانی</a>
                 
             </div>
