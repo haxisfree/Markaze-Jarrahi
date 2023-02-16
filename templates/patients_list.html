@@ -1,174 +1,111 @@
-
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
 {% load jalali_tags %}
-<div class="row">
-  <div class="col-9">
-    <input type="text" id="search" onkeyup="filterPatient()" placeholder="جستوجو ...">
 
-    <!-- <div id="filter">
-      <div>جستوجو بر اساس:</div>
-      <input type="radio" id="search-patient" name="filter" value="patient-name" checked onclick="filterPatient()">
-      <label for="html">نام بیمار</label>
-      <input type="radio" id="search-date" name="filter" value="date_of_admission" onclick="filterPatient()">
-      <label for="css">تاریخ پذیرش</label>
-      <input type="radio" id="search-doctor" name="filter" value="docter_name" onclick="filterPatient()">
-      <label for="javascript">نام پزشک</label>
-    </div>
-
-    <input type="text" id="min" name="min" onkeyup="searchDate()">
-    <input type="text" id="max" name="max" onkeyup="searchDate()"> -->
-  </div>
-  <div class="col-3">
-    <a href="{% url 'new_patient' %}"><button class="btn btn-primary float-left">افزودن بیمار جدید</button></a>
-  </div>
+<div class="search-container">
+    <form method="GET" action="{% url 'search' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-12">
+                <input class="form-control py-2"
+                type="search" placeholder="جستوجو نام بیمار ..." aria-label="Search"
+                name="name search">
+                <input class="form-control py-2"
+                type="search" placeholder="جستوجو کدملی بیمار ..." aria-label="Search"
+                name="national code search">
+                <input class="form-control py-2"
+                type="search" placeholder="جستوجو شماره پرونده بیمار ..." aria-label="Search"
+                name="file number search">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-9">
+                &nbsp;&nbsp;
+                از تاریخ 
+                <input type="date" class="form-control" id="publishDateMin" name="date_min">
+                تا
+                <input type="date" class="form-control" id="publishDateMax" name="date_max" data-jdp onclick="datePicker()">
+            </div>
+            <div class="col-3">
+                <button id="search-button" class="btn btn-primary" type="submit">جستوجو</button>
+            </div>
+        </div>
+    </form>
 </div>
-<div class="row">
-  <div class="col-12">
-    <div id="patientslist">
-        <table>
-          <thead>
-            <tr>
-              <th>نام بیمار</th>
-              <th> کد ملی</th>
-              <th>شماره پرونده</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-  
-          <!-- <form action="" method="GET">
-            <input type="text" name="q" />
-            <button type="submit">search</button>
-          </form>
-         -->
-
-
-
-
-
-
-
-
-            <!-- search part -->
-        
-            <!-- <form class="d-flex" method=POST 
-              action="{% url 'search' %}">
-                {% csrf_token %}
-              <input class="form-control me-2"
-              type="search" placeholder="Search" aria-label="Search"
-              name="searched">
-
-              <button class="btn btn-outline-secondary" type="submit">
-                Search
-              </button> -->
-
-
-            </form>
-   <!-- <p>{{ request.user.date_joined|to_jalali:'%y/%m/%d _ %H:%M:%S' }}</p> -->
-   
-   
-            <form method="GET" action="{% url 'search' %}">
-              {% csrf_token %}
-              <input class="form-control py-2"
-              type="search" placeholder="name Search" aria-label="Search"
-              name="name search">
-
-              <input class="form-control py-2"
-              type="search" placeholder="national code Search" aria-label="Search"
-              name="national code search">
-
-              <input class="form-control py-2"
-              type="search" placeholder="file number Search" aria-label="Search"
-              name="file number search">
-
-              <input type="date" class="form-control" id="publishDateMin" name="date_min">
-              <input class="form-control" id="publishDateMax" name="date_max" data-jdp onclick="datePicker()">
-              
-              <button class="btn btn-primary" type="submit">
-                Search
-              </button>
-
-            </form>
-        
-        
-        
-            <!-- end of search part -->
-
-
-
-          <tbody>
-            {% for patient in patient %}
-            <tr class="patient">
-              <td><a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a></td>
-              <!-- <td>{{patient.date_of_admission|to_jalali:'%y/%m/%d'}}</td> -->
-              <td>{{patient.national_code}}</td>
-              <td>{{patient.file_number}}</td>
-              <td class="button"><a href="{% url 'patient_info' patient.pk %}"><button class="show-patient">مشاهده</button></a></td>
-              <td class="button"><button class="delete-patient"><a href="{% url 'patient_delete' patient.pk %}">حذف</a></button></td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+<div class="patients-container">
+    <div class="row">
+        <div class="col-12">
+            <div id="patientslist">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>نام بیمار</th>
+                            <th> کد ملی</th>
+                            <th>شماره پرونده</th>
+                            <th>تاریخ پذیرش</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for patient in patient %}
+                        <tr class="patient">
+                            <td>
+                                <a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a>
+                            </td>
+                            <td>{{patient.national_code}}</td>
+                            <td>{{patient.file_number}}</td>
+                            <td>{{patient.date_of_admission|to_jalali:'%y/%m/%d'}}</td>
+                            <td class="button">
+                                <a href="{% url 'patient_info' patient.pk %}"><button class="show-patient">مشاهده</button></a>
+                            </td>
+                            <td class="button">
+                                <a href="{% url 'patient_delete' patient.pk %}"><button class="delete-patient">حذف</button></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-
-
-<!-- <div class="pagination">
-  <span class="step-links">
-      {% if patient.has_next %}
-          <a class="btn btn-primary float-right" href="?page={{patient.next_page_number}}">&larr; previous patients</a>
-      {% endif %}
-      
-      <span class="current">
-          | Page {{ patient.number }} of {{ patient.paginator.num_pages }} |
-      </span>
-
-      {% if patient.has_previous %}
-          <a class="btn btn-primary float-right" href="?page={{patient.previous_page_number}}">next patients&rarr;</a>
-      {% endif %}
-  </span>
-</div>     -->
-
-
 
 
  <!-- start of pagination -->
 <div class="flex">
-  <div class="pagination">
-      {% if patient.has_previous %}
-          <a href="?page={{ patient.previous_page_number }}">&laquo;</a>
-      {% else %}
-          <a class="disabled" href="#" tabindex="-1" aria-disabled="True">&laquo;</a>
-      {% endif %}
-
-    {% if patient.number|add:'-4' > 1 %}
-      <a class="page-link" href="?page={{ patient.number|add:'-5' }}">&hellip;</a>
-    {% endif %}
-
-    {% for i in patient.paginator.page_range %}
-        {% if patient.number == i %}
-                <a class="active">{{ i }}</a>
-        {% elif i > patient.number|add:'-5' and i < patient.number|add:'5' %}
-                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+    <div class="pagination">
+        {% if patient.has_previous %}
+            <a class="arrow" href="?page={{ patient.previous_page_number }}"><img src="{% static 'pic/icon/next.png' %}"></a>
+        {% else %}
+            <a class="disabled arrow" href="#" tabindex="-1" aria-disabled="True"><img src="{% static 'pic/icon/next.png' %}"></a>
         {% endif %}
-    {% endfor %}
 
-    {% if patient.paginator.num_pages > patient.number|add:'4' %}
-        <a class="page-link" href="?page={{ patient.number|add:'5' }}">&hellip;</a>
-    {% endif %}
+        {% if patient.number|add:'-4' > 1 %}
+            <a class="page-link" href="?page={{ patient.number|add:'-5' }}">&hellip;</a>
+        {% endif %}
 
-    {% if patient.has_next %}
-        <a class="page-link" href="?page={{ patient.next_page_number }}">&raquo;</a>
-    {% else %}
-        <a class="disabled" href="#" tabindex="-1" aria-disabled="True">&raquo;</a>
-    {% endif %}
-  </div> 
+        {% for i in patient.paginator.page_range %}
+            {% if patient.number == i %}
+                <a class="active">{{ i }}</a>
+            {% elif i > patient.number|add:'-5' and i < patient.number|add:'5' %}
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if patient.paginator.num_pages > patient.number|add:'4' %}
+            <a class="page-link" href="?page={{ patient.number|add:'5' }}">&hellip;</a>
+        {% endif %}
+
+        {% if patient.has_next %}
+            <a class="page-link arrow" href="?page={{ patient.next_page_number }}"><img src="{% static 'pic/icon/previous.png' %}"></a>
+        {% else %}
+            <a class="disabled arrow" href="#" tabindex="-1" aria-disabled="True"><img src="{% static 'pic/icon/previous.png' %}"></a>
+        {% endif %}
+    </div> 
 </div>
-
 <!-- end of pagination -->
 
 
@@ -200,5 +137,3 @@
 
 
 {% endblock content %}
-
-<!-- <a href="{% url 'patient_delete' patient.pk %}">+ Delete Blog Post</a> -->
