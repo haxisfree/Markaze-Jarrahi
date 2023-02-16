@@ -11,6 +11,7 @@ from .views import ( PatientsListView,
                     SurgeryReportFormView,
                     Pagination,
                     searchbar,
+                    # PaymentStatus,
 
 
                     InsuranceListView, 
@@ -34,6 +35,7 @@ from .views import ( PatientsListView,
 
 urlpatterns = [
     path('patient/<int:pk>/', PatientInfoView.as_view(), name='patient_info'),
+    # path('patient/<int:pk>/', PaymentStatus, name='patient_info_change'),
     path('patientslist', Pagination, name='patients_list'),
     path('new_patient/', PatientCreateView.as_view(), name='new_patient'),
     path('patient/<int:pk>/edit/', PatientUpdateView.as_view(), name='patient_edit'),

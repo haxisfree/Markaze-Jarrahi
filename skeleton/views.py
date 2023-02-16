@@ -75,7 +75,7 @@ def my_view(request):
 def Pagination(request, page=1):
     
     patient_list = Patient.objects.all()
-    paginator = Paginator(patient_list, 1)
+    paginator = Paginator(patient_list, 5)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
     context = {
@@ -117,6 +117,62 @@ class MedicalUpdateView(UpdateView):
     def get_success_url(self):
           patientid=self.kwargs['pk']
           return reverse_lazy('patient_info', kwargs={'pk': patientid})
+
+
+
+def PaymentStatus(request, pk):
+
+    if request.method == 'POST':
+        qh = request.GET.get('y')
+        patientid=self.kwargs['pk']
+        status = Patient.objects.get( pk=pk )
+
+        if status.payment_status == "P":
+            qs = status.update( payment_status = "U" )
+        else:
+            qs = status.update( payment_status = "P" )
+
+    return reverse_lazy('patient_info', kwargs={'pk': patientid})
+    
+    
+    # if Patient.objects.filter(pk=pk).get( payment_status__exact = qh )
+    #     pass
+    # else
+    #     qs = Patient.objects.filter(pk=pk).update( payment_status__exact = qh )
+
+
+    # return render(request, 'patient_info.html', {'form': qs})
+    
+    # ps = Patient.objects.all().filter(basic_insurance_id__exact=qh)
+    # Patient.objects.filter(pk=pk).update(payment_status='P')
+
+
+
+
+# Tariff.objects.get( tariff__exact = self.payment_tariff_id )
+
+
+class InsuranceUpdateView(UpdateView):
+    model = Insurance
+    template_name = 'insurance_edit.html'
+    form_class = InsuranceForm
+    def get_success_url(self):
+          insuranceid=self.kwargs['pk']
+          return reverse_lazy('insurance_info', kwargs={'pk': insuranceid})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -202,12 +258,52 @@ class InsuranceUpdateView(UpdateView):
 def insurance_filter(request, pk):
     
     qh = request.GET.get('x')
-    qs = Patient.objects.all().filter(basic_insurance_id__exact=qh)
+    ps = Patient.objects.all().filter(basic_insurance_id__exact=qh)
 
+
+
+    paginator = Paginator(ps, 3)
+    page = request.GET.get('screen')
+    qs = paginator.get_page(page)
+    
+    
     context = {'querys' : qs}
     return render(request, 
                     'patient_insurance.html',
                     context)
+
+
+
+# def Pagination(request, page=1):
+    
+#     patient_list = Patient.objects.all()
+#     paginator = Paginator(patient_list, 1)
+#     page = request.GET.get('page')
+#     page_obj = paginator.get_page(page)
+#     context = {
+#         "patient" : page_obj
+#         }
+#     return render(request, 'patients_list.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -217,14 +313,9 @@ class TariffListView(ListView):
     context_object_name = 'tariff_obj'
     template_name = 'tariff_list.html'
 
-
-
 class TariffInfoView(DetailView):
     model = Tariff
     template_name = 'tariff_info.html'
-
-
-
 
 class TariffCreateView(CreateView):
     model = Tariff

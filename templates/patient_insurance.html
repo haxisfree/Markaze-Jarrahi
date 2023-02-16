@@ -12,11 +12,91 @@
 
     {% for patient in querys %}
   
-            <a href="#"> {{ patient }} </a>
-
+            <p><a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a></p>
 
     {% endfor %}
 
+
+
+
+    <div class="flex">
+        <div class="pagination">
+            {% if querys.has_previous %}
+                {% if 'x' in request.get_full_path %}
+                    <a href="{{ request.get_full_path }}&screen={{ querys.previous_page_number }}">&laquo;</a>
+                {% else %}
+                    <a href="?screen={{ querys.previous_page_number }}">&laquo;</a>
+                {% endif %}
+            {% else %}
+                <a class="disabled" href="#" tabindex="-1" aria-disabled="True">&laquo;</a>
+            {% endif %}
+      
+          {% if querys.number|add:'-4' > 1 %}
+
+            {% if 'x' in request.get_full_path %}
+                <a href="{{ request.get_full_path }}&screen={{ querys.number|add:'-5' }}">&hellip;</a>
+            {% else %}
+                <a class="page-link" href="?screen={{ querys.number|add:'-5' }}">&hellip;</a>
+            {% endif %}
+
+
+            
+          {% endif %}
+      
+          {% for i in querys.paginator.page_range %}
+              {% if querys.number == i %}
+                      <a class="active">{{ i }}</a>
+              {% elif i > querys.number|add:'-5' and i < querys.number|add:'5' %}
+
+
+                {% if 'x' in request.get_full_path %}
+                    <a href="{{ request.get_full_path }}&screen={{  i  }}">{{ i }}</a>
+                {% else %}
+                    <a class="page-link" href="?screen={{ i }}">{{ i }}</a>
+                {% endif %}
+
+
+
+
+              {% endif %}
+          {% endfor %}
+      
+          {% if querys.paginator.num_pages > querys.number|add:'4' %}
+          
+
+            {% if 'x' in request.get_full_path %}
+                <a href="{{ request.get_full_path }}&screen={{  querys.number|add:'5'  }}">&hellip;</a>
+            {% else %}
+                <a class="page-link" href="?screen={{ querys.number|add:'5' }}">&hellip;</a>
+            {% endif %}
+
+
+
+          {% endif %}
+      
+
+
+
+
+
+
+
+          {% if querys.has_next %}
+
+
+            {% if 'x' in request.get_full_path %}
+                <a href="{{ request.get_full_path }}&screen={{  querys.next_page_number  }}">&raquo;</a>
+            {% else %}
+                <a class="page-link" href="?screen={{ querys.next_page_number }}">&raquo;</a>
+            {% endif %}
+
+
+
+          {% else %}
+              <a class="disabled" href="#" tabindex="-1" aria-disabled="True">&raquo;</a>
+          {% endif %}
+        </div> 
+      </div>
 
 {% endblock content %}
 
