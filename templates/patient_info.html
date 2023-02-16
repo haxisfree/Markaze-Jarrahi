@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <h2>{{ patient.first_name }} {{ patient.docter_name }}</h2>
+                <h2>{{ patient.first_name }} {{ patient.last_name }}</h2>
                 <p> شماره پرونده &nbsp; {{ patient.file_number }}</p>
                 </br>
                 <a href="{% url 'patient_edit' patient.pk %}"><button class="btn btn-primary">ویرایش</button></a>
