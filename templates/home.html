@@ -12,17 +12,17 @@
                 <a class="h-one" href="{% url 'patients_list' %}">
                     <div class="hexagon"> <img class="home-icon" src="{% static 'pic/icon/multiple-users-silhouette.png' %}">لیست بیماران</div>
                 </a>
-                <a class="h-two">
-                    <div class="hexagon"><img class="home-icon" src="{% static 'pic/icon/business-and-trade.png' %}">لیست بیمه</div>
+                <a class="h-two" href="{% url 'insurance_list' %}">
+                    <div class="hexagon"><img class="home-icon" src="{% static 'pic/icon/business-and-trade.png' %}">شرکت های بیمه</div>
                 </a>
-                <a class="h-three">
-                    <div class="hexagon"><img class="home-icon" src="{% static 'pic/icon/file.png' %}">گزارش گیری</div>
+                <a class="h-three" href="{% url 'tariff_list' %}">
+                    <div class="hexagon"><img class="home-icon" src="{% static 'pic/icon/sale.png' %}">تعرفه ها</div>
                 </a>
                 <a class="h-four">
-                    <div class="hexagon"><img class="home-icon" src="{% static 'pic/icon/wallet-filled-money-tool.png' %}">تن خواه</div>
+                    <div class="hexagon"><img class="home-icon" src="{% static 'pic/icon/file.png' %}">گزارش گیری</div>
                 </a>
-                <a class="h-five" href="{% url 'tariff_list' %}">
-                    <div class="hexagon"><img class="home-icon" src="{% static 'pic/icon/help.png' %}">پشتیبانی</div>
+                <a class="h-five">
+                    <div class="hexagon"><img class="home-icon" src="{% static 'pic/icon/wallet-filled-money-tool.png' %}">تن خواه</div>
                 </a>
                 <a class="h-six" href="{% url 'new_patient' %}">
                     <div class="hexagon"><img class="home-icon" src="{% static 'pic/icon/patient.png' %}">افزودن بیمار </div>
@@ -31,6 +31,10 @@
                     <div class="hexagon"></div>
                 </div>
             </div>
+
+            <a class="help-button">
+                <button class="btn btn-primary"><img class="" src="{% static 'pic/icon/help.png' %}">پشتیبانی </button>
+            </a>
         </div>
     </body>
 </html>

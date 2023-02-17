@@ -24,9 +24,9 @@
             <div class="col-9">
                 &nbsp;&nbsp;
                 از تاریخ 
-                <input type="date" class="form-control" id="publishDateMin" name="date_min">
+                <input  class="form-control" id="publishDateMin" name="date_min" data-jdp onclick="datePicker()">
                 تا
-                <input type="date" class="form-control" id="publishDateMax" name="date_max" data-jdp onclick="datePicker()">
+                <input  class="form-control" id="publishDateMax" name="date_max" data-jdp onclick="datePicker()">
             </div>
             <div class="col-3">
                 <button id="search-button" class="btn btn-primary" type="submit">جستوجو</button>
@@ -62,7 +62,7 @@
                                 <a href="{% url 'patient_info' patient.pk %}"><button class="show-patient">مشاهده</button></a>
                             </td>
                             <td class="button">
-                                <a href="{% url 'patient_delete' patient.pk %}"><button class="delete-patient">حذف</button></a>
+                                <a href="{% url 'patient_delete' patient.pk %}"><button class="btn-delete">حذف</button></a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -112,8 +112,13 @@
 
 
 
-
-    <script>
+<script>
+    jalaliDatepicker.startWatch({
+    minDate: "attr",
+    maxDate: "attr"
+    }); 
+</script>
+    <!-- <script>
         jalaliDatepicker.startWatch({
             minDate: "attr",
             maxDate: "attr",
@@ -132,7 +137,7 @@
             }
         });
         
-    </script>
+    </script> -->
 
 
 

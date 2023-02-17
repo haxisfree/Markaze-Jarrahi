@@ -1,14 +1,60 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
+<div class="row">
+    <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
+</div>
+
 <div class="container">
-    <h1 class="mb-70">اطلاعات بیمار</h1>
-    <form action="" method="post">{% csrf_token %}
-        <!-- {{ insurance_form.as_p }} -->
-        {{ iform.as_p }}
-        <!-- {{ form.bank_account }} -->
-        <input type="submit" value="ذخیره" />
+    <h1>اطلاعات شرکت بیمه</h1>
+    <hr>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                <label>نام بیمه :</label>
+                {{ iform.name }}
+            </div>
+            <div class="col-6">
+                <label>نام بیمه به انگلیسی: </label>
+                {{ iform.slug }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>فرانشیز (درصد) :</label>
+                {{ iform.franchising }}
+            </div>
+            <div class="col-6">
+                <label>مجموع بدهکاری و بستانکاری :</label>
+                {{ iform.total_debits_and_credits }}
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+ 
+            <div class="col-6">
+                <label>بانک معرفی شده به بیمه:</label>
+                {{ iform.bank_account }}
+            </div>
+            <div class="col-6">
+                <label>شعبه :</label>
+                {{ iform.branchs_name }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>شماره حساب :</label>
+                {{ iform.bank_card_num }}
+            </div>
+        </div>
+
+        <div class="flex-left">
+            <input  type="submit" value="ذخیره" style="width: 18%;"/>
+        </div>
     </form>
 </div>
 {% endblock content %}
+
+

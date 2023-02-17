@@ -3,9 +3,11 @@
 {% extends 'base.html' %}
 
 {% load static %}
-{% load humanize %}
+
 {% block content %}
 {% load humanize %}
+
+{% load jalali_tags %}
 
     <!-- <button onclick="window.print()">Print this page</button> -->
     <!-- <img src="{% static 'icon/img1.jpg' %}" alt="Girl with ampool" width="500" height="200"> -->
@@ -23,28 +25,48 @@
             </div>
             <div class="col-9">
                 <h2>{{ patient.first_name }} {{ patient.last_name }}</h2>
-                <p> شماره پرونده &nbsp; {{ patient.file_number }}</p>
+                <p> شماره پرونده &nbsp; &nbsp; {{ patient.file_number }}</p>
+                <p><span class="sub-title">تاریخ پذیرش &nbsp; &nbsp; {{patient.date_of_admission|to_jalali:'%y/%m/%d'}}</span></p>
                 </br>
-                <a href="{% url 'patient_edit' patient.pk %}"><button class="btn btn-primary">ویرایش</button></a>
+                <a href="{% url 'medical_edit' patient.pk %}"><button class="btn btn-secondary">تکمیل اطلاعات پزشکی بیمار</button></a>
                 &nbsp;
-                <a href="{% url 'patient_delete' patient.pk %}"><button class="btn btn-secondary">حذف</button></a>
-                <a href="{% url 'medical_edit' patient.pk %}"><button class="btn btn-primary">تکمیل اطلاعات پزشکی بیمار</button></a>
+                <a href="{% url 'patient_delete' patient.pk %}"><button class="btn btn-delete">حذف بیمار</button></a>
             </div>
         </div>
         <br>
         </br>
         <hr>
         <div class="row">
-            <div class="col-12">
-                <h2>اطلاعات بیمار</h2>
+            <div class="col-12 first-info">
+                <h2>اطلاعات شخصی بیمار</h2>
                 <p><span class="sub-title">نام پدر</span>{{ patient.father_name}}</p>
-                <p><span class="sub-title">تاریخ تولد</span>{{ patient.birth_date }}</p>
-                <p><span class="sub-title">شماره تماس</span>{{ patient.phone_number | intcomma:False }}</p>
-                <p><span class="sub-title">نام پزشک</span>{{ patient.docter_name }}</p>
-                <p><span class="sub-title">تاریخ پذیرش </span>{{ patient.date_of_admission }}</p>
-                <p><span class="sub-title">تاریخ پذیرش </span>{{ patient.basic_insurance }}</p>
-                <p><span class="sub-title">فرانشیز پرداختی توسط بیمار</span>{{ patient.Franchise | intcomma:False}}</p>
-                <p><span class="sub-title">مبلغ پرداختی بیمه </span>{{ patient.InsurancePremium | intcomma:False }}</p>
+                <p><span class="sub-title">تاریخ تولد</span>{{patient.birth_date|to_jalali:'%y/%m/%d'}}</p>
+                <p><span class="sub-title">کدملی</span>{{ patient.national_code }}</p>
+                <p><span class="sub-title">تلفن ثابت</span>{{ patient.home_phone }}</p>
+                <p><span class="sub-title">تلفن همراه</span>{{ patient.phone_number }}</p>
+                <p><span class="sub-title">آدرس</span>{{ patient.address}}</p>
+                <p><span class="sub-title">نام معرف</span></span>{{ patient.presenter}}</p>
+                <br>
+                <a href="{% url 'patient_edit' patient.pk %}"><button class="btn btn-secondary float-left">ویرایش</button></a>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div class="row">
+            <div class="col-12 second-info">
+                <h2>اطلاعات پزشکی بیمار</h2>
+                <p><span class="sub-title">نوع عمل</span>{{ patient.type_of_surgery}}</p>
+                <p><span class="sub-title">پزشک بیهوشی</span>{{ patient.anesthesia_doctor_name}}</p>
+                <p><span class="sub-title">اپراتور سنگ شکنی</span>{{ patient.operator}}</p>
+                <p><span class="sub-title">تاریخ بستری</span>{{ patient.date_of_hospitalization }}</p>
+                <p><span class="sub-title">تاریخ ترخیص</span>{{ patient.date_of_discharge}}</p>
+                <p><span class="sub-title">بیمه اصلی</span>{{ patient.basic_insurance }}</p>
+                <p><span class="sub-title">بیمه تکمیلی</span>{{ patient.basic_insurance }}</p>
+                <br>
+                <a href="{% url 'medical_edit' patient.pk %}"><button class="btn btn-secondary float-left">ویرایش</button></a>
+                
+                <!-- <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی توسط بیمار</span>{{ patient.Franchise | intcomma:False}}</p>
+                <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی بیمه </span>{{ patient.InsurancePremium | intcomma:False }}</p> -->
             </div>
         </div>
         <br>
