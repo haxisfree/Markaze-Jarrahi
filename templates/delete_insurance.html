@@ -7,7 +7,7 @@
     <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
 </div>
 <div class="container">
-    <h2 class="center">آیا از حذف بیمه<a href="{% url 'patient_info' patient.pk %}" style="color: var(--red);">{{ insurance.name }}</a> مطمئن هستید؟ </h2>
+    <h2 class="center">آیا از حذف <a href="{% url 'insurance_info' insurance.pk %}" style="color: var(--red);">{{ insurance.name }}</a> مطمئن هستید؟ </h2>
     <form action="" method="post">
         {% csrf_token %}
         <div class="flex">

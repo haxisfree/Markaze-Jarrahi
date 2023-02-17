@@ -717,3 +717,21 @@ div.empty h2{
     margin-top: 0;
     margin-bottom: 40px;
 }
+
+
+a:hover div.insurance-container{
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.03);
+}
+
+.insurance-container {
+    background-color: white;
+    padding: 2%;
+    margin: 2%;
+    border-radius: 10px;
+    width: 29.333%;
+    text-align: center;
+}
+.insurance-patients{
+    float: left;
+    margin-top: 16px;
+}

@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.utils.html import format_html
 from django.urls import reverse
 from django.core.validators import validate_comma_separated_integer_list
+from django_jalali.db import models as jmodels
 
 
 
@@ -109,7 +110,7 @@ class Patient(models.Model):
     national_code = models.BigIntegerField(verbose_name="کد ملی", blank=True, null=True)
     phone_number = models.BigIntegerField(verbose_name="تلفن همراه", blank=True, null=True)
     home_phone = models.BigIntegerField(verbose_name="تلفن ثابت", blank=True, null=True)
-    date_of_admission = models.DateField(default = timezone.now, verbose_name="تاریخ پذیزش", blank=True, null=True)
+    date_of_admission = jmodels.jDateTimeField(default = timezone.now, verbose_name="تاریخ پذیزش", blank=True, null=True)
     file_number = models.CharField(max_length=300, verbose_name="شماره پرونده", blank=True, null=True) 
     description = models.TextField(verbose_name="توضیحات", blank=True, null=True)
     address = models.TextField(verbose_name="آدرس منزل", blank=True, null=True)

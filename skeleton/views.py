@@ -56,7 +56,7 @@ def searchbar(request):
         qs = qs.filter(date_of_admission__gte=date_min)
 
     if is_valid_queryparam(date_max):
-        qs = qs.filter(date_of_admission__lt=date_max)
+        qs = qs.filter(date_of_admission__lte=date_max)
 
 
 
