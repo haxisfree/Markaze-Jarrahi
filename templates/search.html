@@ -2,30 +2,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- <center>
-        {% if  searched %}
-        
-            <h1>You Searched For ...  {{ searched }}</h1>
-            <br/>
-            {% for patient in mltsr%}
-                <a href="{% url 'patient_info' patient.pk %}"> {{ patient }} </a> 
-                <br/>
-
+    <div class="row">
+        <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
+    </div>
+    <div class="container">
+        <h1 style="color: var(--blue);">نتایج جستوجو :</h1>
+        <br>
+        <div class="search-result">
+            {% for patient in queryset %}
+            <a href="{% url 'patient_info' patient.pk %}">
+                <div>
+                    <hr>
+                    <h3>{{ patient.first_name }} {{ patient.last_name }}</h3>
+                    <p>کدملی: {{ patient.national_code }} &nbsp; &nbsp; شماره پرونده: {{ patient.file_number }} &nbsp; &nbsp; تاریخ پذیرش: {{patient.date_of_admission|to_jalali:'%y/%m/%d'}}</p>
+                </div>
+            </a>
             {% endfor %}
-        
-            {% else %}
-        <h1>You forgot to search ... </h1>
-        {% endif %}
-    </center> -->
-
-
-
-    {% for patient in queryset %}
+            <div class="empty">
+                <h2>نتیجه ای یافت نشد.</h2>
+            </div>
+        </div>
+        <script>
+            var searchResult = document.querySelector(".search-result").children.length;
+            if(searchResult == 1) {
+                document.querySelector(".empty").style.display="inline";
+            }
+            else {
+                document.querySelector(".empty").style.display="none";
+                console.log("n")
+            }
+        </script>
+    </div>
   
-            <a href="{% url 'patient_info' patient.pk %}"> {{ patient }} </a>
+            
 
 
-    {% endfor %}
+   
 
 
  
