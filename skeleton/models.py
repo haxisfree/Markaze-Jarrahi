@@ -7,6 +7,8 @@ from django.utils.html import format_html
 from django.urls import reverse
 from django.core.validators import validate_comma_separated_integer_list
 
+from django_jalali.db import models as jmodels
+
 
 
 
@@ -132,6 +134,8 @@ class Patient(models.Model):
     payment_tariff = models.ForeignKey(Tariff, blank=True, null=True, on_delete=models.PROTECT)
     payment_status = models.CharField(max_length=1, choices=PS_CHOICES, verbose_name="وضعیت پرداخت", default="U")
 
+    delivery_date =  jmodels.jDateTimeField(verbose_name='تاریخ تحویل', blank=True, null=True)
+
 
 
 
@@ -167,6 +171,7 @@ class Patient(models.Model):
     
     def __str__(self):
         return self.first_name
+        # return "%s, %s" % (self.first_name, self.date)
 
 
     def get_absolute_url(self):
@@ -175,4 +180,3 @@ class Patient(models.Model):
 
 
     
-

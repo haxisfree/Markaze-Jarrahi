@@ -5,8 +5,8 @@ from .models import Patient, Insurance, Tariff
 from jalali_date.fields import JalaliDateField, SplitJalaliDateTimeField
 from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
 
-# class DateInput(forms.DateInput):
-#     input_type = 'date'
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 
 # class PatientForm(ModelForm):
@@ -32,32 +32,47 @@ class PatientForm(forms.ModelForm):
             widget=AdminJalaliDateWidget
         )
         self.fields['birth_date'].required = False
-
-        # self.fields['birth_date'] = SplitJalaliDateTimeField(label=('birth_date'), 
-        #     widget=AdminSplitJalaliDateTime # required, for decompress DatetimeField to JalaliDateField and JalaliTimeField
-        # )
         
+
         self.fields['date_of_admission'] = JalaliDateField(label=('تاریخ پذیرش'), # date format is  "yyyy-mm-dd"
             widget=AdminJalaliDateWidget # optional, to use default datepicker
         )
         self.fields['date_of_admission'].required = False
 
-        # you can added a "class" to this field for use your datepicker!
-        # self.fields['date'].widget.attrs.update({'class': 'jalali_date-date'})
-
-        # self.fields['date_of_admission'] = SplitJalaliDateTimeField(label=("date_of_admission"), 
-        #     widget=AdminSplitJalaliDateTime # required, for decompress DatetimeField to JalaliDateField and JalaliTimeField
-        # )
 
         self.fields['date_of_hospitalization'] = JalaliDateField(label=('تاریخ بستری'), # date format is  "yyyy-mm-dd"
             widget=AdminJalaliDateWidget # optional, to use default datepicker
         )
         self.fields['date_of_hospitalization'].required = False
         
+
         self.fields['date_of_discharge'] = JalaliDateField(label=('تاریخ ترخیص'),
             widget=AdminJalaliDateWidget # optional, to use default datepicker
         )
         self.fields['date_of_discharge'].required = False
+        
+        self.fields['delivery_date'] = JalaliDateField(label=('تاریخ تحویل'),
+            widget=AdminJalaliDateWidget # optional, to use default datepicker
+        )
+        self.fields['delivery_date'].required = False
+
+
+
+
+class ExampleForm(forms.Form):
+    my_date_field = forms.DateField(widget=AdminJalaliDateWidget)
+
+
+# class ExampleModelForm(forms.Form):
+#     class Meta:
+#         widget = {'my_date_field' : DateInput()}
+
+
+
+
+
+
+
 
 
 class InsuranceForm(forms.ModelForm):

@@ -4,8 +4,11 @@
 
 {% load jalali_tags %}
 
+
+<p>{{ request.user.date_joined|to_jalali:'%y/%m/%d' }}</p>
+
 <div class="search-container">
-    <form method="GET" action="{% url 'search' %}">
+    <form method="get" action="{% url 'search' %}">
         {% csrf_token %}
         <div class="row">
             <div class="col-12">
@@ -24,10 +27,13 @@
             <div class="col-9">
                 &nbsp;&nbsp;
                 از تاریخ 
-                <input type="date" class="form-control" id="publishDateMin" name="date_min">
+                <input type="" class="form-control" id="publishDateMin" name="date_min">
                 تا
-                <input type="date" class="form-control" id="publishDateMax" name="date_max" data-jdp onclick="datePicker()">
-            </div>
+                <input type="" class="form-control" id="publishDateMax" name="date_max">
+                {{ form.my_date_field }}
+                {{ form.birth_date }}
+                <a>نام: {{ form_class.first_name }}</a>
+              </div>
             <div class="col-3">
                 <button id="search-button" class="btn btn-primary" type="submit">جستوجو</button>
             </div>
@@ -113,7 +119,7 @@
 
 
 
-    <script>
+    <!-- <script>
         jalaliDatepicker.startWatch({
             minDate: "attr",
             maxDate: "attr",
@@ -132,8 +138,7 @@
             }
         });
         
-    </script>
-
+    </script> -->
 
 
 {% endblock content %}

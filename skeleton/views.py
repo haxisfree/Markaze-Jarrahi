@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Patient, Insurance, Tariff
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
-from .forms import PatientForm, InsuranceForm, MedicalForm, TariffForm
+from .forms import PatientForm, InsuranceForm, MedicalForm, TariffForm, ExampleForm
 from jalali_date import datetime2jalali, date2jalali
 from django.db.models import Q 
 import datetime
@@ -59,8 +59,8 @@ def searchbar(request):
         qs = qs.filter(date_of_admission__lt=date_max)
 
 
-
-    context = {'queryset' : qs}
+    # formic = PatientForm()
+    context = {'queryset' : qs} #, "form": formic}
     return render(request, 
                     'search.html',
                     context)
@@ -96,6 +96,50 @@ class PatientInfoView(DetailView):
 class PatientsListView(ListView):
     model = Patient
     template_name = 'patients_list.html'
+    form_class = PatientForm
+
+    def my_view(request):
+    	jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
+
+
+
+
+# def PatientsListView(request):
+    
+#     if request.method == 'POST':
+#         insurance_form = InsuranceForm(request.POST)
+#         if insurance_form.is_valid():
+#             insurance_form.save()
+#             return HttpResponseRedirect(reverse('insurance_list'))
+#     else:
+#         insurance_form = InsuranceForm()
+
+
+
+#     context ={}
+#     context["dataset"] = Patient.objects.all()
+#     return render(request, "list_view.html", context)
+
+
+
+
+#     if request.method == 'POST':
+#         insurance_form = InsuranceForm(request.POST)
+#         if insurance_form.is_valid():
+#             insurance_form.save()
+#             return HttpResponseRedirect(reverse('insurance_list'))
+#     else:
+#         insurance_form = InsuranceForm()
+#     return render(request, 'new_insurance.html', {'iform': insurance_form})
+
+
+
+
+
+
+
+
+
 
 
 class PatientCreateView(CreateView):
@@ -335,6 +379,7 @@ class TariffDeleteView(DeleteView):
     model = Tariff
     template_name = 'delete_tariff.html'
     success_url = reverse_lazy('tariff_list')
+
 
 
 

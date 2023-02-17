@@ -6,6 +6,7 @@
 {% load humanize %}
 {% block content %}
 {% load humanize %}
+{% load jalali_tags %}
 
     <!-- <button onclick="window.print()">Print this page</button> -->
     <!-- <img src="{% static 'icon/img1.jpg' %}" alt="Girl with ampool" width="500" height="200"> -->
@@ -38,10 +39,10 @@
             <div class="col-12">
                 <h2>اطلاعات بیمار</h2>
                 <p><span class="sub-title">نام پدر</span>{{ patient.father_name}}</p>
-                <p><span class="sub-title">تاریخ تولد</span>{{ patient.birth_date }}</p>
+                <p><span class="sub-title">تاریخ تولد</span>{{ patient.birth_date|to_jalali:'%y/%m/%d' }}</p>
                 <p><span class="sub-title">شماره تماس</span>{{ patient.phone_number | intcomma:False }}</p>
                 <p><span class="sub-title">نام پزشک</span>{{ patient.docter_name }}</p>
-                <p><span class="sub-title">تاریخ پذیرش </span>{{ patient.date_of_admission }}</p>
+                <p><span class="sub-title">تاریخ پذیرش </span>{{ patient.date_of_admission|to_jalali:'%y/%m/%d' }}</p>
                 <p><span class="sub-title">تاریخ پذیرش </span>{{ patient.basic_insurance }}</p>
                 <p><span class="sub-title">فرانشیز پرداختی توسط بیمار</span>{{ patient.Franchise | intcomma:False}}</p>
                 <p><span class="sub-title">مبلغ پرداختی بیمه </span>{{ patient.InsurancePremium | intcomma:False }}</p>
