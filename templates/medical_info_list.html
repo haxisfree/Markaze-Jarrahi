@@ -1,45 +1,57 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
-<div class="container">
-    <h1 class="mb-70">اطلاعات پزشکی بیمار</h1>
-    <form action="" method="POST">{% csrf_token %}
-        {{ form.as_p }}
 
-        <a>نام پزشک بیهوشی: {{ form.anesthesia_doctor_name }}</a>
-        <a>نام اپراتور: {{ form.operator }}</a>
-        <a>بیمه پایه: {{ form.basic_insurance }}</a>
-        <a>تاریخ تکمیلی: {{ form.supplementary_insurance }}</a>
-        <a>نوع عمل: {{ form.type_of_surgery }}</a>
-        <a>تاریخ بستری: {{ form.date_of_hospitalization }}</a>
-        <a>تاریخ ترخیص: {{ form.date_of_discharge }}</a>
-
-        <input type="submit" value="ذخیره" />
-    </form>
-</div> -->
-
-
-
-
-
-<h1 class="mb-70">Edit Patient</h1>
-<form action="" method="post">{% csrf_token %}
-    <!-- {{ form.media }} -->
-    {{ form.as_p }}
-
-    <!-- <a>نام پزشک بیهوشی: {{ form.anesthesia_doctor_name }}</a>
-    <a>نام اپراتور: {{ form.operator }}</a>
-    <a>بیمه پایه: {{ form.basic_insurance }}</a>
-    <a>تاریخ تکمیلی: {{ form.supplementary_insurance }}</a>
-    <a>نوع عمل: {{ form.type_of_surgery }}</a>
-    <a>تاریخ بستری: {{ form.date_of_hospitalization }}</a>
-    <a>تاریخ ترخیص: {{ form.date_of_discharge }}</a> -->
-
-
-    <input type="submit" value="‌ذخیره" />
-</form>
+<div class="row">
+    <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
 </div>
 
+<div class="container">
+    <h1>اطلاعات پزشکی بیمار</h1>
+    <hr>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                <label>اپراتور سنگ شکنی :</label>
+                {{ form.operator}}
+            </div>
+            <div class="col-6">
+                <label>پزشک بیهوشی :</label>
+                {{ form.anesthesia_doctor_name}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label>نوع عمل :</label>
+                {{ form.type_of_surgery}}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-6">
+                <label>تاریخ بستری :</label>
+                {{ form.date_of_hospitalization }}
+            </div>
+            <div class="col-6">
+                <label>تاریخ ترخیص :</label>
+                {{ form.date_of_discharge}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>بیمه اصلی :</label>
+                {{ form.basic_insurance }}
+            </div>
+            <div class="col-6">
+                <label>بیمه تکمیلی :</label>
+                {{ form.basic_insurance }}
+            </div>
+        </div>
+        <div class="flex-left">
+            <input  type="submit" value="ذخیره" style="width: 18%;"/>
+        </div>
+    </form>
+</div>
 
 {% endblock content %}
