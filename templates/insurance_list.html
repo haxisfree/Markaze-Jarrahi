@@ -12,9 +12,9 @@
   {% for insurance in insurance_obj %}
   <a href="{% url 'insurance_info' insurance.slug %}">
       <div class="col-3 insurance-container">
-        <!-- {% if insurance.cover %} -->
-          <img class="bookcover" src="{{ insurance.cover.url}}" alt="{{ insurance.name }}" width="400px">
-        <!-- {% endif %} -->
+        {% if insurance.cover %}
+        <img class="bookcover" src="{{ insurance.cover.url}}" alt="{{ insurance.name }}" width="400px">
+        {% endif %}
           <h3>{{ insurance.name }}</h3>
       </div>
   </a>

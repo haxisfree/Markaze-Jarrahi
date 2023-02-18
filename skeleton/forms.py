@@ -122,3 +122,10 @@ class TariffForm(forms.ModelForm):
     class Meta:
         model = Tariff
         fields = "__all__"
+
+
+class PaidForm(forms.ModelForm):
+    class Meta:
+        model = Patient
+        fields = ["paid"]
+

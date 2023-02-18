@@ -72,6 +72,14 @@
                 
                 <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی توسط بیمار</span>{{ patient.Franchise | intcomma:False}}</p>
                 <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی بیمه </span>{{ patient.InsurancePremium | intcomma:False }}</p>
+                <form method="POST" action="{% url 'paid' patient.pk %}">
+                    {% csrf_token %}
+                    {% if patient.paid == False %}
+                        <button type="submit" title="پرداخت کنید" class="btn btn-outline-success">پرداخت</button>
+                    {% else %}
+                        <button type="submit" title="عدم پرداخت" class="btn btn-outline-danger">پرداخت شده</button>
+                    {% endif %}
+                </form>
             </div>
         </div>
 

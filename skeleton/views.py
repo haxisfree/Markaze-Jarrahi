@@ -3,12 +3,12 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Patient, Insurance, Tariff
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
-from .forms import PatientForm, InsuranceForm, MedicalForm, TariffForm#, ExampleForm
+from .forms import PatientForm, InsuranceForm, MedicalForm, TariffForm, PaidForm
 from jalali_date import datetime2jalali, date2jalali
 from django.db.models import Q 
 import datetime
@@ -167,36 +167,19 @@ class MedicalUpdateView(UpdateView):
 
 
 
-# def PaymentStatus(request, pk):
+def paid(request, pk):
+    obj = get_object_or_404(Patient, pk=pk)
+    if request.method == 'POST':
+        if obj.paid == False:
+            obj.paid = True
+            obj.save()
+        else:
+            obj.paid = False
+            obj.save()
+        return redirect('paid', pk=pk)
 
-#     if request.method == 'POST':
-#         qh = request.GET.get('y')
-#         patientid=self.kwargs['pk']
-#         status = Patient.objects.get( pk=pk )
+    return render(request, 'patient_info.html', {'patient': obj})
 
-#         if status.payment_status == "P":
-#             qs = status.update( payment_status = "U" )
-#         else:
-#             qs = status.update( payment_status = "P" )
-
-#     return reverse_lazy('patient_info', kwargs={'pk': patientid})
-    
-    
-    # if Patient.objects.filter(pk=pk).get( payment_status__exact = qh )
-    #     pass
-    # else
-    #     qs = Patient.objects.filter(pk=pk).update( payment_status__exact = qh )
-
-
-    # return render(request, 'patient_info.html', {'form': qs})
-    
-    # ps = Patient.objects.all().filter(basic_insurance_id__exact=qh)
-    # Patient.objects.filter(pk=pk).update(payment_status='P')
-
-
-
-
-# Tariff.objects.get( tariff__exact = self.payment_tariff_id )
 
 
 class InsuranceUpdateView(UpdateView):
@@ -284,7 +267,7 @@ class InsuranceDeleteView(DeleteView):
 
 def InsuranceCreate(request):
     if request.method == 'POST':
-        insurance_form = InsuranceForm(request.POST)
+        insurance_form = InsuranceForm(request.POST, request.FILES)
         if insurance_form.is_valid():
             insurance_form.save()
             return HttpResponseRedirect(reverse('insurance_list'))

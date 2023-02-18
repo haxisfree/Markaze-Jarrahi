@@ -79,12 +79,6 @@ class Patient(models.Model):
         ('F', 'زن'),
     )
     
-
-    PS_CHOICES = (
-        ('P', 'پزداخت شده') , 
-        ('U', 'پزداخت نشده'),
-    )
-
     INSURANCE_CHOICES = (
         ('IRAN', 'بیمه ایران') , 
         ('DANA', 'بیمه دانا'),
@@ -138,7 +132,8 @@ class Patient(models.Model):
     date_of_discharge = models.DateTimeField(verbose_name="تاریخ ترخیص", blank=True, null=True)
     type_of_surgery = models.CharField(max_length=100, verbose_name="نوع عمل", blank=True, null=True)
     payment_tariff = models.ForeignKey(Tariff, blank=True, null=True, on_delete=models.PROTECT)
-    payment_status = models.CharField(max_length=1, choices=PS_CHOICES, verbose_name="وضعیت پرداخت", default="U")
+    # payments_status = models.BooleanField( verbose_name="وضعیت پرداخت", default=False,blank=True, null=True,)
+    paid = models.BooleanField(verbose_name="وضعیت پرداخت", default=False,blank=True, null=True,)
 
     delivery_date =  jmodels.jDateTimeField(verbose_name='تاریخ تحویل', blank=True, null=True)
 
