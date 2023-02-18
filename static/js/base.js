@@ -1,16 +1,5 @@
 
 
-function datePicker(){
-    var days, i;
-    days = document.getElementsByClassName("jdp-day");
-    for(i =0; i < days.length; i++){
-      days[i].addEventListener("click",function(){
-          document.querySelector("#publishDateMax").value = document.querySelector("#publishDateMax").value.replaceAll("/","-");
-          document.querySelector("#publishDateMin").value = document.querySelector("#publishDateMin").value.replaceAll("/","-")
-      })
-    }
-}
-
 
 
 

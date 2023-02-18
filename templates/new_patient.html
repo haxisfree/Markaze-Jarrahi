@@ -70,13 +70,19 @@
         </div>
         <div class="row">
             <div class="col-6">
+                <label>تعرفه :</label>
+                {{ form.payment_tariff }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>نام پزشک معرف :</label>
+                {{ form.docter_name }}
+            </div>
+            <div class="col-6">
                 <label>نام معرف :</label>
                 {{ form.presenter }}
             </div>
-            <!-- <div class="col-6">
-                <label>پزشک معرف :</label>
-                {{ form.docter_name }}
-            </div> -->
         </div>
         <div class="row">
             <div class="col-12">
@@ -84,7 +90,6 @@
                 {{ form.description }}
             </div>
         </div>
-        <!-- <a>تعرفه: {{ form.payment_tariff }}</a> -->
         <div class="flex-left">
             <input  type="submit" value="ذخیره" style="width: 18%;"/>
         </div>
