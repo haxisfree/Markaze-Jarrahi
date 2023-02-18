@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Patient, Insurance, Tariff
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
-from .forms import PatientForm, InsuranceForm, MedicalForm, TariffForm, ExampleForm
+from .forms import PatientForm, InsuranceForm, MedicalForm, TariffForm#, ExampleForm
 from jalali_date import datetime2jalali, date2jalali
 from django.db.models import Q 
 import datetime
@@ -56,7 +56,7 @@ def searchbar(request):
         qs = qs.filter(date_of_admission__gte=date_min)
 
     if is_valid_queryparam(date_max):
-        qs = qs.filter(date_of_admission__lt=date_max)
+        qs = qs.filter(date_of_admission__lte=date_max)
 
 
     # formic = PatientForm()
@@ -75,6 +75,7 @@ def my_view(request):
 def Pagination(request, page=1):
     
     patient_list = Patient.objects.all()
+    
     paginator = Paginator(patient_list, 5)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
@@ -152,7 +153,9 @@ class PatientUpdateView(UpdateView):
     model = Patient
     template_name = 'patient_edit.html'
     form_class = PatientForm
-    # jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
+    def get_success_url(self):
+          patientid=self.kwargs['pk']
+          return reverse_lazy('patient_info', kwargs={'pk': patientid})
 
 class MedicalUpdateView(UpdateView):
     model = Patient
@@ -164,19 +167,19 @@ class MedicalUpdateView(UpdateView):
 
 
 
-def PaymentStatus(request, pk):
+# def PaymentStatus(request, pk):
 
-    if request.method == 'POST':
-        qh = request.GET.get('y')
-        patientid=self.kwargs['pk']
-        status = Patient.objects.get( pk=pk )
+#     if request.method == 'POST':
+#         qh = request.GET.get('y')
+#         patientid=self.kwargs['pk']
+#         status = Patient.objects.get( pk=pk )
 
-        if status.payment_status == "P":
-            qs = status.update( payment_status = "U" )
-        else:
-            qs = status.update( payment_status = "P" )
+#         if status.payment_status == "P":
+#             qs = status.update( payment_status = "U" )
+#         else:
+#             qs = status.update( payment_status = "P" )
 
-    return reverse_lazy('patient_info', kwargs={'pk': patientid})
+#     return reverse_lazy('patient_info', kwargs={'pk': patientid})
     
     
     # if Patient.objects.filter(pk=pk).get( payment_status__exact = qh )

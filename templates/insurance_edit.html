@@ -1,29 +1,63 @@
-
-
 {% extends 'base.html' %}
 
-
-
-
 {% block content %}
+<div class="row">
+    <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
+</div>
 
-{% load jalali_tags %}
-<!-- {{ request.user.date_joined|to_jalali:'%y/%m/%d _ %H:%M:%S' }} -->
-<button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
 <div class="container">
-    <h1 class="mb-70">Edit Patient</h1>
-        <form action="" method="POST">{% csrf_token %}
-            <!-- {{ form.media }} -->
-            {{ form.as_p }}
-            <input type="submit" value="‌ذخیره" />
-        </form>
-    </div>
-
-
-
-
-
-    
-
-    
+    <h1>اطلاعات شرکت بیمه</h1>
+    <hr>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                <label>نام بیمه :</label>
+                {{ form.name }}
+            </div>
+            <div class="col-6">
+                <label>نام بیمه به انگلیسی: </label>
+                {{ form.slug }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>فرانشیز (درصد) :</label>
+                {{ form.franchising }}
+            </div>
+            <div class="col-6">
+                <label>مجموع بدهکاری و بستانکاری :</label>
+                {{ form.total_debits_and_credits }}
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+ 
+            <div class="col-6">
+                <label>بانک معرفی شده به بیمه:</label>
+                {{ form.bank_account }}
+            </div>
+            <div class="col-6">
+                <label>شعبه :</label>
+                {{ form.branchs_name }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>شماره حساب :</label>
+                {{ form.bank_card_num }}
+            </div>
+        </div>
+        <div class="col-6">
+            <label>لوگوی بیمه:</label>
+            {{ form.cover }}
+        </div>
+        <div class="flex-left">
+            <input  type="submit" value="ذخیره" style="width: 18%;"/>
+        </div>
+    </form>
+</div>
 {% endblock content %}
+
+

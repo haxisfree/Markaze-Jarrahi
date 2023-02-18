@@ -7,50 +7,40 @@
 {% block content %}
 {% load humanize %}
 
-    <!-- <button onclick="window.print()">Print this page</button> -->
-    <!-- <img src="{% static 'icon/img1.jpg' %}" alt="Girl with ampool" width="500" height="200"> -->
-
-
 
     <div class="container">
-        <div class="row patient-header">
-            <div class="col-3">
-                <div class="avatar">
-                </div>
+        <div class="row">
+            <div class="col-6">
+                <h2>شرکت {{ insurance.name }}</h2>
             </div>
-            <div class="col-9">
-                <h2>{{ insurance.name }}</h2>
-
-                <a href="{% url 'insurance_edit' insurance.slug %}"><button class="btn btn-primary">ویرایش</button></a>
-                &nbsp;
-                <a href="{% url 'insurance_delete' insurance.slug %}"><button class="btn btn-secondary">حذف</button></a>
+            <div class="col-6">
+                <form method="GET" action="{% url 'patient_insurance' insurance.slug %}">
+                    <button class="btn btn-primary insurance-patients" type="submit" name='x' value="{{insurance.slug}}"> لیست بیماران تحت پوشش</button> 
+                </form>
             </div>
         </div>
         <br>
-        </br>
         <hr>
+        <br>
         <div class="row">
             <div class="col-12">
-                <h2>اطلاعات شرکت بیمه</h2>
-                <p><span class="sub-title">نام بیمه</span>{{ insurance.name}}</p>
-            </div>
-        </div>
-        <br>
-        <hr>
-        <div class="row patient-forms">
-            <div class="col-12">
+                <p><span class="sub-title" style="width: 250px;">بانک معرفی شده به بیمه</span>{{ insurance.bank_account }}</p>
+                <p><span class="sub-title" style="width: 250px;">شعبه</span>{{ insurance.branchs_name }}</p>
+                <p><span class="sub-title" style="width: 250px;">شماره حساب</span>{{ insurance.bank_card_num }}</p>
+                <p><span class="sub-title" style="width: 250px;">فرانشیز (درصد)</span>{{ insurance.franchising }}</p>
+                <p><span class="sub-title" style="width: 250px;">مجموع بدهکاری و بستانکاری</span>{{ insurance.total_debits_and_credits }}</p>
+                <br>
+                <div class="float-left">
+                    <a href="{% url 'insurance_edit' insurance.slug %}"><button class="btn btn-secondary">ویرایش</button></a>
+                    &nbsp;
+                    <a href="{% url 'insurance_delete' insurance.slug %}"><button class="btn btn-delete">حذف</button></a>
+                </div>
             </div>
         </div>
     </div>
 
 
 
-    <form method="GET" action="{% url 'patient_insurance' insurance.slug %}">
 
-        <button class="btn btn-primary" type="submit" name='x' value="{{insurance.slug}}">
-            لیست بیماران تحت پوشش
-        </button>
-        
-    </form>
 
     {% endblock content %}

@@ -4,7 +4,6 @@
 
 
 {% block content %}
-
 <div class="search-container">
     <form method="GET" action="{% url 'search' %}">
         {% csrf_token %}
@@ -35,8 +34,6 @@
         </div>
     </form>
 </div>
-
-
 
     {% for patient in querys %}
   

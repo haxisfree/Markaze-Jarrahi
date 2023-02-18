@@ -6,9 +6,8 @@ from django.utils import timezone
 from django.utils.html import format_html
 from django.urls import reverse
 from django.core.validators import validate_comma_separated_integer_list
-
 from django_jalali.db import models as jmodels
-
+from django.utils.html import format_html 
 
 
 
@@ -51,6 +50,7 @@ class Insurance (models.Model):
 
     slug = models.SlugField(primary_key=True,max_length=100, verbose_name="نام انگلیسی بیمه")
     name = models.CharField(max_length=100, verbose_name="نام بیمه")
+    cover = models.ImageField(upload_to='covers/' , blank=True, verbose_name="تصویر بیمه")
     franchising = models.DecimalField (max_digits = 2, decimal_places = 2, verbose_name="فرانشیز (درصد)")
     bank_account = models.CharField(max_length=100, verbose_name="بانک معرفی شده به بیمه")
     bank_card_num = models.BigIntegerField(verbose_name="شماره حساب", blank=True, null=True)
@@ -60,6 +60,12 @@ class Insurance (models.Model):
 
     def __str__(self):
         return self.name
+
+
+    def covers(self):
+        return format_html("<img width=80 height=110 style='border-radious: 5px' src='{}'>".format(self.cover.url))
+
+
 
 
     def get_absolute_url(self):
@@ -117,7 +123,7 @@ class Patient(models.Model):
     national_code = models.BigIntegerField(verbose_name="کد ملی", blank=True, null=True)
     phone_number = models.BigIntegerField(verbose_name="تلفن همراه", blank=True, null=True)
     home_phone = models.BigIntegerField(verbose_name="تلفن ثابت", blank=True, null=True)
-    date_of_admission = models.DateField(default = timezone.now, verbose_name="تاریخ پذیزش", blank=True, null=True)
+    date_of_admission = jmodels.jDateTimeField(default = timezone.now, verbose_name="تاریخ پذیزش", blank=True, null=True)
     file_number = models.CharField(max_length=300, verbose_name="شماره پرونده", blank=True, null=True) 
     description = models.TextField(verbose_name="توضیحات", blank=True, null=True)
     address = models.TextField(verbose_name="آدرس منزل", blank=True, null=True)
@@ -142,23 +148,27 @@ class Patient(models.Model):
     @property
     def Franchise(self):
 
-        first_tariff_object = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
-        f = first_tariff_object.TotalTariffWithoutMedicine * self.basic_insurance.franchising
-
-        return f
-
+        if self.basic_insurance:
+            first_tariff_object = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
+            f = first_tariff_object.TotalTariffWithoutMedicine * self.basic_insurance.franchising
+            return int(f)
+        else:
+            message = "ابتدا بیمه اصلی را انتخاب کنید"
+            return message
 
 
     @property
     def InsurancePremium(self):
+        
+        if self.Franchise == "ابتدا بیمه اصلی را انتخاب کنید" :
+            message_2 = "ابتدا بیمه اصلی را انتخاب کنید"
+            return message_2
+        else:
+            second_tariff_object = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
+            ip = second_tariff_object.TotalTariffWithoutMedicine - self.Franchise
+            return int(ip)
 
-        second_tariff_object = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
-        ip = second_tariff_object.TotalTariffWithoutMedicine - self.Franchise
-
-        return ip
-
-
-
+            
 
 
 
@@ -171,7 +181,6 @@ class Patient(models.Model):
     
     def __str__(self):
         return self.first_name
-        # return "%s, %s" % (self.first_name, self.date)
 
 
     def get_absolute_url(self):

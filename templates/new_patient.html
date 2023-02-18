@@ -6,32 +6,88 @@
 </div>
 
 <div class="container">
-    <h1 class="mb-70">اطلاعات بیمار</h1>
-    <form action="" method="post">{% csrf_token %}
-        <!-- {{ form.as_p }} -->
-
-        <a>نام: {{ form.first_name }}</a>
-        <a>نام خانوادگی: {{ form.last_name }}</a>
-        <a>نام پدر: {{ form.father_name }}</a>
-        <a>تاریخ تولد: {{ form.birth_date }}</a>
-        <a>جنسیت: {{ form.sex }}</a>
-        <a>کد ملی: {{ form.national_code }}</a>
-        <a>تلفن همراه: {{ form.phone_number }}</a>
-        <a>تلفن ثابت: {{ form.home_phone }}</a>
-        <a>آدرس: {{ form.address }}</a>
-        <a>نام پزشک معرف: {{ form.docter_name }}</a>
-        <a>نام معرف: {{ form.presenter }}</a>
-        <a>شماره پرونده: {{ form.file_number }}</a>
-        <a>تاریخ پذیرش: {{ form.date_of_admission }}</a>
-        <a>توضیحات: {{ form.description }}</a>payment_tariff
+    <h1>اطلاعات بیمار</h1>
+    <hr>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                <label>نام :</label>
+                {{ form.first_name }}
+            </div>
+            <div class="col-6">
+                <label>نام خانوادگی :</label>
+                {{ form.last_name }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>نام پدر :</label>
+                {{ form.father_name }}
+            </div>
+            <div class="col-6">
+                <label>جنسیت :</label>
+                {{ form.sex }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>تاریخ تولد :</label>
+                {{ form.birth_date }}
+            </div>
+            <div class="col-6">
+                <label>کدملی :</label>
+                {{ form.national_code }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>تلفن ثابت :</label>
+                {{ form.home_phone }}
+            </div>
+            <div class="col-6">
+                <label>تلفن همراه :</label>
+                {{ form.phone_number }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label>آدرس :</label>
+                {{ form.address }}
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-6">
+                <label>شماره پرونده :</label>
+                {{ form.file_number }}
+            </div>
+            <div class="col-6">
+                <label>تاریخ پذیرش :</label>
+                {{ form.date_of_admission }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>نام معرف :</label>
+                {{ form.presenter }}
+            </div>
+            <!-- <div class="col-6">
+                <label>پزشک معرف :</label>
+                {{ form.docter_name }}
+            </div> -->
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label>توضیحات :</label>
+                {{ form.description }}
+            </div>
+        </div>
         <a>تعرفه: {{ form.payment_tariff }}</a>
-        <a>وضعیت پرداخت: {{ form.payment_status }}</a>
-        <a>تاریخ تحویل: {{ form.delivery_date }}</a>
-
-
-
-
-        <input type="submit" value="ذخیره" />
+        <div class="flex-left">
+            <input  type="submit" value="ذخیره" style="width: 18%;"/>
+        </div>
     </form>
 </div>
 {% endblock content %}

@@ -5,8 +5,8 @@ from .models import Patient, Insurance, Tariff
 from jalali_date.fields import JalaliDateField, SplitJalaliDateTimeField
 from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
+# class DateInput(forms.DateInput):
+#     input_type = 'date'
 
 
 # class PatientForm(ModelForm):
@@ -24,7 +24,22 @@ class DateInput(forms.DateInput):
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = "__all__"
+        fields = [
+         'first_name',
+         'last_name',
+         'father_name',
+         'sex',
+         'birth_date',
+         'national_code',
+         'phone_number',
+         'home_phone',
+         'date_of_admission',
+         'file_number',
+         'description',
+         'address',
+         'docter_name',
+         'presenter',
+         'payment_tariff']
 
     def __init__(self, *args, **kwargs):
         super(PatientForm, self).__init__(*args, **kwargs)
@@ -59,8 +74,8 @@ class PatientForm(forms.ModelForm):
 
 
 
-class ExampleForm(forms.Form):
-    my_date_field = forms.DateField(widget=AdminJalaliDateWidget)
+# class ExampleForm(forms.Form):
+#     my_date_field = forms.DateField(widget=AdminJalaliDateWidget)
 
 
 # class ExampleModelForm(forms.Form):

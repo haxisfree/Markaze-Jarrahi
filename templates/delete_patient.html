@@ -7,11 +7,11 @@
     <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
 </div>
 <div class="container">
-    <h2 class="center">آیا از حذف بیمار <a href="{% url 'patient_info' patient.pk %}" style="color: var(--blue);">{{ patient.first_name }} {{ patient.last_name }}</a> مطمئن هستید؟ </h2>
+    <h2 class="center">آیا از حذف بیمار <a href="{% url 'patient_info' patient.pk %}" style="color: var(--red);">{{ patient.first_name }} {{ patient.last_name }}</a> مطمئن هستید؟ </h2>
     <form action="" method="post">
         {% csrf_token %}
         <div class="flex">
-            <input type="submit" value="تایید" class="center btn-secondary"/>
+            <input type="submit" value="تایید" class="center btn-delete"/>
         </div>
     </form>
 </div>    
