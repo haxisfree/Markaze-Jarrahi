@@ -1,40 +1,57 @@
 
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
 
 {% load jalali_tags %}
+
+{% load humanize %}
+
 <div class="row">
-  <div class="col-9">
-  </div>
-  <div class="col-3">
+  <div class="col-12">
     <a href="{% url 'new_tarrif' %}"><button class="btn btn-primary float-left">افزودن تعرفه جدید</button></a>
   </div>
 </div>
-<div class="row">
-  <div class="col-12">
-    <div id="patientslist">
-        <table>
-          <thead>
-            <tr>
-              <th>نام تعرفه</th>
-              <th></th>
-                {% for t in tariff_obj %}
-                <tr class="patient">
-                  <td><a href="{% url 'tariff_info' t.pk %}">{{ t.pk }}</a></td>
-                </tr>
-                {% endfor %}
-              <th></th>
-            </tr>
-          </thead>
-  
-
-          <tbody>
-          </tbody>
-        </table>
-    </div>
+<div class="patients-container">
+  <div class="row">
+      <div class="col-12">
+          <div id="patientslist">
+              <table>
+                  <thead>
+                      <tr>
+                          <th>نام تعرفه</th>
+                          <th>حق العمل سنگ شکنی</th>
+                          <th>حق العمل بیهوشی</th>
+                          <th>دارو و لوازم مصرفی</th>
+                          <th></th>
+                          <th></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for t in tariff_obj %}
+                      <tr class="patient">
+                          <td style="width: 25% !important;">{{ t.tariff}}</td>
+                          <td>{{ t.kidney_crusher_cost | intcomma:False }}</td>
+                          <td>{{ t.anesthetic_cost | intcomma:False }}</td>
+                          <td>{{ t.drug_and_consumables_cost | intcomma:False }}</td>
+                          <td class="button">
+                              <a href="{% url 'tariff_edit' t.pk %}"><button class="show-patient">ویرایش</button></a>
+                          </td>
+                          <td class="button">
+                              <a href="{% url 'tariff_delete' t.pk %}"><button class="btn-delete">حذف</button></a>
+                          </td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
   </div>
 </div>
+
+
 
 
 

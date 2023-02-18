@@ -1,5 +1,6 @@
 
 
+<<<<<<< HEAD
 function datePicker(){
     var days, i;
     days = document.getElementsByClassName("jdp-day");
@@ -11,6 +12,8 @@ function datePicker(){
     }
 }
 
+=======
+>>>>>>> front
 
 
 
