@@ -39,7 +39,7 @@ class PatientForm(forms.ModelForm):
          'address',
          'docter_name',
          'presenter',
-         'payment_tariff']
+         'payment_tariff',]
 
     def __init__(self, *args, **kwargs):
         super(PatientForm, self).__init__(*args, **kwargs)

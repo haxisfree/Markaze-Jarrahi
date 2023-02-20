@@ -370,4 +370,86 @@ class TariffDeleteView(DeleteView):
 
 
 
+def report_pagination(request, page=1):
+    
+    patient_list = Patient.objects.all()
+    
+    paginator = Paginator(patient_list, 5)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
+    context = {
+        "patient" : page_obj
+        }
+    return render(request, 'reports.html', context)
+
+
+
+
+
+def report_searchbar(request):
+    qs = Patient.objects.all()
+    name_contains_query = request.GET.get('name search')
+    national_code_search_contains_query = request.GET.get('national code search')
+    file_number_search_contains_query = request.GET.get('file number search')
+    date_min = request.GET.get('date_min')
+    date_max = request.GET.get('date_max')
+    docter_name_search_query = request.GET.get('docter name search')
+    presenter_search_query = request.GET.get('presenter search')
+    anesthesia_doctor_name_search_query = request.GET.get('anesthesia doctor name search')
+    operator_search_query = request.GET.get('operator search')
+    basic_insurance_search_query = request.GET.get('basic insurance search')
+
+    list = []
+    qf = Insurance.objects.filter(name__icontains=basic_insurance_search_query).values()#[:][0]["slug"]
+    for dict in qf:
+        list.append(dict["slug"])
+
+    if is_valid_queryparam(name_contains_query) :
+        qs = qs.filter(Q(first_name__icontains=name_contains_query)
+        | Q(last_name__icontains=name_contains_query)).distinct()
+    
+    elif is_valid_queryparam(national_code_search_contains_query) :
+        qs = qs.filter(national_code__icontains=national_code_search_contains_query)
+
+    elif is_valid_queryparam(file_number_search_contains_query) :
+        qs = qs.filter(file_number__icontains=file_number_search_contains_query)
+    
+
+    if is_valid_queryparam(docter_name_search_query):
+        qs = qs.filter(docter_name__icontains=docter_name_search_query)
+    
+    if is_valid_queryparam(presenter_search_query):
+        qs = qs.filter(presenter__icontains=presenter_search_query)
+
+    if is_valid_queryparam(anesthesia_doctor_name_search_query):
+        qs = qs.filter(anesthesia_doctor_name__icontains=anesthesia_doctor_name_search_query)
+    
+    if is_valid_queryparam(operator_search_query):
+        qs = qs.filter(operator__icontains=operator_search_query)
+    
+
+    if is_valid_queryparam(basic_insurance_search_query):
+        for q in list:
+            qs = qs.filter(basic_insurance_id__exact=q)
+
+
+
+
+    if is_valid_queryparam(date_min):
+        qs = qs.filter(date_of_admission__gte=date_min)
+
+    if is_valid_queryparam(date_max):
+        qs = qs.filter(date_of_admission__lte=date_max)
+
+
+
+    context = {'queryset' : qs}
+    return render(request, 
+                    'search.html',
+                    context)
+
+
+
+
+
 

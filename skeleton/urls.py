@@ -14,6 +14,8 @@ from .views import ( PatientsListView,
                     # PaymentStatus,
                     paid,
                     # Paid,
+                    report_searchbar,
+                    report_pagination,
 
 
                     InsuranceListView, 
@@ -51,6 +53,8 @@ urlpatterns = [
     path('patient/<int:pk>/surgery_report_form/', SurgeryReportFormView.as_view(), name='surgery_report_form'),
     path('search/', searchbar, name='search'),
     path('patient/<int:pk>/paid/', paid, name='paid'),
+    path('reportsearch/', report_searchbar, name='report_search'),
+    path('reports', report_pagination, name='reports'),
 
 
 
