@@ -399,10 +399,10 @@ def report_searchbar(request):
     operator_search_query = request.GET.get('operator search')
     basic_insurance_search_query = request.GET.get('basic insurance search')
 
-    list = []
-    qf = Insurance.objects.filter(name__icontains=basic_insurance_search_query).values()#[:][0]["slug"]
-    for dict in qf:
-        list.append(dict["slug"])
+    # list = []
+    qf = Insurance.objects.filter(name__icontains=basic_insurance_search_query).values()[:][0]["slug"]
+    # for dict in qf:
+    #     list.append(dict["slug"])
 
     if is_valid_queryparam(name_contains_query) :
         qs = qs.filter(Q(first_name__icontains=name_contains_query)
@@ -429,8 +429,8 @@ def report_searchbar(request):
     
 
     if is_valid_queryparam(basic_insurance_search_query):
-        for q in list:
-            qs = qs.filter(basic_insurance_id__exact=q)
+        # for q in list:
+            qs = qs.filter(basic_insurance_id__exact=qf)
 
 
 
@@ -445,7 +445,7 @@ def report_searchbar(request):
 
     context = {'queryset' : qs}
     return render(request, 
-                    'search.html',
+                    'report_result.html',
                     context)
 
 
