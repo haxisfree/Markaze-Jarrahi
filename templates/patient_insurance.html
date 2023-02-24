@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="search-container">
-    <form method="GET" action="{% url 'search' %}">
+    <form method="get" action="{% url 'search' %}">
         {% csrf_token %}
         <div class="row">
             <div class="col-12">
@@ -24,9 +24,9 @@
             <div class="col-9">
                 &nbsp;&nbsp;
                 از تاریخ 
-                <input type="date" class="form-control" id="publishDateMin" name="date_min">
+                <input  class="form-control" id="publishDateMin" name="date_min" data-jdp>
                 تا
-                <input type="date" class="form-control" id="publishDateMax" name="date_max" data-jdp onclick="datePicker()">
+                <input  class="form-control" id="publishDateMax" name="date_max" data-jdp>
             </div>
             <div class="col-3">
                 <button id="search-button" class="btn btn-primary" type="submit">جستوجو</button>
@@ -35,23 +35,6 @@
     </form>
 </div>
 
-<<<<<<< HEAD
-
-
-
-
-    {% for patient in querys %}
-  
-            <p><a href="{% url 'patient_info' patient.pk %}">
-                {{ patient.first_name }} {{ patient.last_name }}
-            </a></p>
-            <!-- <input type="checkbox" name="chk[]" value="{{ patient.pk }}">
-            <br><br> -->
-
-    {% endfor %}
-
-=======
->>>>>>> workspace
 
     <div class="patients-container">
         <div class="row">
@@ -182,5 +165,12 @@
         </div> 
       </div>
 
+      <script>
+        jalaliDatepicker.startWatch({
+        minDate: "attr",
+        maxDate: "attr"
+        }); 
+    </script>
 {% endblock content %}
+
 

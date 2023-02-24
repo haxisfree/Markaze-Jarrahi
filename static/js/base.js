@@ -1,3 +1,7 @@
+jalaliDatepicker.startWatch({
+  minDate: "attr",
+  maxDate: "attr"
+  }); 
 function deleteEmptyTable(){
     var table, numberOfRows, row;
     table = document.querySelector("table");
