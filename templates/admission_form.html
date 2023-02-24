@@ -4,19 +4,27 @@
 
 {% block content %}
 <div class="row">
-    <button class="btn btn-primary back" onclick="history.back()">بازگشت></button>
+    <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
 </div>
 <div class="container">
-    <h1>فرم پذیرش</h1>
+    <h1>فرم دارو و لوازم مصرفی</h1>
     <button onclick="window.print()" class="btn btn-primary btn-print"><img src="">پرینت</button>
     <div id="admission-form" class="forms">
         <p class="admission-date">{{ patient.date_of_admission }}</p>
         <p class="file-number">{{ patient.file_number }}</p>
         <p class="patient-name">{{ patient.first_name }} {{ patient.last_name }}</p>
-        <p class="father-name">{{ patient.father_name }}</p>
-        <p class="birth-date">{{ patient.birth_date }}</p>
         <p class="national-code">{{ patient.national_code }}</p>
-        <p class="phone-number">{{ patient.phone_number }}</p>
+        <p class="discharge-date">{{ patient.date_of_discharge}}</p>
+        <p class="anesthesia-doctor">{{ patient.anesthesia_doctor_name }}</p>
+        <p class="surgery-type">{{ patient.type_of_surgery }}</p>
+
+        <!-- <p class="surgery-type">{{ t.kidney_crusher_cost | intcomma:False }}</p>
+        <p class="surgery-type">{{ t.anesthetic_cost | intcomma:False }}</p>
+        <p class="surgery-type">{{ t.drug_and_consumables_cost | intcomma:False }}</p>
+        <p class="surgery-type">{{ insurance.franchising }}</p>
+        <p class="surgery-type">{{ patient.Franchise | intcomma:False}}</p>
+        <p class="surgery-type">{{ patient.InsurancePremium | intcomma:False }}</p>
+        <p class="surgery-type">{{ total_debits_and_credits}}</p> -->
     </div>
 </div>
 {% endblock content %}
