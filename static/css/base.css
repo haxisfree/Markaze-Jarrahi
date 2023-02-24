@@ -725,9 +725,6 @@ button img {
     padding: 0px 20px 5px 10px;
     border-radius: 5px;
   }
-  #id_file_number {
-    /* direction: ltr; */
-  }
 
 div.empty{
     display: none;
