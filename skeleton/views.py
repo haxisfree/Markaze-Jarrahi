@@ -25,6 +25,14 @@ import re
 
 
 
+#importing get_template from loader
+from django.template.loader import get_template
+
+#import render_to_pdf from util.py 
+from .utils import render_to_pdf 
+
+from xhtml2pdf import pisa 
+from django.template.loader import get_template
 
 
 
@@ -225,6 +233,7 @@ def insurance_letter(request):
 
     
     lis = []
+    
     for h in li3:
         try:
             rows = Patient.objects.get(first_name__exact=h)
@@ -232,8 +241,40 @@ def insurance_letter(request):
         except Exception:
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))    
 
+
+    k = 0
+    for w in range(len(lis)):
+        k += 1
+    
+    lis_firstone = lis[0]
+    insu = Insurance.objects.get(slug__exact=lis_firstone.basic_insurance_id)
+
+    
+
+    # template_path = 'insurance_letter.html'
+    # context = {
+    #     "patient" : lis,
+    #     'insurance': insu,
+    #     "leng":k
+    #     }
+    # response = HttpResponse(content_type='application/pdf')
+    # response['Content-Disposition'] = 'filename="نامه بیمه"'
+    # template = get_template(template_path)
+    # html = template.render(context)
+    # pisa_status = pisa.CreatePDF(
+    #     html, dest=response
+    # )
+    # if pisa_status.err:
+    #     return HttpResponse('we had some errors <pre>' + html + '</pre>')
+    # return response
+
+
+
+
     context = {
-        "patient" : lis
+        "patient" : lis,
+        'insurance': insu,
+        "leng":k
         }
 
     return render(request, 'insurance_letter.html', context)
@@ -308,6 +349,23 @@ def export_excel(request):
                 ws.write(row_num, col_num, str(row[col_num]), font_style)
     wb.save(response)
     return response
+
+
+
+
+# #Creating our view, it is a class based view
+# class GeneratePdf(View):
+#      def get(self, request, *args, **kwargs):
+        
+#         #getting the template
+#         pdf = render_to_pdf('insurance_letter.html')
+         
+#          #rendering the template
+#         return HttpResponse(pdf, content_type='application/pdf')
+
+
+
+# def GeneratePdf(request):
 
 
 

@@ -38,7 +38,7 @@ from .views import ( PatientsListView,
                     TariffCreateView,
                     TariffUpdateView,
                     TariffDeleteView,
-
+                    # GeneratePdf,
                     # ReportResultView,
 )
 
@@ -84,6 +84,9 @@ urlpatterns = [
     path('new_tariff/', TariffCreateView.as_view(), name='new_tarrif'),
     path('tariff/<slug:pk>/edit/', TariffUpdateView.as_view(), name='tariff_edit'),
     path('tariff/<slug:pk>/delete/', TariffDeleteView.as_view(), name='tariff_delete'),
+
+
+    # path('pdf/', GeneratePdf.as_view(), name='pdf'),
 
 ]
 
