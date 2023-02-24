@@ -28,6 +28,8 @@ from .views import ( PatientsListView,
                     MedicalUpdateView,
                     insurance_filter,
                     InsuranceUpdateView,
+                    insurance_searchbar,
+                    insurance_letter,
 
 
 
@@ -61,6 +63,9 @@ urlpatterns = [
     path('reports', report_pagination, name='reports'),
     # path('insurance/<slug:pk>/patients/', checkbox, name='checkbox'),
     path('export_excel', export_excel, name='export_excel'),
+    path('insurance_search/', insurance_searchbar, name='insurance_search'),
+    path('insurance_letter/', insurance_letter, name='insurance_letter'),
+
     # path('export', ReportResultView.as_view(), name='export'),
     
 
@@ -72,8 +77,6 @@ urlpatterns = [
     path('insurance/<slug:pk>/edit/', InsuranceUpdateView.as_view(), name='insurance_edit'),
     path('insurance/<slug:pk>/delete/', InsuranceDeleteView.as_view(), name='insurance_delete'),
     path('insurance/<slug:pk>/patients/', insurance_filter, name='patient_insurance'),
-
-
 
 
     path('tariff/<slug:pk>/', TariffInfoView.as_view(), name='tariff_info'),
