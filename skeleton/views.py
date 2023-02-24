@@ -1,9 +1,11 @@
+#!/usr/bin/python -tt
+
 from django.shortcuts import render, redirect
 
 
 # Create your views here.
 
-from django.views.generic import ListView, DetailView, TemplateView, View
+from django.views.generic import ListView, DetailView, TemplateView, View, FormView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Patient, Insurance, Tariff
 from django.urls import reverse_lazy
@@ -14,8 +16,12 @@ from django.db.models import Q
 import datetime
 from datetime import date, datetime
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
+import datetime
+import xlwt
+from .admin import PostResources
+import re
 
 
 
@@ -59,8 +65,8 @@ def searchbar(request):
         qs = qs.filter(date_of_admission__lte=date_max)
 
 
-    # formic = PatientForm()
-    context = {'queryset' : qs} #, "form": formic}
+
+    context = {'queryset' : qs}
     return render(request, 
                     'search.html',
                     context)
@@ -179,6 +185,136 @@ def paid(request, pk):
         return redirect('paid', pk=pk)
 
     return render(request, 'patient_info.html', {'patient': obj})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def export_excel(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename=Patient' + \
+        str(datetime.datetime.now())+'.xls'
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Patient')
+    row_num = 0
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['first_name','last_name','birth_date','sex', 'date_of_admission']
+
+    for col_num in range(len(columns)):
+        ws.write(row_num,col_num,columns[col_num], font_style)
+
+    font_style = xlwt.XFStyle()
+    qs = request.GET.get('y')
+
+    y = re.findall("\[(.*?)\]", qs)
+    for y in y:
+        x = re.split(",", y)
+
+
+    li1 = []
+    li2 = []
+    li3 = []
+    for z in x:
+        f = re.sub(r"^\s+", "", z)
+        li1.append(f)
+    for s in li1:
+        g = re.sub(r"\s+$", "", s)
+        li2.append(g)
+
+    for r in li2:
+        li3.append(r[10:-1])
+
+    lis = []
+    for h in li3:
+        rows = Patient.objects.filter(first_name__exact=h).values_list(
+        'first_name','last_name','birth_date','sex', 'date_of_admission'
+        )
+        lis.append(rows)
+
+    for q in lis:
+        for row in q:    
+            row_num += 1
+            for col_num in range(len(row)):
+                ws.write(row_num, col_num, str(row[col_num]), font_style)
+    wb.save(response)
+    return response
+
+
+
+
+
+
+
+# def export_excel(request):
+#     response = HttpResponse(content_type='application/ms-excel')
+#     response['Content-Disposition'] = 'attachment; filename=Patient' + \
+#         str(datetime.datetime.now())+'.xls'
+#     wb = xlwt.Workbook(encoding='utf-8')
+#     ws = wb.add_sheet('Patient')
+#     row_num = 0
+#     font_style = xlwt.XFStyle()
+#     font_style.font.bold = True
+
+#     columns = ['first_name','last_name','birth_date','sex']
+
+#     for col_num in range(len(columns)):
+#         ws.write(row_num,col_num,columns[col_num], font_style)
+
+#     font_style = xlwt.XFStyle()
+#     qs = request.GET.get('y')
+
+#     rows = Patient.objects.filter(basic_insurance__exact=qs).values_list(
+#     'first_name','last_name','birth_date','sex'
+#     )
+
+#     for row in rows:
+#         row_num += 1
+#         for col_num in range(len(row)):
+#             ws.write(row_num, col_num, str(row[col_num]), font_style)
+#     wb.save(response)
+#     return response
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -301,19 +437,6 @@ def insurance_filter(request, pk):
     return render(request, 
                     'patient_insurance.html',
                     context)
-
-
-
-# def Pagination(request, page=1):
-    
-#     patient_list = Patient.objects.all()
-#     paginator = Paginator(patient_list, 1)
-#     page = request.GET.get('page')
-#     page_obj = paginator.get_page(page)
-#     context = {
-#         "patient" : page_obj
-#         }
-#     return render(request, 'patients_list.html', context)
 
 
 

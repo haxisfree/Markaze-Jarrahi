@@ -16,6 +16,8 @@ from .views import ( PatientsListView,
                     # Paid,
                     report_searchbar,
                     report_pagination,
+                    # checkbox,
+                    export_excel,
 
 
                     InsuranceListView, 
@@ -34,6 +36,8 @@ from .views import ( PatientsListView,
                     TariffCreateView,
                     TariffUpdateView,
                     TariffDeleteView,
+
+                    # ReportResultView,
 )
 
 
@@ -55,6 +59,10 @@ urlpatterns = [
     path('patient/<int:pk>/paid/', paid, name='paid'),
     path('reportsearch/', report_searchbar, name='report_search'),
     path('reports', report_pagination, name='reports'),
+    # path('insurance/<slug:pk>/patients/', checkbox, name='checkbox'),
+    path('export_excel', export_excel, name='export_excel'),
+    # path('export', ReportResultView.as_view(), name='export'),
+    
 
 
 

@@ -25,6 +25,19 @@
                 <h2>نتیجه ای یافت نشد.</h2>
             </div>
         </div>
+
+
+
+
+        <form method="GET" action="{% url 'export_excel' %}">
+            <button class="btn btn-primary insurance-patients" type="submit" name='y' value="{{queryset}}">خروجی اکسل</button> 
+        </form>
+
+
+
+
+
+
         <script>
             var searchResult = document.querySelector(".search-result").children.length;
             if(searchResult == 1) {

@@ -31,7 +31,7 @@
             <div class="col-9">
                 <h2>{{ patient.first_name }} {{ patient.last_name }}</h2>
                 <p> <span>شماره پرونده </span> &nbsp; &nbsp; <span>{{ patient.file_number }}</span></p>
-                <p><span class="sub-title">تاریخ پذیرش &nbsp; &nbsp; {{patient.date_of_admission|to_jalali:'%y/%m/%d'}}</span></p>
+                <p><span class="sub-title">تاریخ پذیرش &nbsp; &nbsp; {{patient.date_of_admission}}</span></p>
                 </br>
                 <a href="{% url 'medical_edit' patient.pk %}"><button class="btn btn-secondary">تکمیل اطلاعات پزشکی بیمار</button></a>
                 &nbsp;

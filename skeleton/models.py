@@ -113,11 +113,11 @@ class Patient(models.Model):
     last_name = models.CharField(max_length=200, verbose_name="نام خانوادگی")    
     father_name = models.CharField(max_length=100, verbose_name="نام پدر", blank=True, null=True)
     sex = models.CharField(max_length=1, choices=SEX_CHOICES, verbose_name="جنسیت", blank=True, null=True)    
-    birth_date = models.DateTimeField(verbose_name="تاریخ تولد", blank=True, null=True)
+    birth_date = jmodels.jDateField(verbose_name="تاریخ تولد", blank=True, null=True)
     national_code = models.BigIntegerField(verbose_name="کد ملی", blank=True, null=True)
     phone_number = models.BigIntegerField(verbose_name="تلفن همراه", blank=True, null=True)
     home_phone = models.BigIntegerField(verbose_name="تلفن ثابت", blank=True, null=True)
-    date_of_admission = jmodels.jDateTimeField(default = timezone.now, verbose_name="تاریخ پذیزش", blank=True, null=True)
+    date_of_admission = jmodels.jDateField(default = timezone.now, verbose_name="تاریخ پذیزش", blank=True, null=True)
     file_number = models.CharField(max_length=300, verbose_name="شماره پرونده", blank=True, null=True) 
     description = models.TextField(verbose_name="توضیحات", blank=True, null=True)
     address = models.TextField(verbose_name="آدرس منزل", blank=True, null=True)
@@ -128,14 +128,13 @@ class Patient(models.Model):
     operator = models.CharField(max_length=100, verbose_name="نام اپراتور سنگ شکنی", blank=True, null=True)
     basic_insurance = models.ForeignKey(Insurance, blank=True, null=True, on_delete=models.PROTECT)
     supplementary_insurance = models.CharField(max_length=100, verbose_name="بیمه تکمیلی", blank=True, null=True)
-    date_of_hospitalization = models.DateTimeField(verbose_name="تاریخ بستری", blank=True, null=True)
-    date_of_discharge = models.DateTimeField(verbose_name="تاریخ ترخیص", blank=True, null=True)
+    date_of_hospitalization = jmodels.jDateField(verbose_name="تاریخ بستری", blank=True, null=True)
+    date_of_discharge = jmodels.jDateField(verbose_name="تاریخ ترخیص", blank=True, null=True)
     type_of_surgery = models.CharField(max_length=100, verbose_name="نوع عمل", blank=True, null=True)
     payment_tariff = models.ForeignKey(Tariff, blank=True, null=True, on_delete=models.PROTECT)
-    # payments_status = models.BooleanField( verbose_name="وضعیت پرداخت", default=False,blank=True, null=True,)
     paid = models.BooleanField(verbose_name="وضعیت پرداخت", default=False,blank=True, null=True,)
 
-    delivery_date =  jmodels.jDateTimeField(verbose_name='تاریخ تحویل', blank=True, null=True)
+    
 
 
 
@@ -184,3 +183,25 @@ class Patient(models.Model):
 
 
     
+
+class Fund(models.Model):
+
+    id = models.AutoField(primary_key=True, verbose_name="شناسه")
+    name = models.CharField(max_length=100, verbose_name="نام")
+    description = models.TextField(verbose_name="موارد", blank=True, null=True)    
+    price = models.BigIntegerField(verbose_name="قیمت", blank=True, null=True)
+    date = jmodels.jDateField(default = timezone.now, verbose_name="تاریخ خرید", blank=True, null=True)
+    name = models.CharField(max_length=100, verbose_name="نام خریدار")
+
+
+
+
+    class Meta: 
+        ordering = ['-date']
+    
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('fund_info', args=[str(self.id)])
+

@@ -35,11 +35,34 @@
     </form>
 </div>
 
+
+
+
+
     {% for patient in querys %}
   
-            <p><a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a></p>
+            <p><a href="{% url 'patient_info' patient.pk %}">
+                {{ patient.first_name }} {{ patient.last_name }}
+            </a></p>
+            <!-- <input type="checkbox" name="chk[]" value="{{ patient.pk }}">
+            <br><br> -->
 
     {% endfor %}
+
+
+
+<!-- </form> -->
+
+
+<!-- {% for patient in querys %}
+  
+<p><a href="{% url 'patient_info' patient.pk %}">
+    {{ patient.first_name }} {{ patient.last_name }}
+</a></p>
+<input type="checkbox" name="chk[]" value="{{ patient.pk }}">
+<br><br>
+
+{% endfor %} -->
 
 
 
