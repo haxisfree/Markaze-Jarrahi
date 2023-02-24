@@ -162,9 +162,55 @@ class Patient(models.Model):
             ip = second_tariff_object.TotalTariffWithoutMedicine - self.Franchise
             return int(ip)
 
+    @property
+    def KidneyKruser(self):
+        
+        if self.payment_tariff:
+            kidney = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
+            k = kidney.kidney_crusher_cost
+            return int(k)
+        else:
+            message = "ابتدا تعرفه را ثبت کنید"
+            return message
+
+
+    
+    @property
+    def AnestheticCost(self):
+        
+        if self.payment_tariff:
+            anesthetic = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
+            a = anesthetic.anesthetic_cost
+            return int(a)
+        else:
+            message = "ابتدا تعرفه را ثبت کنید"
+            return message
+
+    
+    @property
+    def DrugCost(self):
+        
+        if self.payment_tariff:
+            drug = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
+            d = drug.drug_and_consumables_cost
+            return int(d)
+        else:
+            message = "ابتدا تعرفه را ثبت کنید"
+            return message
+
+
+    @property
+    def Fran(self):
+        
+        if self.basic_insurance:
+            fran = Insurance.objects.get( slug__exact = self.basic_insurance_id )
+            f = fran.franchising * 100
+            return int(f)
+        else:
+            message = "ابتدا تعرفه را ثبت کنید"
+            return message
+
             
-
-
 
 
 
