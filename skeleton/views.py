@@ -214,7 +214,7 @@ def export_excel(request):
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
 
-    columns = ['first_name','last_name','birth_date','sex', 'date_of_admission']
+    columns = ['first_name','last_name','national_code','phone_number', 'file_number', 'docter_name', 'basic_insurance', 'paid', 'type_of_surgery']
 
     for col_num in range(len(columns)):
         ws.write(row_num,col_num,columns[col_num], font_style)
@@ -243,7 +243,7 @@ def export_excel(request):
     lis = []
     for h in li3:
         rows = Patient.objects.filter(first_name__exact=h).values_list(
-        'first_name','last_name','birth_date','sex', 'date_of_admission'
+        'first_name','last_name','national_code','phone_number', 'file_number', 'docter_name', 'basic_insurance', 'paid', 'type_of_surgery'
         )
         lis.append(rows)
 
