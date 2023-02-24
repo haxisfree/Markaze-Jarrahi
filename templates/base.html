@@ -4,7 +4,7 @@
 
 {% load humanize %}
 
-<html lang="fa-IR">
+<html dir="rtl">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">    
@@ -20,7 +20,7 @@
         <script src="{% static 'js/base.js' %}"></script>
 
     </head>
-    <body>
+    <body  onload="deleteEmptyTable();">
         <div class="row">
             <div class="sidebar">
                 <img id="logo" src="">

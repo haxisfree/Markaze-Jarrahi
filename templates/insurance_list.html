@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
 
 {% load jalali_tags %}
@@ -13,7 +15,9 @@
   <a href="{% url 'insurance_info' insurance.slug %}">
       <div class="col-3 insurance-container">
         {% if insurance.cover %}
-        <img class="bookcover" src="{{ insurance.cover.url}}" alt="{{ insurance.name }}" width="400px">
+          <img class="insurance-cover" src="{{ insurance.cover.url}}">
+        {% else %}
+          <img class="insurance-cover" src="{% static 'pic/icon/Health-Insurance-logo.png' %}">
         {% endif %}
           <h3>{{ insurance.name }}</h3>
       </div>

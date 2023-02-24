@@ -35,6 +35,7 @@
     </form>
 </div>
 
+<<<<<<< HEAD
 
 
 
@@ -49,7 +50,42 @@
 
     {% endfor %}
 
+=======
+>>>>>>> workspace
 
+    <div class="patients-container">
+        <div class="row">
+            <div class="col-12">
+                <div id="patientslist">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>نام بیمار</th>
+                                <th> کد ملی</th>
+                                <th>شماره پرونده</th>
+                                <th>تاریخ پذیرش</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for patient in querys %}
+                            <tr class="patient">
+                                <td>
+                                    <a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a>
+                                </td>
+                                <td>{{patient.national_code}}</td>
+                                <td>{{patient.file_number}}</td>
+                                <td>{{patient.date_of_admission}}</td>
+                            </tr>
+                            {% endfor %}
+                            <tr class="empty-table patient">
+                                <td colspan="6"><p>بیماری ثبت نشده است.</p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <!-- </form> -->
 
@@ -71,12 +107,12 @@
         <div class="pagination">
             {% if querys.has_previous %}
                 {% if 'x' in request.get_full_path %}
-                    <a href="{{ request.get_full_path }}&screen={{ querys.previous_page_number }}">&laquo;</a>
+                    <a class="arrow" href="{{ request.get_full_path }}&screen={{ querys.previous_page_number }}"><img src="{% static 'pic/icon/next.png' %}"></a>
                 {% else %}
-                    <a href="?screen={{ querys.previous_page_number }}">&laquo;</a>
+                    <a class="arrow" href="?screen={{ querys.previous_page_number }}"><img src="{% static 'pic/icon/next.png' %}"></a>
                 {% endif %}
             {% else %}
-                <a class="disabled" href="#" tabindex="-1" aria-disabled="True">&laquo;</a>
+                <a class="disabled arrow" href="#" tabindex="-1" aria-disabled="True"><img src="{% static 'pic/icon/next.png' %}"></a>
             {% endif %}
       
           {% if querys.number|add:'-4' > 1 %}
@@ -133,15 +169,15 @@
 
 
             {% if 'x' in request.get_full_path %}
-                <a href="{{ request.get_full_path }}&screen={{  querys.next_page_number  }}">&raquo;</a>
+                <a class="arrow" href="{{ request.get_full_path }}&screen={{  querys.next_page_number  }}"><img src="{% static 'pic/icon/previous.png' %}"></a>
             {% else %}
-                <a class="page-link" href="?screen={{ querys.next_page_number }}">&raquo;</a>
+                <a class="page-link arrow" href="?screen={{ querys.next_page_number }}"><img src="{% static 'pic/icon/previous.png' %}"></a>
             {% endif %}
 
 
 
           {% else %}
-              <a class="disabled" href="#" tabindex="-1" aria-disabled="True">&raquo;</a>
+              <a class="disabled arrow" href="#" tabindex="-1" aria-disabled="True"><img src="{% static 'pic/icon/previous.png' %}"></a>
           {% endif %}
         </div> 
       </div>

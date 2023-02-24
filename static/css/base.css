@@ -26,6 +26,9 @@
     .forms{
         margin: 0 !important;
     }
+    .wrapper {
+        padding: 0 !important;
+      }
 
 }
 @font-face {
@@ -265,20 +268,22 @@ form [class^="col-"]{
     padding-right: 25px;
 }
 #admission-form {
-    background-image: url("../pic/BG/admission_form.jpg");
+    background-image: url("../pic/BG/drugs_form2.png");
 }
 #anesthesia-form{
-    background-image: url("../pic/BG/anesthesia_form.jpg");
+    background-image: url("../pic/BG/anesthesia_form2.jpg");
 }
 #bills-form{
-    background-image: url("../pic/BG/bills_form.jpg");
+    background-image: url("../pic/BG/bills_form2.jpg");
 }
 #surgery-report-form{
-    background-image: url("../pic/BG/surgery_report_form.jpg");
+    background-image: url("../pic/BG/surgery_report_form2.jpg");
 }
 .forms{
-    height: 1118px;
-    width: 791px;
+    /* height: 1118px;
+    width: 791px; */
+    height: 297mm;
+    width: 210mm;
     margin: 2% auto;
     background-size: cover;
 }
@@ -294,9 +299,9 @@ form [class^="col-"]{
 
 
 #admission-form .patient-name {
-    right: 259px;
-    top: 100px;
-}
+    right: 123px;
+    top: 105px;
+  }
 #admission-form .father-name {
     right: 408px;
     top: 73px;
@@ -306,108 +311,124 @@ form [class^="col-"]{
     right: 615px;
 }
 #admission-form .admission-date {
-    top: 84px;
-    right: 589px;
-}
-#admission-form .file-number {
-    top: 59px;
-    right: 130px;
-}
+    top: 199px;
+    right: 438px;
+  }
+  #admission-form .file-number {
+    top: 139px;
+    right: 438px;
+  }
 #admission-form .birth-date {
     top: 93px;
     right: 196px;
 }
 #admission-form .national-code {
-    top: 66px;
-    right: 400px;
-}
+    top: 101px;
+    right: 118px;
+  }
+#admission-form .discharge-date {
+    top: 94px;
+    right: 437px;
+  }
+
+  #admission-form .surgery-type {
+    top: 91px;
+    right: 123px;
+  }
+  #admission-form .anesthesia-doctor {
+    top: 87px;
+    right: 151px;
+  }
 
 #anesthesia-form .file-number {
-    top: 75px;
-    right: 60px;
+    top: 74px;
+    right: 95px;
 }
 #anesthesia-form .patient-firstname {
-  top: 132px;
-  right: 223px;
+    top: 115px;
+    right: 147px;
 }
 #anesthesia-form .patient-lastname {
-    top: 106px;
-    right: 105px;
+    top: 81px;
+    right: 252px;
 }
 #anesthesia-form .admission-date {
-    top: 42px;
-    right: 549px;
+    top: -6px;
+    right: 560px;
 }
 
 #anesthesia-form  .birth-date {
-    top: 68px;
-    right: 257px;
+    top: 35px;
+    right: 286px;
 }
 #anesthesia-form .father-name {
-    top: 94px;
-    right: 60px;
+    top: 69px;
+    right: 106px;
 }
 #anesthesia-form .doctor-name {
-    top: 80px;
-    right: 547px;
+    top: 47px;
+    right: 560px;
 }
 #bills-form .file-number {
-    top: 131px;
-    right: 61px;
+    top: 112px;
+    right: 116px;
 }
 #bills-form .patient-name {
-    top: 160px;
-    right: 170px;
+    top: 133px;
+    right: 212px;
 }
 #bills-form .doctor-name {
-    top: 196px;
-    right: 613px;
+    top: 185px;
+    right: 604px;
 }
 #bills-form .father-name {
-    top: 138px;
-    right: 95px;
+    top: 96px;
+    right: 143px;
 }
 #bills-form .birth-date {
-    top: 109px;
-    right: 587px;
+    top: 61px;
+    right: 604px;
   }
-#bills-form  .national-code {
-    top: 52px;
-    right: 620px;
+#bills-form .national-code {
+    top: 0px;
+    right: 637px;
   }
-#bills-form  .admission-date {
-    top: 89px;
-    right: 132px;
+#bills-form .admission-date {
+    top: 26px;
+    right: 179px;
   }
 #surgery-report-form .file-number {
+    top: 132px;
+    right: 110px;
+  }
+#surgery-report-form .patient-firstname {
+    top: 172px;
+    right: 246px;
+  }
+#surgery-report-form .patient-lastname {
+    top: 139px;
+    right: 146px;
+  }
+#surgery-report-form .doctor-name {
+    top: 103px;
+    right: 536px;
+  }
+#surgery-report-form .father-name {
     top: 120px;
-    right: 91px;
+    right: 111px;
   }
-#surgery-report-form  .patient-firstname {
-    top: 178px;
-    right: 238px;
+#surgery-report-form .birth-date {
+    top: 85px;
+    right: 272px;
   }
-#surgery-report-form  .patient-lastname {
-    top: 152px;
-    right: 135px;
+#surgery-report-form .admission-date {
+    top: 51px;
+    right: 532px;
   }
-#surgery-report-form  .doctor-name {
-    top: 125px;
-    right: 544px;
+  #surgery-report-form .anesthesia-doctor {
+    top: 86px;
+    right: 153px;
   }
-#surgery-report-form  .father-name {
-    top: 148px;
-    right: 100px;
-  }
-#surgery-report-form  .birth-date {
-    top: 121px;
-    right: 265px;
-  }
-#surgery-report-form  .admission-date {
-    top: 94px;
-    right: 541px;
-  }
-
 #filter {
     margin-top: 20px;
     margin-right: 5px;
@@ -704,9 +725,6 @@ button img {
     padding: 0px 20px 5px 10px;
     border-radius: 5px;
   }
-  #id_file_number {
-    direction: ltr;
-  }
 
 div.empty{
     display: none;
@@ -734,4 +752,22 @@ a:hover div.insurance-container{
 .insurance-patients{
     float: left;
     margin-top: 16px;
+}
+.empty-table{
+    display: none;
+}
+.empty-table p{
+    text-align: center;
+    padding: 50px;
+    font-size: 22px;
+    color: var(--gray);
+}
+.p-0{
+    padding: 0 !important;
+}
+.insurance-cover {
+    height: 250px;
+}
+a:hover .insurance-cover{
+    filter: grayscale(100%);
 }
