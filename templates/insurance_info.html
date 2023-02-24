@@ -9,12 +9,19 @@
 
 
     <div class="container">
-        <div class="row">
-            <div class="col-6">
-                <h2>شرکت {{ insurance.name }}</h2>
+        <div class="row center">
+            <div class="col-12">
+                {% if insurance.cover %}
+                    <img class="insurance-cover" src="{{ insurance.cover.url}}" style="height: 200px;">
+                {% else %}
+                    <img class="insurance-cover" src="{% static 'pic/icon/Health-Insurance-logo.png' %}" style="height: 200px;">
+                {% endif %}
             </div>
-            <div class="col-6">
-                <form method="GET" action="{% url 'patient_insurance' insurance.slug %}">
+            <div class="col-12">
+                <h2 style="margin: 10px;">شرکت {{ insurance.name }}</h2>
+            </div>
+            <div class="col-12 flex">
+                <form class="center" method="GET" action="{% url 'patient_insurance' insurance.slug %}">
                     <button class="btn btn-primary insurance-patients" type="submit" name='x' value="{{insurance.slug}}"> لیست بیماران تحت پوشش</button> 
                 </form>
             </div>

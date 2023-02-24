@@ -20,7 +20,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 import datetime
 import xlwt
-from .admin import PostResources
 import re
 
 

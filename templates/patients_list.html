@@ -5,8 +5,6 @@
 {% load jalali_tags %}
 
 
-<p>{{ request.user.date_joined|to_jalali:'%y/%m/%d' }}</p>
-
 <div class="search-container">
     <form method="get" action="{% url 'search' %}">
         {% csrf_token %}
@@ -69,6 +67,9 @@
                             </td>
                         </tr>
                         {% endfor %}
+                        <tr class="empty-table patient">
+                            <td colspan="6"><p>بیماری ثبت نشده است.</p></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

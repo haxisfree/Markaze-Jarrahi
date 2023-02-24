@@ -30,8 +30,16 @@
             </div>
             <div class="col-9">
                 <h2>{{ patient.first_name }} {{ patient.last_name }}</h2>
+<<<<<<< HEAD
                 <p> <span>شماره پرونده </span> &nbsp; &nbsp; <span>{{ patient.file_number }}</span></p>
                 <p><span class="sub-title">تاریخ پذیرش &nbsp; &nbsp; {{patient.date_of_admission}}</span></p>
+=======
+                <div class="row">
+                    <div class="col-6 p-0" style="width: 18%;">شماره پرونده</div>
+                    <div class="col-6 p-0" style="width: 18%;">{{ patient.file_number }}</div>
+                </div>
+                <p><span class="sub-title">تاریخ پذیرش &nbsp; &nbsp; {{patient.date_of_admission|to_jalali:'%y/%m/%d'}}</span></p>
+>>>>>>> workspace
                 </br>
                 <a href="{% url 'medical_edit' patient.pk %}"><button class="btn btn-secondary">تکمیل اطلاعات پزشکی بیمار</button></a>
                 &nbsp;
@@ -94,10 +102,10 @@
         <div class="row patient-forms">
             <div class="col-12">
                 <h2>فرم های بیمار</h2>
-                <p><a href="{% url 'admission_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">فرم پذیرش</a></p>
                 <p><a href="{% url 'anesthesia_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">برگه بیهوشی</a></p>
-                <p><a href="{% url 'bills_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">صورت حساب بیمار</a></p>
                 <p><a href="{% url 'surgery_report_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">گزارش عمل جراحی</a></p>
+                <p><a href="{% url 'admission_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">فرم دارو و لوازم مصرفی</a></p>
+                <p><a href="{% url 'bills_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">صورت حساب بیمار</a></p>
             </div>
         </div>
     </div>
