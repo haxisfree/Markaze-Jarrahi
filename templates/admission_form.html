@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
-
+{% load humanize %}
 {% block content %}
 <div class="row">
     <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
@@ -18,6 +18,22 @@
         <p class="anesthesia-doctor">{{ patient.anesthesia_doctor_name }}</p>
         <p class="surgery-type">{{ patient.type_of_surgery }}</p>
 
+
+
+<!--  -->
+
+        <p class="surgery-type">{{ patient.Franchise | intcomma:False}}</p>
+        <p class="surgery-type">{{ patient.InsurancePremium | intcomma:False}}</p>
+        <p class="surgery-type">{{ patient.KidneyKruser | intcomma:False}}</p>
+        <p class="surgery-type">{{ patient.AnestheticCost | intcomma:False}}</p>
+        <p class="surgery-type">{{ patient.DrugCost | intcomma:False}}</p>
+        <p class="surgery-type">{{ patient.Fran | intcomma:False}}</p>
+
+<!--  -->
+<!-- KidneyKruser
+AnestheticCost
+DrugCost
+Fran -->
         <!-- <p class="surgery-type">{{ t.kidney_crusher_cost | intcomma:False }}</p>
         <p class="surgery-type">{{ t.anesthetic_cost | intcomma:False }}</p>
         <p class="surgery-type">{{ t.drug_and_consumables_cost | intcomma:False }}</p>
@@ -25,7 +41,13 @@
         <p class="surgery-type">{{ patient.Franchise | intcomma:False}}</p>
         <p class="surgery-type">{{ patient.InsurancePremium | intcomma:False }}</p>
         <p class="surgery-type">{{ total_debits_and_credits}}</p> -->
-    </div>
+
+<!--  -->
+
+
+
+
+</div>
 </div>
 {% endblock content %}
 
