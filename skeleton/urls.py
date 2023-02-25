@@ -28,6 +28,8 @@ from .views import ( PatientsListView,
                     MedicalUpdateView,
                     insurance_filter,
                     InsuranceUpdateView,
+                    insurance_searchbar,
+                    insurance_letter,
 
 
 
@@ -36,7 +38,7 @@ from .views import ( PatientsListView,
                     TariffCreateView,
                     TariffUpdateView,
                     TariffDeleteView,
-
+                    # GeneratePdf,
                     # ReportResultView,
 )
 
@@ -61,6 +63,9 @@ urlpatterns = [
     path('reports', report_pagination, name='reports'),
     # path('insurance/<slug:pk>/patients/', checkbox, name='checkbox'),
     path('export_excel', export_excel, name='export_excel'),
+    path('insurance_search/', insurance_searchbar, name='insurance_search'),
+    path('insurance_letter/', insurance_letter, name='insurance_letter'),
+
     # path('export', ReportResultView.as_view(), name='export'),
     
 
@@ -74,13 +79,14 @@ urlpatterns = [
     path('insurance/<slug:pk>/patients/', insurance_filter, name='patient_insurance'),
 
 
-
-
     path('tariff/<slug:pk>/', TariffInfoView.as_view(), name='tariff_info'),
     path('tarifflist', TariffListView.as_view(), name='tariff_list'),
     path('new_tariff/', TariffCreateView.as_view(), name='new_tarrif'),
     path('tariff/<slug:pk>/edit/', TariffUpdateView.as_view(), name='tariff_edit'),
     path('tariff/<slug:pk>/delete/', TariffDeleteView.as_view(), name='tariff_delete'),
+
+
+    # path('pdf/', GeneratePdf.as_view(), name='pdf'),
 
 ]
 

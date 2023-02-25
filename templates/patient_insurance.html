@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="search-container">
-    <form method="get" action="{% url 'search' %}">
+    <form method="get" action="{% url 'insurance_search' %}">
         {% csrf_token %}
         <div class="row">
             <div class="col-12">
@@ -29,11 +29,12 @@
                 <input  class="form-control" id="publishDateMax" name="date_max" data-jdp>
             </div>
             <div class="col-3">
-                <button id="search-button" class="btn btn-primary" type="submit">جستوجو</button>
+                <button id="search-button" class="btn btn-primary" type="submit" name='m' value="{{request.resolver_match.kwargs.pk}}">جستوجو</button>
             </div>
         </div>
     </form>
 </div>
+
 
 
     <div class="patients-container">
@@ -69,6 +70,7 @@
             </div>
         </div>
     </div>
+
 
 <!-- </form> -->
 

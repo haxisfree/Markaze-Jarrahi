@@ -25,7 +25,14 @@ import re
 
 
 
+#importing get_template from loader
+from django.template.loader import get_template
 
+#import render_to_pdf from util.py 
+from .utils import render_to_pdf 
+
+from xhtml2pdf import pisa 
+from django.template.loader import get_template
 
 
 
@@ -63,19 +70,77 @@ def searchbar(request):
     if is_valid_queryparam(date_max):
         qs = qs.filter(date_of_admission__lte=date_max)
 
+    context = {'queryset' : qs}
+    
+    return render(request,'search.html',context)
 
+
+
+def insurance_searchbar_filters(request):
+    qs = Patient.objects.all()
+    name_contains_query = request.GET.get('name search')
+    national_code_search_contains_query = request.GET.get('national code search')
+    file_number_search_contains_query = request.GET.get('file number search')
+    date_min = request.GET.get('date_min')
+    date_max = request.GET.get('date_max')
+
+
+    if is_valid_queryparam(name_contains_query) :
+        qs = qs.filter(Q(first_name__icontains=name_contains_query)
+        | Q(last_name__icontains=name_contains_query)).distinct()
+    
+    elif is_valid_queryparam(national_code_search_contains_query) :
+        qs = qs.filter(national_code__icontains=national_code_search_contains_query)
+
+    elif is_valid_queryparam(file_number_search_contains_query) :
+        qs = qs.filter(file_number__icontains=file_number_search_contains_query)
+    
+
+    if is_valid_queryparam(date_min):
+        qs = qs.filter(date_of_admission__gte=date_min)
+
+    if is_valid_queryparam(date_max):
+        qs = qs.filter(date_of_admission__lte=date_max)
+
+    return qs
+
+
+
+def insurance_searchbar(request):
+
+    qh = request.GET.get('m')
+    qs = Patient.objects.all().filter(basic_insurance_id__exact=qh)
+    name_contains_query = request.GET.get('name search')
+    national_code_search_contains_query = request.GET.get('national code search')
+    file_number_search_contains_query = request.GET.get('file number search')
+    date_min = request.GET.get('date_min')
+    date_max = request.GET.get('date_max')
+
+    
+    if is_valid_queryparam(name_contains_query) :
+        qs = qs.filter(Q(first_name__icontains=name_contains_query)
+        | Q(last_name__icontains=name_contains_query)).distinct()
+        
+    elif is_valid_queryparam(national_code_search_contains_query) :
+        qs = qs.filter(national_code__icontains=national_code_search_contains_query)
+
+    elif is_valid_queryparam(file_number_search_contains_query) :
+        qs = qs.filter(file_number__icontains=file_number_search_contains_query)
+        
+
+    if is_valid_queryparam(date_min):
+        qs = qs.filter(date_of_admission__gte=date_min)
+
+    if is_valid_queryparam(date_max):
+        qs = qs.filter(date_of_admission__lte=date_max)
 
     context = {'queryset' : qs}
-    return render(request, 
-                    'search.html',
-                    context)
 
+    return render(request,'insurance_search.html',context)
 
 
 def my_view(request):
 	jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
-
-
 
 def Pagination(request, page=1):
     
@@ -98,7 +163,6 @@ class PatientInfoView(DetailView):
     model = Patient
     template_name = 'patient_info.html'
 
-
 class PatientsListView(ListView):
     model = Patient
     template_name = 'patients_list.html'
@@ -106,47 +170,6 @@ class PatientsListView(ListView):
 
     def my_view(request):
     	jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
-
-
-
-
-# def PatientsListView(request):
-    
-#     if request.method == 'POST':
-#         insurance_form = InsuranceForm(request.POST)
-#         if insurance_form.is_valid():
-#             insurance_form.save()
-#             return HttpResponseRedirect(reverse('insurance_list'))
-#     else:
-#         insurance_form = InsuranceForm()
-
-
-
-#     context ={}
-#     context["dataset"] = Patient.objects.all()
-#     return render(request, "list_view.html", context)
-
-
-
-
-#     if request.method == 'POST':
-#         insurance_form = InsuranceForm(request.POST)
-#         if insurance_form.is_valid():
-#             insurance_form.save()
-#             return HttpResponseRedirect(reverse('insurance_list'))
-#     else:
-#         insurance_form = InsuranceForm()
-#     return render(request, 'new_insurance.html', {'iform': insurance_form})
-
-
-
-
-
-
-
-
-
-
 
 class PatientCreateView(CreateView):
     model = Patient
@@ -183,26 +206,80 @@ def paid(request, pk):
             obj.save()
         return redirect('paid', pk=pk)
 
-    return render(request, 'patient_info.html', {'patient': obj})
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def insurance_letter(request):
+    
+    qs = request.GET.get('n')
+
+    y = re.findall("\[(.*?)\]", qs)
+    for y in y:
+        x = re.split(",", y)
+
+
+    li1 = []
+    li2 = []
+    li3 = []
+    for z in x:
+        f = re.sub(r"^\s+", "", z)
+        li1.append(f)
+    for s in li1:
+        g = re.sub(r"\s+$", "", s)
+        li2.append(g)
+
+    for r in li2:
+        li3.append(r[10:-1])
+
+    
+    lis = []
+    
+    for h in li3:
+        try:
+            rows = Patient.objects.get(first_name__exact=h)
+            lis.append(rows)
+        except Exception:
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))    
+
+
+    k = 0
+    for w in range(len(lis)):
+        k += 1
+    
+    lis_firstone = lis[0]
+    insu = Insurance.objects.get(slug__exact=lis_firstone.basic_insurance_id)
+
+    
+
+    # template_path = 'insurance_letter.html'
+    # context = {
+    #     "patient" : lis,
+    #     'insurance': insu,
+    #     "leng":k
+    #     }
+    # response = HttpResponse(content_type='application/pdf')
+    # response['Content-Disposition'] = 'filename="نامه بیمه"'
+    # template = get_template(template_path)
+    # html = template.render(context)
+    # pisa_status = pisa.CreatePDF(
+    #     html, dest=response
+    # )
+    # if pisa_status.err:
+    #     return HttpResponse('we had some errors <pre>' + html + '</pre>')
+    # return response
 
 
 
 
+    context = {
+        "patient" : lis,
+        'insurance': insu,
+        "leng":k
+        }
 
+    return render(request, 'insurance_letter.html', context)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 def export_excel(request):
     response = HttpResponse(content_type='application/ms-excel')
@@ -214,7 +291,17 @@ def export_excel(request):
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
 
-    columns = ['first_name','last_name','national_code','phone_number', 'file_number', 'docter_name', 'basic_insurance', 'paid', 'type_of_surgery']
+    columns = [
+        'نام',
+        'نام خانوادگی',
+        'کد ملی',
+        'تلفن همراه',
+        'شماره پرونده',
+        'نام پزشک',
+        'بیمه پایه',
+        'نوع عمل بیمار',
+        'وضعیت پرداخت'
+        ]
 
     for col_num in range(len(columns)):
         ws.write(row_num,col_num,columns[col_num], font_style)
@@ -243,7 +330,15 @@ def export_excel(request):
     lis = []
     for h in li3:
         rows = Patient.objects.filter(first_name__exact=h).values_list(
-        'first_name','last_name','national_code','phone_number', 'file_number', 'docter_name', 'basic_insurance', 'paid', 'type_of_surgery'
+        'first_name',
+        'last_name',
+        'national_code',
+        'phone_number',
+        'file_number',
+        'docter_name',
+        'basic_insurance',
+        'type_of_surgery',
+        'paid'
         )
         lis.append(rows)
 
@@ -258,59 +353,19 @@ def export_excel(request):
 
 
 
+# #Creating our view, it is a class based view
+# class GeneratePdf(View):
+#      def get(self, request, *args, **kwargs):
+        
+#         #getting the template
+#         pdf = render_to_pdf('insurance_letter.html')
+         
+#          #rendering the template
+#         return HttpResponse(pdf, content_type='application/pdf')
 
 
 
-# def export_excel(request):
-#     response = HttpResponse(content_type='application/ms-excel')
-#     response['Content-Disposition'] = 'attachment; filename=Patient' + \
-#         str(datetime.datetime.now())+'.xls'
-#     wb = xlwt.Workbook(encoding='utf-8')
-#     ws = wb.add_sheet('Patient')
-#     row_num = 0
-#     font_style = xlwt.XFStyle()
-#     font_style.font.bold = True
-
-#     columns = ['first_name','last_name','birth_date','sex']
-
-#     for col_num in range(len(columns)):
-#         ws.write(row_num,col_num,columns[col_num], font_style)
-
-#     font_style = xlwt.XFStyle()
-#     qs = request.GET.get('y')
-
-#     rows = Patient.objects.filter(basic_insurance__exact=qs).values_list(
-#     'first_name','last_name','birth_date','sex'
-#     )
-
-#     for row in rows:
-#         row_num += 1
-#         for col_num in range(len(row)):
-#             ws.write(row_num, col_num, str(row[col_num]), font_style)
-#     wb.save(response)
-#     return response
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# def GeneratePdf(request):
 
 
 
@@ -325,28 +380,10 @@ class InsuranceUpdateView(UpdateView):
           insuranceid=self.kwargs['pk']
           return reverse_lazy('insurance_info', kwargs={'pk': insuranceid})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class PatientDeleteView(DeleteView):
     model = Patient
     template_name = 'delete_patient.html'
     success_url = reverse_lazy('patients_list')
-
 
 class AdmissionFormView(DetailView):
     model = Patient
@@ -368,37 +405,19 @@ class SurgeryReportFormView(DetailView):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 class InsuranceInfoView(DetailView):
     model = Insurance
     template_name = 'insurance_info.html'
-
 
 class InsuranceListView(ListView):
     model = Insurance
     template_name = 'insurance_list.html'
     context_object_name = 'insurance_obj'
 
-
 class InsuranceDeleteView(DeleteView):
     model = Insurance
     template_name = 'delete_insurance.html'
     success_url = reverse_lazy('insurance_list')
-
-
-
 
 def InsuranceCreate(request):
     if request.method == 'POST':
@@ -410,7 +429,6 @@ def InsuranceCreate(request):
         insurance_form = InsuranceForm()
     return render(request, 'new_insurance.html', {'iform': insurance_form})
 
-
 class InsuranceUpdateView(UpdateView):
     model = Insurance
     template_name = 'insurance_edit.html'
@@ -419,45 +437,17 @@ class InsuranceUpdateView(UpdateView):
           insuranceid=self.kwargs['pk']
           return reverse_lazy('insurance_info', kwargs={'pk': insuranceid})
 
-
 def insurance_filter(request, pk):
     
     qh = request.GET.get('x')
     ps = Patient.objects.all().filter(basic_insurance_id__exact=qh)
-
-
-
     paginator = Paginator(ps, 3)
     page = request.GET.get('screen')
     qs = paginator.get_page(page)
     
-    
     context = {'querys' : qs}
-    return render(request, 
-                    'patient_insurance.html',
-                    context)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    return render(request,'patient_insurance.html',context)
 
 
 class TariffListView(ListView):
@@ -479,16 +469,12 @@ class TariffUpdateView(UpdateView):
     model = Tariff
     template_name = 'tariff_edit.html'
     form_class = TariffForm
-    def get_success_url(self):
-          tariffid=self.kwargs['pk']
-          return reverse_lazy('tariff_info', kwargs={'pk': tariffid})
+    success_url = reverse_lazy('tariff_list')
 
 class TariffDeleteView(DeleteView):
     model = Tariff
     template_name = 'delete_tariff.html'
     success_url = reverse_lazy('tariff_list')
-
-
 
 
 
@@ -504,10 +490,6 @@ def report_pagination(request, page=1):
         }
     return render(request, 'reports.html', context)
 
-
-
-
-
 def report_searchbar(request):
     qs = Patient.objects.all()
     name_contains_query = request.GET.get('name search')
@@ -521,10 +503,7 @@ def report_searchbar(request):
     operator_search_query = request.GET.get('operator search')
     basic_insurance_search_query = request.GET.get('basic insurance search')
 
-    # list = []
     qf = Insurance.objects.filter(name__icontains=basic_insurance_search_query).values()[:][0]["slug"]
-    # for dict in qf:
-    #     list.append(dict["slug"])
 
     if is_valid_queryparam(name_contains_query) :
         qs = qs.filter(Q(first_name__icontains=name_contains_query)
@@ -551,8 +530,7 @@ def report_searchbar(request):
     
 
     if is_valid_queryparam(basic_insurance_search_query):
-        # for q in list:
-            qs = qs.filter(basic_insurance_id__exact=qf)
+        qs = qs.filter(basic_insurance_id__exact=qf)
 
 
 
@@ -566,9 +544,8 @@ def report_searchbar(request):
 
 
     context = {'queryset' : qs}
-    return render(request, 
-                    'report_result.html',
-                    context)
+
+    return render(request,'report_result.html',context)
 
 
 
