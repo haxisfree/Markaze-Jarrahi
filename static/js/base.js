@@ -1,20 +1,36 @@
-jalaliDatepicker.startWatch({
-  minDate: "attr",
-  maxDate: "attr"
-  }); 
-function deleteEmptyTable(){
-    var table, numberOfRows, row;
-    table = document.querySelector("table");
-    if(table){
-        numberOfRows = table.querySelector("tbody").children.length;
-        if(numberOfRows <= 1){  
-            table.querySelector(".empty-table").style.display="table-row";
-        }
-        else{
-            table.querySelector(".empty-table").style.display="none";
-        }
+function documentLoad(){
+
+    //insurane letter table 
+    var table = document.getElementsByClassName('letter-table')[0],
+    rows = table.getElementsByTagName('tr'),
+    text = 'textContent' in document ? 'textContent' : 'innerText';
+    var totalPrice =0
+    for (var i = 1, len = rows.length-1; i < len; i++) {
+      rows[i].children[0][text] = i + rows[i].children[0][text];
+
+      if(rows[i].children[5].innerHTML== ""){
+        rows[i].children[5].innerHTML="0";
+      }
+      // totalPrice = totalPrice + parseFloat(rows[i].children[5][text]);
     }
+    // rows[rows.length-1].children[1].innerHTML = totalPrice;
 }
+
+
+
+// function deleteEmptyTable(){
+//     var table, numberOfRows, row;
+//     table = document.querySelector("table");
+//     if(table){
+//         numberOfRows = table.querySelector("tbody").children.length;
+//         if(numberOfRows <= 1){  
+//             table.querySelector(".empty-table").style.display="table-row";
+//         }
+//         else{
+//             table.querySelector(".empty-table").style.display="none";
+//         }
+//     }
+// }
 function searchPatient(x) {
     var input, filter, patients, name, i;
     input = document.getElementById("search");

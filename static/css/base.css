@@ -812,8 +812,31 @@ a:hover div.insurance-container{
     padding: 0 !important;
 }
 .insurance-cover {
-    height: 250px;
+    width: 100%;
+}
+.cover-container {
+  height: 250px;
+  width: 250px;
+  margin: auto;
 }
 a:hover .insurance-cover{
     filter: grayscale(100%);
 }
+
+.letter-container {
+  background-color: var(--white);
+  padding: 25mm;
+  height: 247mm;
+  width: 160mm;
+}
+.letter-table th, .letter-table td {
+  padding: 5px 15px;
+}
+.letter-table {
+  border-collapse: collapse;
+}
+.letter-table , .letter-table td, .letter-table th {
+  border: 1px solid black;
+  font-size: 14px;
+}
+
