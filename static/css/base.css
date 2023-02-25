@@ -275,6 +275,8 @@ form [class^="col-"]{
 }
 #bills-form{
     background-image: url("../pic/BG/bills_form2.jpg");
+    height: 286mm;
+width: 196mm;
 }
 #surgery-report-form{
     background-image: url("../pic/BG/surgery_report_form2.jpg");
@@ -299,8 +301,8 @@ form [class^="col-"]{
 
 
 #admission-form .patient-name {
-    right: 123px;
-    top: 105px;
+    right: 127px;
+    top: 108px;
   }
 #admission-form .father-name {
     right: 408px;
@@ -324,7 +326,7 @@ form [class^="col-"]{
 }
 #admission-form .national-code {
     top: 101px;
-    right: 118px;
+    right: 125px;
   }
 #admission-form .discharge-date {
     top: 94px;
@@ -332,12 +334,36 @@ form [class^="col-"]{
   }
 
   #admission-form .surgery-type {
-    top: 91px;
-    right: 123px;
+    top: 88px;
+    right: 130px;
   }
   #admission-form .anesthesia-doctor {
     top: 87px;
-    right: 151px;
+    right: 158px;
+  }
+  #admission-form .KidneyKruser {
+    top: 182px;
+    right: 300px;
+  }
+  #admission-form .DrugCost {
+    top: 184px;
+    right: 300px;
+  }
+  #admission-form .AnestheticCost {
+    top: 190px;
+    right: 300px;
+  }
+  #admission-form .patient-Franchise-percent {
+    top: 198px;
+    right: 300px;
+  }
+  #admission-form .patient-Franchise {
+    top: 208px;
+    right: 300px;
+  }
+  #admission-form .InsurancePremium {
+    top: 218px;
+    right: 300px;
   }
 
 #anesthesia-form .file-number {
@@ -371,35 +397,55 @@ form [class^="col-"]{
 }
 #bills-form .file-number {
     top: 112px;
-    right: 116px;
+    right: 60px;
 }
 #bills-form .patient-name {
-    top: 133px;
-    right: 212px;
+    top: 132px;
+    right: 160px;
 }
 #bills-form .doctor-name {
-    top: 185px;
-    right: 604px;
+    top: 180px;
+    right: 554px;
 }
 #bills-form .father-name {
-    top: 96px;
-    right: 143px;
+    top: 94px;
+    right: 92px;
 }
 #bills-form .birth-date {
-    top: 61px;
-    right: 604px;
+    top: 59px;
+    right: 554px;
+  }
+  #bills-form  .discharge-date {
+    top: -10px;
+    right: 577px;
   }
 #bills-form .national-code {
-    top: 0px;
-    right: 637px;
+    top: -3px;
+    right: 586px;
   }
 #bills-form .admission-date {
-    top: 26px;
-    right: 179px;
+    top: 25px;
+    right: 127px;
+  }
+  #bills-form  .surgery-type {
+    top: -12px;
+    right: 101px;
+  }
+  #bills-form .KidneyKruser {
+    top: 463px;
+    right: 354px;
+  }
+  #bills-form  .AnestheticCost {
+    top: 467px;
+    right: 352px;
+  }
+  #bills-form .InsurancePremium {
+    top: 508px;
+    right: 350px;
   }
 #surgery-report-form .file-number {
-    top: 132px;
-    right: 110px;
+    top: 112px;
+    right: 63px;
   }
 #surgery-report-form .patient-firstname {
     top: 172px;

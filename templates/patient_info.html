@@ -30,11 +30,8 @@
             </div>
             <div class="col-9">
                 <h2>{{ patient.first_name }} {{ patient.last_name }}</h2>
-                <div class="row">
-                    <div class="col-6 p-0" style="width: 18%;">شماره پرونده</div>
-                    <div class="col-6 p-0" style="width: 18%;">{{ patient.file_number }}</div>
-                </div>
-                <p><span class="sub-title">تاریخ پذیرش &nbsp; &nbsp; {{patient.date_of_admission}}</span></p>
+                <p><span class="sub-title" style="color: var(--black);">شماره پرونده &nbsp; &nbsp; &nbsp;</span>{{ patient.file_number }}</p>
+                <p style="color: var(--gray);"><span class="sub-title">تاریخ پذیرش &nbsp; &nbsp; &nbsp;</span>{{patient.date_of_admission}}</p>
                 </br>
                 <a href="{% url 'medical_edit' patient.pk %}"><button class="btn btn-secondary">تکمیل اطلاعات پزشکی بیمار</button></a>
                 &nbsp;
@@ -79,8 +76,8 @@
         <div class="row">
             <div class="col-12 second-info">
                 <h2>اطلاعات مالی بیمار</h2>                
-                <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی توسط بیمار</span>{{ patient.Franchise | intcomma:False}} تومان </p>
-                <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی بیمه </span>{{ patient.InsurancePremium | intcomma:False }} تومان </p>
+                <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی توسط بیمار</span>{{ patient.Franchise | intcomma:False}} ریال </p>
+                <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی بیمه </span>{{ patient.InsurancePremium | intcomma:False }} ریال </p>
             </div>
         </div>
         <br>

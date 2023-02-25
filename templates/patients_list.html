@@ -58,7 +58,7 @@
                             </td>
                             <td>{{patient.national_code}}</td>
                             <td>{{patient.file_number}}</td>
-                            <td>{{patient.date_of_admission|to_jalali:'%y/%m/%d'}}</td>
+                            <td>{{patient.date_of_admission}}</td>
                             <td class="button">
                                 <a href="{% url 'patient_info' patient.pk %}"><button class="show-patient">مشاهده</button></a>
                             </td>

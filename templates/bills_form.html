@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
-
+{% load humanize %}
 {% block content %}
 <div class="row">
     <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
@@ -16,11 +16,12 @@
         <p class="father-name">{{ patient.father_name }}</p>
         <p class="birth-date">{{ patient.birth_date }}</p>
         <p class="national-code">{{ patient.national_code }}</p>
-        <p class="admission-date">{{ patient.date_of_admission }}</p>
+        <p class="admission-date">{{ patient.date_of_hospitalization }}</p>
         <p class="discharge-date">{{ patient.date_of_discharge}}</p>
-        <p class="anesthesia-doctor">{{ patient.anesthesia_doctor_name }}</p>
         <p class="surgery-type">{{ patient.type_of_surgery }}</p>
-
+        <p class="KidneyKruser">{{ patient.KidneyKruser | intcomma:False}}</p>
+        <p class="AnestheticCost ">{{ patient.AnestheticCost | intcomma:False}}</p>
+        <p class="InsurancePremium">{{ patient.InsurancePremium | intcomma:False}}</p>
     </div>
 </div>
 

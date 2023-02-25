@@ -53,8 +53,21 @@
                     <a href="{% url 'tariff_list' %}" 
                     {% if request.path == "/tarifflist" %}
                         class="active"
+                    {% endif %}>
+                    <img class="icon" src="{% static 'pic/icon/sale.png' %}">تعرفه ها</a>
+
+                    <a href="{% url 'reports' %}" 
+                    {% if request.path == "/reports" %}
+                        class="active"
                     {% endif %}
-                    ><img class="icon" src="{% static 'pic/icon/sale.png' %}">تعرفه ها</a>
+                    ><img class="icon" src="{% static 'pic/icon/file.png' %}">گزارش گیری</a>
+
+                    <a href="{% url 'reports' %}" 
+                    {% if request.path == "/reports" %}
+                        class="active"
+                    {% endif %}
+                    ><img class="icon" src="{% static 'pic/icon/help.png' %}">پشتیبانی</a>
+
 
                     
                 </div>
