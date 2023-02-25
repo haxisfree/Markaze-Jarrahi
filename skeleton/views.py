@@ -21,7 +21,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 import datetime
 import xlwt
 import re
-
+from num2fawords import words, ordinal_words
 
 
 
@@ -31,8 +31,8 @@ from django.template.loader import get_template
 #import render_to_pdf from util.py 
 from .utils import render_to_pdf 
 
-from xhtml2pdf import pisa 
-from django.template.loader import get_template
+# from xhtml2pdf import pisa 
+
 
 
 
@@ -246,6 +246,11 @@ def insurance_letter(request):
     for w in range(len(lis)):
         k += 1
     
+    num = words(k)
+    num2 = ordinal_words(k)
+
+
+
     lis_firstone = lis[0]
     insu = Insurance.objects.get(slug__exact=lis_firstone.basic_insurance_id)
 
@@ -274,7 +279,9 @@ def insurance_letter(request):
     context = {
         "patient" : lis,
         'insurance': insu,
-        "leng":k
+        "leng":k,
+        "num" : num,
+        "num2" : num2,
         }
 
     return render(request, 'insurance_letter.html', context)
