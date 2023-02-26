@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
-
+{% load humanize %}
 {% block content %}
 <div class="row">
     <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
@@ -23,6 +23,7 @@
         <p class="patient-Franchise-percent">{{ patient.Fran | intcomma:False}}%</p>
         <p class="patient-Franchise">{{ patient.Franchise | intcomma:False}}</p>
         <p class="InsurancePremium">{{ patient.InsurancePremium | intcomma:False}}</p>
+        <p class="InsurancePremiumFa">{{ patient.InsurancePremiumFa }}</p>
 </div>
 </div>
 {% endblock content %}

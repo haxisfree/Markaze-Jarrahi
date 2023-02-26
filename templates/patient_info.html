@@ -87,7 +87,7 @@
                 <h2>فرم های بیمار</h2>
                 <p><a href="{% url 'anesthesia_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">برگه بیهوشی</a></p>
                 <p><a href="{% url 'surgery_report_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">گزارش عمل جراحی</a></p>
-                <p><a href="{% url 'admission_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">فرم دارو و لوازم مصرفی</a></p>
+                <p><a href="{% url 'drug_and_consumables_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">فرم دارو و لوازم مصرفی</a></p>
                 <p><a href="{% url 'bills_form' patient.pk %}"><img class="icon" src="{% static 'pic/icon/form.png' %}">صورت حساب بیمار</a></p>
             </div>
         </div>

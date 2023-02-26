@@ -5,7 +5,7 @@ from .views import ( PatientsListView,
                     PatientCreateView, 
                     PatientUpdateView,
                     PatientDeleteView,
-                    AdmissionFormView,
+                    DrugAndConsumablesFormView,
                     AnesthesiaFormView,
                     BillsFormView,
                     SurgeryReportFormView,
@@ -40,6 +40,16 @@ from .views import ( PatientsListView,
                     TariffDeleteView,
                     # GeneratePdf,
                     # ReportResultView,
+
+
+
+
+                    FundInfoView,
+                    FundListView,
+                    FundCreateView,
+                    FundUpdateView,
+                    FundDeleteView,
+                    SupportView,
 )
 
 
@@ -53,7 +63,7 @@ urlpatterns = [
     path('patient/<int:pk>/delete/', PatientDeleteView.as_view(), name='patient_delete'),
     path('', HomeView.as_view(), name='home'),
     path('page/<int:page>', Pagination, name='patients_list'),
-    path('patient/<int:pk>/admission_form/', AdmissionFormView.as_view(), name='admission_form'),
+    path('patient/<int:pk>/drug_and_consumables_form/', DrugAndConsumablesFormView.as_view(), name='drug_and_consumables_form'),
     path('patient/<int:pk>/anesthesia_form/', AnesthesiaFormView.as_view(), name='anesthesia_form'),
     path('patient/<int:pk>/bills_form/', BillsFormView.as_view(), name='bills_form'),
     path('patient/<int:pk>/surgery_report_form/', SurgeryReportFormView.as_view(), name='surgery_report_form'),
@@ -87,6 +97,13 @@ urlpatterns = [
 
 
     # path('pdf/', GeneratePdf.as_view(), name='pdf'),
+    path('fund/<int:pk>/', FundInfoView.as_view(), name='fund_info'),
+    path('fundlist', FundListView.as_view(), name='fund_list'),
+    path('new_fund/', FundCreateView.as_view(), name='new_fund'),
+    path('fund/<int:pk>/edit/', FundUpdateView.as_view(), name='fund_edit'),
+    path('fund/<int:pk>/delete/', FundDeleteView.as_view(), name='fund_delete'),
+
+    path('support', SupportView.as_view(), name='support'),
 
 ]
 

@@ -7,10 +7,10 @@ from django.shortcuts import render, redirect
 
 from django.views.generic import ListView, DetailView, TemplateView, View, FormView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Patient, Insurance, Tariff
+from .models import Patient, Insurance, Tariff, Fund
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
-from .forms import PatientForm, InsuranceForm, MedicalForm, TariffForm, PaidForm
+from .forms import PatientForm, InsuranceForm, MedicalForm, TariffForm, PaidForm, FundForm
 from jalali_date import datetime2jalali, date2jalali
 from django.db.models import Q 
 import datetime
@@ -233,28 +233,65 @@ def insurance_letter(request):
 
     
     lis = []
-    
+    # count = []
+    c = 0
+
     for h in li3:
         try:
             rows = Patient.objects.get(first_name__exact=h)
             lis.append(rows)
+            c += 1
+            # count.append(c)
+
         except Exception:
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))    
 
 
+    # k = 0
+    # for w in range(len(lis)):
+    #     k += 1
+    
+    # num = words(k)
+    # num2 = ordinal_words(k)
     k = 0
-    for w in range(len(lis)):
-        k += 1
+    for p in lis:
+        try:
+            if p.InsurancePremium is not None:
+                k += p.InsurancePremium
+            else:
+                pass
+        except:
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
     num = words(k)
-    num2 = ordinal_words(k)
-
-
 
     lis_firstone = lis[0]
     insu = Insurance.objects.get(slug__exact=lis_firstone.basic_insurance_id)
 
-    
+    month = {
+        '-01-' : "فروردین",
+        '-02-' : "اردیبهشت",
+        '-03-' : "خرداد",
+        '-04-' : "تیر",
+        '-05-' : "مرداد",
+        '-06-' : "شهریور",
+        '-07-' : "مهر",
+        '-08-' : "آبان",
+        '-09-' : "آذر",
+        '-10-' : "دی",
+        '-11-' : "بهمن",
+        '-12-' : "اسفند"
+    }
+    # global mah
+    mah = ""
+    if lis_firstone:
+        date = str(lis_firstone.date_of_admission)
+        x = re.findall("\-.*\-", date)
+        for key,value in month.items():
+            if x == key:
+                mah == value
+
+
 
     # template_path = 'insurance_letter.html'
     # context = {
@@ -279,9 +316,11 @@ def insurance_letter(request):
     context = {
         "patient" : lis,
         'insurance': insu,
-        "leng":k,
-        "num" : num,
-        "num2" : num2,
+        "leng":c,
+        "sumIP" : k,
+        "numword" : num,
+        "mah" : mah,
+        "lis_firstone":x
         }
 
     return render(request, 'insurance_letter.html', context)
@@ -392,9 +431,9 @@ class PatientDeleteView(DeleteView):
     template_name = 'delete_patient.html'
     success_url = reverse_lazy('patients_list')
 
-class AdmissionFormView(DetailView):
+class DrugAndConsumablesFormView(DetailView):
     model = Patient
-    template_name = 'admission_form.html'
+    template_name = 'drug_and_consumables_form.html'
 
 class AnesthesiaFormView(DetailView):
     model = Patient
@@ -555,6 +594,43 @@ def report_searchbar(request):
     return render(request,'report_result.html',context)
 
 
+
+
+
+
+class FundListView(ListView):
+    model = Fund
+    context_object_name = 'fund_obj'
+    template_name = 'fund_list.html'
+
+class FundInfoView(DetailView):
+    model = Fund
+    template_name = 'fund_info.html'
+
+class FundCreateView(CreateView):
+    model = Fund
+    template_name = 'new_fund.html'
+    form_class = FundForm
+    success_url = reverse_lazy('fund_list')
+
+class FundUpdateView(UpdateView):
+    model = Fund
+    template_name = 'fund_edit.html'
+    form_class = FundForm
+    def get_success_url(self):
+          fundid=self.kwargs['pk']
+          return reverse_lazy('fund_info', kwargs={'pk': fundid})
+
+class FundDeleteView(DeleteView):
+    model = Fund
+    template_name = 'delete_fund.html'
+    success_url = reverse_lazy('fund_list')
+
+
+
+
+class SupportView(TemplateView):
+    template_name = 'support.html'
 
 
 

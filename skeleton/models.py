@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.core.validators import validate_comma_separated_integer_list
 from django_jalali.db import models as jmodels
 from django.utils.html import format_html 
+from num2fawords import words, ordinal_words
 
 
 
@@ -161,6 +162,17 @@ class Patient(models.Model):
             second_tariff_object = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
             ip = second_tariff_object.TotalTariffWithoutMedicine - self.Franchise
             return int(ip)
+
+    @property
+    def InsurancePremiumFa(self):
+        
+        if self.Franchise != None :
+            wordnum = words(self.InsurancePremium)
+            return wordnum
+        else:
+            message = "ابتدا بیمه اصلی را انتخاب کنید"
+            return message
+
 
     @property
     def KidneyKruser(self):

@@ -1,0 +1,64 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% load jalali_tags %}
+
+{% load humanize %}
+
+<div class="row">
+  <div class="col-12">
+    <a href="{% url 'new_fund' %}"><button class="btn btn-primary float-left">افزودن تنخواه جدید</button></a>
+  </div>
+</div>
+<div class="patients-container">
+  <div class="row">
+      <div class="col-12">
+          <div id="patientslist">
+              <table>
+                  <thead>
+                      <tr>
+                          <th>عنوان</th>
+                          <th>مبلغ</th>
+                          <th>تاریخ</th>
+                          <th>خریدار</th>
+                          <th></th>
+                          <th></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for t in fund_obj %}
+                      <tr class="patient">
+                          <td style="width: 25% !important;">{{ t.title}}</td>
+                          <!-- <td>{{ t.description }}</td> -->
+                          <td>{{ t.price | intcomma:False }}</td>
+                          <td>{{ t.date }}</td>
+                          <td>{{ t.name }}</td>
+                          <td class="button">
+                              <a href="{% url 'fund_edit' t.pk %}"><button class="show-patient">ویرایش</button></a>
+                          </td>
+                          <td class="button">
+                              <a href="{% url 'fund_delete' t.pk %}"><button class="btn-delete">حذف</button></a>
+                          </td>
+                      </tr>
+                      {% endfor %}
+                      <tr class="empty-table patient">
+                        <td colspan="6"><p>تنخواه ای ثبت نشده است.</p></td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+{% endblock content %}

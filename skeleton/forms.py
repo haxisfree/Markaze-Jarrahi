@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from django.contrib.admin.widgets import AdminDateWidget
-from .models import Patient, Insurance, Tariff
+from .models import Patient, Insurance, Tariff, Fund
 from jalali_date.fields import JalaliDateField, SplitJalaliDateTimeField
 from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
 
@@ -103,5 +103,16 @@ class PaidForm(forms.ModelForm):
         model = Patient
         fields = ["paid"]
 
+class FundForm(forms.ModelForm):
+    class Meta:
+        model = Fund
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super(FundForm, self).__init__(*args, **kwargs)
+        self.fields['date'] = JalaliDateField(label=('تاریخ'),
+            widget=AdminJalaliDateWidget
+        )
+        self.fields['date'].required = False
 
 
