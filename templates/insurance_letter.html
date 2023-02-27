@@ -15,7 +15,7 @@
     <h2 class="center">بسمه تعالی</h2>
     <h3>مدیریت محترم {{ insurance.name }}</h3>
     <p style="text-align: justify;">
-        با سلام و احترام به پیوست {{ leng }} برگ صورتحساب بخش سنگ شکنی این مرکز در ماه{{ mah }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; که در این واحد مورد درمان قرار گرفته اند به شرح زیر ارسال می گردد.
+        با سلام و احترام به پیوست {{ leng }} برگ صورتحساب بخش سنگ شکنی این مرکز در ماه {{ mah }} ماه {{sal}} که در این واحد مورد درمان قرار گرفته اند به شرح زیر ارسال می گردد.
         خواهشمند است دستور فرمایید مبلغ درخواستی را به حساب شماره {{ insurance.bank_card_num }} بانک {{ insurance.bank_account }} شعبه {{ insurance.branchs_name }} واریز نمایید.
     </p>
     <br>
@@ -55,15 +55,5 @@
 </div>
 
 
-
-
-
-
-<!-- {{lis_firstone.date_of_admission}} -->
-
-
-
-{{lis_firstone}}
-{{mah}}
 
 {% endblock content %}

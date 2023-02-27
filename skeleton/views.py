@@ -282,15 +282,19 @@ def insurance_letter(request):
         '-11-' : "بهمن",
         '-12-' : "اسفند"
     }
-    # global mah
+   
     mah = ""
+    sal = ""
+
     if lis_firstone:
         date = str(lis_firstone.date_of_admission)
         x = re.findall("\-.*\-", date)
-        for key,value in month.items():
-            if x == key:
-                mah == value
-
+        y = re.findall("\d\d\d\d", date)
+    
+    for key, value in month.items():
+        if key == x[0]:
+            mah = value
+    sal = y[0]
 
 
     # template_path = 'insurance_letter.html'
@@ -320,7 +324,7 @@ def insurance_letter(request):
         "sumIP" : k,
         "numword" : num,
         "mah" : mah,
-        "lis_firstone":x
+        "sal":sal,
         }
 
     return render(request, 'insurance_letter.html', context)
