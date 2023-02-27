@@ -33,7 +33,7 @@
 }
 @font-face {
     font-family: iransans;
-    src: url(../font/IRANSansWeb.woff);
+    src: url(../font/IRANSans.ttf);
 }
 :root {
     --white: #ffffff;
