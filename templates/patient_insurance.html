@@ -27,6 +27,13 @@
                 <input  class="form-control" id="publishDateMin" name="date_min" data-jdp>
                 تا
                 <input  class="form-control" id="publishDateMax" name="date_max" data-jdp>
+
+                <input class="form-control py-2"
+                type="checkbox" id="paid" placeholder="پرداخت شده" aria-label="Search"
+                name="paid search" for="paid" >پرداخت شده
+                <input class="form-control py-2"
+                type="checkbox" id="unpaid" placeholder="پرداخت نشده" aria-label="Search"
+                name="unpaid search" for="unpaid" >پرداخت نشده
             </div>
             <div class="col-3">
                 <button id="search-button" class="btn btn-primary" type="submit" name='m' value="{{request.resolver_match.kwargs.pk}}">جستوجو</button>

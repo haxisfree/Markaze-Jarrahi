@@ -51,6 +51,8 @@ def searchbar(request):
     file_number_search_contains_query = request.GET.get('file number search')
     date_min = request.GET.get('date_min')
     date_max = request.GET.get('date_max')
+    paid_search_query = request.GET.get('paid search')
+    unpaid_search_query = request.GET.get('unpaid search')
 
 
     if is_valid_queryparam(name_contains_query) :
@@ -69,6 +71,12 @@ def searchbar(request):
 
     if is_valid_queryparam(date_max):
         qs = qs.filter(date_of_admission__lte=date_max)
+
+    if paid_search_query == 'on':
+        qs = qs.filter(paid=True)
+
+    elif unpaid_search_query == 'on':
+        qs = qs.filter(paid=False)
 
     context = {'queryset' : qs}
     
@@ -83,6 +91,8 @@ def insurance_searchbar_filters(request):
     file_number_search_contains_query = request.GET.get('file number search')
     date_min = request.GET.get('date_min')
     date_max = request.GET.get('date_max')
+    paid_search_query = request.GET.get('paid search')
+    unpaid_search_query = request.GET.get('unpaid search')
 
 
     if is_valid_queryparam(name_contains_query) :
@@ -101,6 +111,15 @@ def insurance_searchbar_filters(request):
 
     if is_valid_queryparam(date_max):
         qs = qs.filter(date_of_admission__lte=date_max)
+
+
+    if paid_search_query == 'on':
+        qs = qs.filter(paid=True)
+
+    elif unpaid_search_query == 'on':
+        qs = qs.filter(paid=False)
+
+
 
     return qs
 
@@ -115,6 +134,8 @@ def insurance_searchbar(request):
     file_number_search_contains_query = request.GET.get('file number search')
     date_min = request.GET.get('date_min')
     date_max = request.GET.get('date_max')
+    paid_search_query = request.GET.get('paid search')
+    unpaid_search_query = request.GET.get('unpaid search')
 
     
     if is_valid_queryparam(name_contains_query) :
@@ -133,6 +154,12 @@ def insurance_searchbar(request):
 
     if is_valid_queryparam(date_max):
         qs = qs.filter(date_of_admission__lte=date_max)
+
+    if paid_search_query == 'on':
+        qs = qs.filter(paid=True)
+
+    elif unpaid_search_query == 'on':
+        qs = qs.filter(paid=False)
 
     context = {'queryset' : qs}
 
@@ -552,6 +579,8 @@ def report_searchbar(request):
     anesthesia_doctor_name_search_query = request.GET.get('anesthesia doctor name search')
     operator_search_query = request.GET.get('operator search')
     basic_insurance_search_query = request.GET.get('basic insurance search')
+    paid_search_query = request.GET.get('paid search')
+    unpaid_search_query = request.GET.get('unpaid search')
 
     qf = Insurance.objects.filter(name__icontains=basic_insurance_search_query).values()[:][0]["slug"]
 
@@ -590,6 +619,13 @@ def report_searchbar(request):
 
     if is_valid_queryparam(date_max):
         qs = qs.filter(date_of_admission__lte=date_max)
+
+
+    if paid_search_query == 'on':
+        qs = qs.filter(paid=True)
+
+    elif unpaid_search_query == 'on':
+        qs = qs.filter(paid=False)
 
 
 

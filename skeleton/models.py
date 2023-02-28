@@ -59,6 +59,18 @@ class Insurance (models.Model):
     total_debits_and_credits = models.BigIntegerField(verbose_name="مجموع بدهکاری و بستانکاری", blank=True, null=True, default = 0)
 
 
+    @property
+    def Fran2(self):
+
+        if self.franchising:
+            f = 100 * self.franchising
+            return int(f)
+        else:
+            message = "ابتدا درصد فرانشیز بیمار را وارد کنید"
+            return message
+
+
+
     def __str__(self):
         return self.name
 
