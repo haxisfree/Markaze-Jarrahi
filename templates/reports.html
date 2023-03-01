@@ -21,8 +21,6 @@
                 <input class="form-control py-2"
                 type="search" placeholder="جستجوی شماره پرونده بیمار ..." aria-label="Search"
                 name="file number search">
-            </div>
-            <div class="col-12">
                 <input class="form-control py-2"
                 type="search" placeholder="جستجوی نام پزشک معرف ..." aria-label="Search"
                 name="docter name search">
@@ -48,16 +46,21 @@
                 تا
                 <input  class="form-control" id="publishDateMax" name="date_max" data-jdp>
             </div>
-            
-            <input class="form-control py-2"
-            type="checkbox" id="paid" placeholder="پرداخت شده" aria-label="Search"
-            name="paid search" for="paid" >پرداخت شده
-            <input class="form-control py-2"
-            type="checkbox" id="unpaid" placeholder="پرداخت نشده" aria-label="Search"
-            name="unpaid search" for="unpaid" >پرداخت نشده
-
-
-            <div class="col-3">
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-9">
+                &nbsp;&nbsp;
+                وضعیت پرداخت :
+                &nbsp;&nbsp;
+                <input class="form-checkbox"
+                type="checkbox" id="paid" placeholder="پرداخت شده" aria-label="Search"
+                name="paid search" for="paid" >پرداخت شده
+                &nbsp;&nbsp;
+                <input class="form-checkbox"
+                type="checkbox" id="unpaid" placeholder="پرداخت نشده" aria-label="Search"
+                name="unpaid search" for="unpaid" >پرداخت نشده
+            </div>
+            <div class="col-3 ">
                 <button id="search-button" class="btn btn-primary" type="submit">جستجو</button>
             </div>
         </div>
@@ -74,7 +77,7 @@
 
 
 
-<div class="patients-container">
+<!-- <div class="patients-container">
     <div class="row">
         <div class="col-12">
             <div id="patientslist">
@@ -111,11 +114,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
  <!-- start of pagination -->
-<div class="flex">
+<!-- <div class="flex">
     <div class="pagination">
         {% if patient.has_previous %}
             <a class="arrow" href="?page={{ patient.previous_page_number }}"><img src="{% static 'pic/icon/next.png' %}"></a>
@@ -145,7 +148,7 @@
             <a class="disabled arrow" href="#" tabindex="-1" aria-disabled="True"><img src="{% static 'pic/icon/previous.png' %}"></a>
         {% endif %}
     </div> 
-</div>
+</div> -->
 <!-- end of pagination -->
 
 

@@ -727,7 +727,7 @@ transform: translate(-50%, -50%);
   #search-button {
     float: left;
     margin-left: 5%;
-    margin-top: 2%;
+    margin-top: -22px;
   }
   .search-container .row {
     margin: 10px 0;
@@ -885,4 +885,54 @@ width: 300px;
 .contact img{
   filter: invert(43%) sepia(90%) saturate(2970%) hue-rotate(205deg) brightness(96%) contrast(112%);
   margin-left: 8px;
+}
+
+.form-checkbox {
+  width: fit-content;
+  margin: 0 10px;
+vertical-align: middle;
+}
+.p-0{
+  padding: 0 !important;
+}
+.excel-btn {
+  float: left;
+  margin: 0;
+  padding: 0 12px;
+}
+#report{
+  border-radius: 10px;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.03), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.03);
+  width: 100%;
+  overflow: hidden;
+  margin: 3% 0%;
+}
+#report table{
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#report table tr {
+  border-bottom: 4px solid var(--light-gray);
+}
+#report table tr:last-child {
+  border-bottom: unset;
+}
+
+#report table th, #report table td {
+  padding: 15px;
+  text-align: right;
+  color: var(--gray);
+  width: 18%;
+  background-color: var(--white);
+}
+
+#report table th {
+  background-color: var(--blue);
+  color: var(--white);
+  font-size: 20px;
+}
+#report tr.patient td:first-child {
+  color: var(--black) !important;
+  width: 27% !important;
 }
