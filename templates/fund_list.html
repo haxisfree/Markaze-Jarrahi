@@ -32,7 +32,9 @@
                   <tbody>
                       {% for t in fund_obj %}
                       <tr class="patient">
-                          <td style="width: 25% !important;">{{ t.title}}</td>
+                          <td style="width: 25% !important;">
+                            <a href="{% url 'fund_info' t.pk %}">{{ t.title}}</a>
+                          </td>
                           <!-- <td>{{ t.description }}</td> -->
                           <td>{{ t.price | intcomma:False }}</td>
                           <td>{{ t.date }}</td>

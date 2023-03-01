@@ -9,7 +9,7 @@
         <button class="btn btn-primary back" onclick="history.back()" style="margin-left:15px;">بازگشت</button>
     </div>
     <div>
-        <h1 style="color: var(--blue);">نتایج جستوجو :</h1>
+        <h1 style="color: var(--blue);">نتایج جستجو :</h1>
         <br>
         <form method="GET" action="{% url 'export_excel' %}">
             <button class="btn" style="color: green;" type="submit" name='y' value="{{queryset}}">خروجی اکسل</button> 

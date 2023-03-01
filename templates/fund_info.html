@@ -10,36 +10,30 @@
     <!-- <button onclick="window.print()">Print this page</button> -->
     <!-- <img src="{% static 'icon/img1.jpg' %}" alt="Girl with ampool" width="500" height="200"> -->
 
-
     <div class="row">
         <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
     </div>
+    
     <div class="container">
-        <div class="row patient-header">
-            <div class="col-3">
-                <div class="avatar">
-                    <img src="{% static 'pic/icon/avatar.png' %}">
-                </div>
-            </div>
-            <div class="col-9">
-                <h2>{{ fund.title }}</h2>
-                </br>
-                <a href="{% url 'fund_edit' fund.pk %}"><button class="btn btn-primary">ویرایش</button></a>
-                &nbsp;
-                <a href="{% url 'fund_delete' fund.pk %}"><button class="btn btn-secondary">حذف</button></a>
-            </div>
-        </div>
-
+        <h1><span style="display: inline-block;"> تنخواه </span> {{ fund.title }}</h1>
+        <hr>
+        <br>
         <div class="row">
             <div class="col-12">
-                <h2>اطلاعات تنخواه</h2>
-                <p><span class="sub-title">عنوان تنخواه &nbsp;</span>{{ fund.title}}</p>
-                <p><span class="sub-title">توضیحات &nbsp;</span>{{ fund.description }}</p>
-                <p><span class="sub-title">مبلغ پرداخت شده &nbsp;</span>{{ fund.price | intcomma:False }}</p>
-                <p><span class="sub-title">تاریخ خرید &nbsp;</span>{{ fund.date }}</p>
-                <p><span class="sub-title">نام خریدار  &nbsp;</span>{{ fund.name }}</p>
+                <p><span class="sub-title" style="width: 180px;">توضیحات &nbsp;</span>{{ fund.description }}</p>
+                <p><span class="sub-title" style="width: 180px;">مبلغ پرداخت شده &nbsp;</span>{{ fund.price | intcomma:False }}</p>
+                <p><span class="sub-title" style="width: 180px;">تاریخ خرید &nbsp;</span>{{ fund.date }}</p>
+                <p><span class="sub-title" style="width: 180px;">نام خریدار  &nbsp;</span>{{ fund.name }}</p>
+                <br>
+                <div class="float-left">
+                    <a href="{% url 'fund_edit' fund.pk %}"><button class="btn btn-secondary">ویرایش</button></a>
+                    &nbsp;
+                    <a href="{% url 'fund_delete' fund.pk %}"><button class="btn btn-delete">حذف</button></a>
+                </div>
             </div>
         </div>
+    </div>
+
 
 
 

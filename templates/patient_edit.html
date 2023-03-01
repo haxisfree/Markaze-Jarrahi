@@ -63,12 +63,18 @@
         <br>
         <div class="row">
             <div class="col-6">
-                <label>شماره پرونده :</label>
-                {{ form.file_number }}
-            </div>
-            <div class="col-6">
                 <label>تاریخ پذیرش :</label>
                 {{ form.date_of_admission }}
+            </div>
+            <div class="col-6">
+                <label>تعرفه :</label>
+                {{ form.payment_tariff }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>شماره پرونده :</label>
+                {{ form.file_number }}
             </div>
         </div>
         <div class="row">
@@ -87,7 +93,6 @@
                 {{ form.description }}
             </div>
         </div>
-        <a>تعرفه: {{ form.payment_tariff }}</a>
         <div class="flex-left">
             <input  type="submit" value="ذخیره" style="width: 18%;"/>
         </div>

@@ -23,7 +23,10 @@
     <body onload="documentLoad();">
         <div class="row">
             <div class="sidebar">
-                <img id="logo" src="">
+                <div class="center">
+                    <img id="logo" src="{% static 'pic/logo.png' %}">
+                </div>
+                <hr>
                 <div class="menu">
 
                     <a href="{% url 'home' %}" 
@@ -38,11 +41,11 @@
                     {% endif %}
                     ><img class="icon" src="{% static 'pic/icon/multiple-users-silhouette.png' %}">لیست بیماران</a>
 
-                    <a href="{% url 'new_patient' %}"
+                    <!-- <a href="{% url 'new_patient' %}"
                     {% if request.path == "/new_patient/" %}
                         class="active"
                     {% endif %}
-                    ><img class="icon" src="{% static 'pic/icon/patient.png' %}">افزودن بیمار جدید</a>
+                    ><img class="icon" src="{% static 'pic/icon/patient.png' %}">افزودن بیمار جدید</a> -->
 
                     <a href="{% url 'insurance_list' %}" 
                     {% if request.path == "/insurancelist" %}
@@ -62,11 +65,15 @@
                     {% endif %}
                     ><img class="icon" src="{% static 'pic/icon/file.png' %}">گزارش گیری</a>
 
-                    <a href="{% url 'support' %}" 
-                    {% if request.path == "/support" %}
+                    <a href="{% url 'fund_list' %}" 
+                    {% if request.path == "/fundlist" %}
                         class="active"
                     {% endif %}
-                    ><img class="icon" src="{% static 'pic/icon/help.png' %}">پشتیبانی</a>
+                    ><img class="icon" src="{% static 'pic/icon/wallet-filled-money-tool.png' %}">تنخواه</a>
+
+                    <a class="help-button-base"href="{% url 'support' %}" >
+                        <button class="btn btn-primary"><img class="" src="{% static 'pic/icon/help.png' %}">پشتیبانی </button>
+                    </a>
 
 
                     
