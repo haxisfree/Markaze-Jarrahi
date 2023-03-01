@@ -10,13 +10,13 @@
         <div class="row">
             <div class="col-12">
                 <input class="form-control py-2"
-                type="search" placeholder="جستجوی نام بیمار ..." aria-label="Search"
+                type="search" placeholder="جستوجو نام بیمار ..." aria-label="Search"
                 name="name search">
                 <input class="form-control py-2"
-                type="search" placeholder="جستجوی کدملی بیمار ..." aria-label="Search"
+                type="search" placeholder="جستوجو کدملی بیمار ..." aria-label="Search"
                 name="national code search">
                 <input class="form-control py-2"
-                type="search" placeholder="جستجوی شماره پرونده بیمار ..." aria-label="Search"
+                type="search" placeholder="جستوجو شماره پرونده بیمار ..." aria-label="Search"
                 name="file number search">
             </div>
         </div>
@@ -43,7 +43,7 @@
                 name="unpaid search" for="unpaid" >پرداخت نشده
             </div>
             <div class="col-3 ">
-                <button id="search-button" class="btn btn-primary" type="submit">جستجو</button>
+                <button id="search-button" class="btn btn-primary" type="submit" name='m' value="{{request.resolver_match.kwargs.pk}}">جستجو</button>
             </div>
         </div>
     </form>
@@ -51,50 +51,41 @@
 
 
 
-<div class="patients-container">
-    <div class="row">
-        <div class="col-12">
-            <div id="report">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>نام بیمار</th>
-                            <th>شماره پرونده</th>
-                            <th>تاریخ پذیرش</th>
-                            <th>بیمه اصلی</th>
-                            <th>وضعیت پرداخت</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for patient in querys %}
-                        <tr class="patient">
-                            <td>
-                                <a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a>
-                            </td>
-                            <td>{{patient.file_number}}</td>
-                            <td>{{patient.date_of_admission}}</td>
-                            <td>{{patient.basic_insurance}}</td>
-                            <td class="button">
-                                <form method="POST" action="{% url 'paid' patient.pk %}">
-                                    {% csrf_token %}
-                                    {% if patient.paid == False %}
-                                        <button type="submit" class="btn btn-delete">پرداخت نشده</button>
-                                    {% else %}
-                                        <button type="submit" class="btn btn-secondary">پرداخت شده</button>
-                                    {% endif %}
-                                </form>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        <tr class="empty-table patient">
-                            <td colspan="6"><p>بیماری ثبت نشده است.</p></td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="patients-container">
+        <div class="row">
+            <div class="col-12">
+                <div id="report">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>نام بیمار</th>
+                                <th> کد ملی</th>
+                                <th>شماره پرونده</th>
+                                <th>تاریخ پذیرش</th>
+                                <th>بیمه اصلی</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for patient in querys %}
+                            <tr class="patient">
+                                <td>
+                                    <a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a>
+                                </td>
+                                <td>{{patient.national_code}}</td>
+                                <td>{{patient.file_number}}</td>
+                                <td>{{patient.date_of_admission}}</td>
+                                <td>{{patient.basic_insurance}}</td>
+                            </tr>
+                            {% endfor %}
+                            <tr class="empty-table patient">
+                                <td colspan="6"><p>بیماری ثبت نشده است.</p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 <!-- </form> -->
