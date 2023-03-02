@@ -236,6 +236,22 @@ class Patient(models.Model):
 
             
 
+    @property
+    def TotalSumForCenter(self):
+
+        if self.payment_tariff:
+            tar = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
+            d = tar.TotalSumForCenter
+            return int(d)
+        else:
+            message = "ابتدا تعرفه را ثبت کنید"
+            return message
+
+
+
+
+
+
 
 
     class Meta: 
