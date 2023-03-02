@@ -54,6 +54,15 @@
     </p>
 </div>
 
-
+<script>
+          //insurane letter table 
+          var table = document.getElementsByClassName('letter-table')[0],
+      rows = table.getElementsByTagName('tr'),
+      text = 'textContent' in document ? 'textContent' : 'innerText';
+      var totalPrice =0
+      for (var i = 1, len = rows.length-1; i < len; i++) {
+        rows[i].children[0][text] = i + rows[i].children[0][text];
+      }
+</script>
 
 {% endblock content %}
