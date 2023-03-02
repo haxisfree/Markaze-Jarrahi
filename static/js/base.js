@@ -1,17 +1,17 @@
-// function documentLoad(){
-//   var table, numberOfRows, row;
-//   table = document.querySelector("table");
-//   if(table){
-//       numberOfRows = table.querySelector("tbody").children.length;
-//       if(numberOfRows <= 1){  
-//           table.querySelector(".empty-table").style.display="table-row";
-//       }
-//       else{
-//           table.querySelector(".empty-table").style.display="none";
-//       }
-//   }
+function documentLoad(){
+  var table, numberOfRows, row;
+  table = document.querySelector("table");
+  if(table){
+      numberOfRows = table.querySelector("tbody").children.length;
+      if(numberOfRows <= 1){  
+          table.querySelector(".empty-table").style.display="table-row";
+      }
+      else{
+          table.querySelector(".empty-table").style.display="none";
+      }
+  }
 
-// }
+}
 
 
 // function searchPatient(x) {

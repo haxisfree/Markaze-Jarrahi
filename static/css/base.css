@@ -298,7 +298,10 @@ width: 196mm;
     margin: 1% 85% 1% 0%;
 }
 
-
+#admission-form .total-tariff{
+  top: 227px;
+  right: 300px;
+}
 #admission-form .patient-name {
     right: 127px;
     top: 108px;
@@ -394,6 +397,10 @@ width: 196mm;
     top: 47px;
     right: 560px;
 }
+#bills-form .InsurancePremiumFa {
+  top: 502px;
+  right: 138px;
+}
 #bills-form .file-number {
     top: 112px;
     right: 60px;
@@ -431,15 +438,15 @@ width: 196mm;
     right: 101px;
   }
   #bills-form .KidneyKruser {
-    top: 463px;
+    top: 458px;
     right: 354px;
   }
   #bills-form  .AnestheticCost {
-    top: 467px;
+    top: 462px;
     right: 352px;
   }
   #bills-form .InsurancePremium {
-    top: 508px;
+    top: 503px;
     right: 350px;
   }
   #surgery-report-form .file-number {
@@ -807,13 +814,14 @@ a:hover div.insurance-container{
 }
 .empty-table{
     display: none;
+    height: 200px;
 }
-.empty-table p{
+/* .empty-table p{
     text-align: center;
     padding: 50px;
     font-size: 22px;
     color: var(--gray);
-}
+} */
 .p-0{
     padding: 0 !important;
 }
