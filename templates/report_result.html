@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+{% load static %}
 {% load jalali_tags %}
 
     <div>
@@ -58,6 +58,40 @@
 
 
 
+
+ <!-- start of pagination -->
+<!-- <div class="flex">
+    <div class="pagination">
+        {% if patient.has_previous %}
+            <a class="arrow" href="?page={{ patient.previous_page_number }}"><img src="{% static 'pic/icon/next.png' %}"></a>
+        {% else %}
+            <a class="disabled arrow" href="#" tabindex="-1" aria-disabled="True"><img src="{% static 'pic/icon/next.png' %}"></a>
+        {% endif %}
+
+        {% if patient.number|add:'-4' > 1 %}
+            <a class="page-link" href="?page={{ patient.number|add:'-5' }}">&hellip;</a>
+        {% endif %}
+
+        {% for i in patient.paginator.page_range %}
+            {% if patient.number == i %}
+                <a class="active">{{ i }}</a>
+            {% elif i > patient.number|add:'-5' and i < patient.number|add:'5' %}
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if patient.paginator.num_pages > patient.number|add:'4' %}
+            <a class="page-link" href="?page={{ patient.number|add:'5' }}">&hellip;</a>
+        {% endif %}
+
+        {% if patient.has_next %}
+            <a class="page-link arrow" href="?page={{ patient.next_page_number }}"><img src="{% static 'pic/icon/previous.png' %}"></a>
+        {% else %}
+            <a class="disabled arrow" href="#" tabindex="-1" aria-disabled="True"><img src="{% static 'pic/icon/previous.png' %}"></a>
+        {% endif %}
+    </div> 
+</div> -->
+<!-- end of pagination -->
 
 
 

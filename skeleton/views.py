@@ -319,8 +319,13 @@ def insurance_letter(request):
         y = re.findall("\d\d\d\d", date)
     
     for key, value in month.items():
-        if key == x[0]:
-            mah = value
+        try:
+            if key == x[0]:
+                mah = value
+        except:
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
     sal = y[0]
 
 
@@ -568,6 +573,8 @@ def report_pagination(request, page=1):
         "patient" : page_obj
         }
     return render(request, 'reports.html', context)
+
+
 
 def report_searchbar(request):
     qs = Patient.objects.all()
