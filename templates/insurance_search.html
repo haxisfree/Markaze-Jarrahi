@@ -49,7 +49,7 @@
                                 </tr>
                                 {% endfor %}
                                 <tr class="empty-table patient">
-                                    <td colspan="6"><p>بیماری ثبت نشده است.</p></td>
+                                    <td colspan="6"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -67,17 +67,6 @@
 
 
 
-
-        <script>
-            var searchResult = document.querySelector(".search-result").children.length;
-            if(searchResult == 1) {
-                document.querySelector(".empty").style.display="inline";
-            }
-            else {
-                document.querySelector(".empty").style.display="none";
-                console.log("n")
-            }
-        </script>
     </div>
   
 

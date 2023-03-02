@@ -298,7 +298,10 @@ width: 196mm;
     margin: 1% 85% 1% 0%;
 }
 
-
+#admission-form .total-tariff{
+  top: 227px;
+  right: 300px;
+}
 #admission-form .patient-name {
     right: 127px;
     top: 108px;
@@ -394,6 +397,10 @@ width: 196mm;
     top: 47px;
     right: 560px;
 }
+#bills-form .InsurancePremiumFa {
+  top: 502px;
+  right: 138px;
+}
 #bills-form .file-number {
     top: 112px;
     right: 60px;
@@ -431,20 +438,20 @@ width: 196mm;
     right: 101px;
   }
   #bills-form .KidneyKruser {
-    top: 463px;
+    top: 458px;
     right: 354px;
   }
   #bills-form  .AnestheticCost {
-    top: 467px;
+    top: 462px;
     right: 352px;
   }
   #bills-form .InsurancePremium {
-    top: 508px;
+    top: 503px;
     right: 350px;
   }
-#surgery-report-form .file-number {
-    top: 112px;
-    right: 63px;
+  #surgery-report-form .file-number {
+    top: 130px;
+    right: 123px;
   }
 #surgery-report-form .patient-firstname {
     top: 172px;
@@ -807,23 +814,27 @@ a:hover div.insurance-container{
 }
 .empty-table{
     display: none;
+    height: 200px;
 }
-.empty-table p{
+/* .empty-table p{
     text-align: center;
     padding: 50px;
     font-size: 22px;
     color: var(--gray);
-}
+} */
 .p-0{
     padding: 0 !important;
 }
 .insurance-cover {
     width: 100%;
+    margin: auto;
 }
 .cover-container {
   height: 250px;
   width: 250px;
   margin: auto;
+  display: flex;
+justify-content: center;
 }
 a:hover .insurance-cover{
     filter: grayscale(100%);
@@ -936,7 +947,11 @@ vertical-align: middle;
   color: var(--black) !important;
   width: 27% !important;
 }
-.get-letter{
-  background-color: white;
-box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.02), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.02);
+.status{
+  padding: 4px 10px;
+border-radius: 5px;
+}
+a:hover .status{
+  background-color: unset !important;
+  color: var(--gray) !important;
 }

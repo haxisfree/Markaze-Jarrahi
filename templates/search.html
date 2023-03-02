@@ -17,7 +17,8 @@
                 <div>
                     <hr>
                     <h3>{{ patient.first_name }} {{ patient.last_name }}</h3>
-                    <p>کدملی: {{ patient.national_code }} &nbsp; &nbsp; شماره پرونده: {{ patient.file_number }} &nbsp; &nbsp; تاریخ پذیرش: {{patient.date_of_admission|to_jalali:'%y/%m/%d'}}</p>
+                    <p>کدملی: {{ patient.national_code }} &nbsp; &nbsp; شماره پرونده: {{ patient.file_number }} &nbsp; &nbsp; تاریخ پذیرش: {{patient.date_of_admission}} &nbsp; &nbsp;وضعیت پرداخت: {% if patient.paid == False %}<span class="status btn-delete">پرداخت نشده</span>{% else %}<span class="status btn-secondary">پرداخت شده</span>
+                        {% endif %}</p>
                 </div>
             </a>
             {% endfor %}

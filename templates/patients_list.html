@@ -4,7 +4,10 @@
 
 {% load jalali_tags %}
 
-
+<div class="row">
+    <a href="{% url 'new_patient' %}"><button class="btn btn-primary float-left" style="margin-left: 1%;"><img src="{% static 'pic/icon/patient.png' %}">افزودن بیمار جدید </button></a>
+  </div>
+  <br>
 <div class="search-container">
     <form method="get" action="{% url 'search' %}">
         {% csrf_token %}
@@ -29,14 +32,22 @@
                 تا
                 <input  class="form-control" id="publishDateMax" name="date_max" data-jdp>
             </div>
-            <input class="form-control py-2"
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-9">
+                &nbsp;&nbsp;
+                وضعیت پرداخت :
+                &nbsp;&nbsp;
+                <input class="form-checkbox"
                 type="checkbox" id="paid" placeholder="پرداخت شده" aria-label="Search"
                 name="paid search" for="paid" >پرداخت شده
-            <input class="form-control py-2"
-            type="checkbox" id="unpaid" placeholder="پرداخت نشده" aria-label="Search"
-            name="unpaid search" for="unpaid" >پرداخت نشده
-            <div class="col-3">
-                <button id="search-button" class="btn btn-primary" type="submit">جستجو</button>
+                &nbsp;&nbsp;
+                <input class="form-checkbox"
+                type="checkbox" id="unpaid" placeholder="پرداخت نشده" aria-label="Search"
+                name="unpaid search" for="unpaid" >پرداخت نشده
+            </div>
+            <div class="col-3 ">
+                <button id="search-button" class="btn btn-primary" type="submit" name='m' value="{{request.resolver_match.kwargs.pk}}">جستجو</button>
             </div>
         </div>
     </form>
@@ -74,7 +85,7 @@
                         </tr>
                         {% endfor %}
                         <tr class="empty-table patient">
-                            <td colspan="6"><p>بیماری ثبت نشده است.</p></td>
+                            <td colspan="6"></td>
                         </tr>
                     </tbody>
                 </table>
