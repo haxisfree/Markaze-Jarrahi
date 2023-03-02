@@ -53,11 +53,11 @@ class Insurance (models.Model):
     name = models.CharField(max_length=100, verbose_name="نام بیمه")
     cover = models.ImageField(upload_to='covers/' , blank=True, verbose_name="تصویر بیمه")
     franchising = models.DecimalField (max_digits = 2, decimal_places = 2, verbose_name="فرانشیز (درصد)")
-    bank_account = models.CharField(max_length=100, verbose_name="بانک معرفی شده به بیمه", blank=True, null=True, default = '-')
-    bank_card_num = models.BigIntegerField(verbose_name="شماره حساب", blank=True, null=True, default = 0)
-    branchs_name = models.CharField(max_length=100, verbose_name="نام شعبه", blank=True, null=True, default = '-')
-    total_debits_and_credits = models.BigIntegerField(verbose_name="مجموع بدهکاری و بستانکاری", blank=True, null=True, default = 0)
-
+    bank_account = models.CharField(max_length=100, verbose_name="بانک معرفی شده به بیمه", blank=True, null=True, default = '')
+    bank_card_num = models.BigIntegerField(verbose_name="شماره حساب", blank=True, null=True,)
+    branchs_name = models.CharField(max_length=100, verbose_name="نام شعبه", blank=True, null=True, default = '')
+    total_debits_and_credits = models.BigIntegerField(verbose_name="مجموع بدهکاری و بستانکاری", blank=True, null=True)
+    boss_name = models.CharField(max_length=100, verbose_name="نام مدیرعامل مرکز", blank=True, null=True, default = '')
 
     @property
     def Fran2(self):
@@ -124,26 +124,26 @@ class Patient(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="شناسه")
     first_name = models.CharField(max_length=100, verbose_name="نام")
     last_name = models.CharField(max_length=200, verbose_name="نام خانوادگی")    
-    father_name = models.CharField(max_length=100, verbose_name="نام پدر", blank=True, null=True, default = '-')
+    father_name = models.CharField(max_length=100, verbose_name="نام پدر", blank=True, null=True, default = '')
     sex = models.CharField(max_length=1, choices=SEX_CHOICES, verbose_name="جنسیت", blank=True, null=True)    
     birth_date = jmodels.jDateField(verbose_name="تاریخ تولد", blank=True, null=True)
-    national_code = models.CharField(max_length=100, verbose_name="کد ملی", blank=True, null=True, default = '-')
-    phone_number = models.CharField(max_length=100, verbose_name="تلفن همراه", blank=True, null=True, default = '-')
-    home_phone = models.CharField(max_length=100, verbose_name="تلفن ثابت", blank=True, null=True, default = '-')
+    national_code = models.CharField(max_length=100, verbose_name="کد ملی", blank=True, null=True, default = '')
+    phone_number = models.CharField(max_length=100, verbose_name="تلفن همراه", blank=True, null=True, default = '')
+    home_phone = models.CharField(max_length=100, verbose_name="تلفن ثابت", blank=True, null=True, default = '')
     date_of_admission = jmodels.jDateField(default = timezone.now, verbose_name="تاریخ پذیزش", blank=True, null=True)
-    file_number = models.CharField(max_length=300, verbose_name="شماره پرونده", blank=True, null=True, default = '-') 
-    description = models.TextField(verbose_name="توضیحات", blank=True, null=True, default = 'توضیحاتی وارد نشده است')
-    address = models.TextField(verbose_name="آدرس منزل", blank=True, null=True, default = '-')
+    file_number = models.CharField(max_length=300, verbose_name="شماره پرونده", blank=True, null=True, default = '') 
+    description = models.TextField(verbose_name="توضیحات", blank=True, null=True, default = '')
+    address = models.TextField(verbose_name="آدرس منزل", blank=True, null=True, default = '')
 
-    docter_name = models.CharField(max_length=100, verbose_name="نام پزشک معرف", blank=True, null=True, default = '-')
-    anesthesia_doctor_name = models.CharField(max_length=100, verbose_name="نام پزشک بیهوشی", blank=True, null=True, default = '-')
-    presenter = models.CharField(max_length=100, verbose_name="نام معرف", blank=True, null=True, default = '-')
-    operator = models.CharField(max_length=100, verbose_name="نام اپراتور سنگ شکنی", blank=True, null=True, default = '-')
+    docter_name = models.CharField(max_length=100, verbose_name="نام پزشک معرف", blank=True, null=True, default = '')
+    anesthesia_doctor_name = models.CharField(max_length=100, verbose_name="نام پزشک بیهوشی", blank=True, null=True, default = '')
+    presenter = models.CharField(max_length=100, verbose_name="نام معرف", blank=True, null=True, default = '')
+    operator = models.CharField(max_length=100, verbose_name="نام اپراتور سنگ شکنی", blank=True, null=True, default = '')
     basic_insurance = models.ForeignKey(Insurance, blank=True, null=True, on_delete=models.PROTECT)
-    supplementary_insurance = models.CharField(max_length=100, verbose_name="بیمه تکمیلی", blank=True, null=True, default = '-')
+    supplementary_insurance = models.CharField(max_length=100, verbose_name="بیمه تکمیلی", blank=True, null=True, default = '')
     date_of_hospitalization = jmodels.jDateField(verbose_name="تاریخ بستری", blank=True, null=True)
     date_of_discharge = jmodels.jDateField(verbose_name="تاریخ ترخیص", blank=True, null=True)
-    type_of_surgery = models.CharField(max_length=100, verbose_name="نوع عمل", blank=True, null=True, default = '-')
+    type_of_surgery = models.CharField(max_length=100, verbose_name="نوع عمل", blank=True, null=True, default = '')
     payment_tariff = models.ForeignKey(Tariff, blank=True, null=True, on_delete=models.PROTECT)
     paid = models.BooleanField(verbose_name="وضعیت پرداخت", default=False,blank=True, null=True)
 
@@ -178,7 +178,7 @@ class Patient(models.Model):
     @property
     def InsurancePremiumFa(self):
         
-        if self.Franchise != None :
+        if self.Franchise != "ابتدا بیمه اصلی را انتخاب کنید" :
             wordnum = words(self.InsurancePremium)
             return wordnum
         else:
@@ -257,11 +257,11 @@ class Patient(models.Model):
 class Fund(models.Model):
 
     id = models.AutoField(primary_key=True, verbose_name="شناسه")
-    title = models.CharField(max_length=100, verbose_name="عنوان", blank=True, null=True, default = '-')
-    description = models.TextField(verbose_name="موارد", blank=True, null=True, default = 'موردی وارد نشده است.')    
-    price = models.BigIntegerField(verbose_name="قیمت", blank=True, null=True, default = 'مبلغ وارد نشده است')
+    title = models.CharField(max_length=100, verbose_name="عنوان", blank=True, null=True, default = '')
+    description = models.TextField(verbose_name="موارد", blank=True, null=True, default = '')    
+    price = models.BigIntegerField(verbose_name="قیمت", blank=True, null=True, default = '')
     date = jmodels.jDateField(default = timezone.now, verbose_name="تاریخ خرید", blank=True, null=True)
-    name = models.CharField(max_length=100, verbose_name="نام خریدار", blank=True, null=True, default = '-')
+    name = models.CharField(max_length=100, verbose_name="نام خریدار", blank=True, null=True, default = '')
 
 
 
