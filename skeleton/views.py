@@ -263,6 +263,21 @@ def paid(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+
+def canceling(request, pk):
+    obj = get_object_or_404(Patient, pk=pk)
+    if request.method == 'POST':
+        if obj.canceling == False:
+            obj.canceling = True
+            obj.save()
+        else:
+            obj.canceling = False
+            obj.save()
+        return redirect('patient_info', pk=pk)
+
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
 def insurance_letter(request):
     
     qs = request.GET.get('n')
@@ -413,7 +428,7 @@ def export_excel(request):
         'وضعیت پرداخت',
         'تخفیف',
         'حق بیمار (فرانشیز)',
-        'حق بیمه',
+        # 'حق بیمه',
         ]
 
     for col_num in range(len(columns)):
@@ -441,6 +456,7 @@ def export_excel(request):
         li3.append(r[10:-1])
 
     lis = []
+    lis2 = []
     for h in li3:
         rows = Patient.objects.filter(first_name__exact=h).values_list(
         'first_name',
@@ -457,13 +473,30 @@ def export_excel(request):
         # 'InsurancePremium',
         'discount',
         )
-        rows2 = Patient.objects.get(first_name__exact=h)
-        F = rows2.Franchise
-        IP = rows2.InsurancePremium
-        lis.append(rows)
-        lis.append(F)
-        lis.append(IP)
+        
+        # F = rows2.Franchise
+        # IP = rows2.InsurancePremium
+        # lis.append(list(rows))
+        
+        # rows[-1] = 
+        # lis.append(IP)
+        
+        rows2 = Patient.objects.get(first_name__exact=h).Franchise
+        
+        tup = []
+        lili = []
+        x = list(rows)
+        for s in x:
+            s = list(s)
+            s[-1] = rows2
+            s = tuple(y)
+            tup.append(s)
+            lili.append(tup)
+    
+    # lis.append(x)
 
+        # lis2.append(rows2)
+        # lis[0][-1] = rows2
     # for h2 in li3:
     #     F = h2.Franchise
     #     IP = h2.InsurancePremium
@@ -472,32 +505,19 @@ def export_excel(request):
         
 
 
+    # for q, p in zip (lis,lis2):
 
-
-    for q in lis:
-        for row in q:    
+        
+    for q in lili:
+        # list[q]
+        # q.append[p]
+        for row in q:
+            
             row_num += 1
             for col_num in range(len(row)):
                 ws.write(row_num, col_num, str(row[col_num]), font_style)
     wb.save(response)
     return response
-
-
-
-
-# #Creating our view, it is a class based view
-# class GeneratePdf(View):
-#      def get(self, request, *args, **kwargs):
-        
-#         #getting the template
-#         pdf = render_to_pdf('insurance_letter.html')
-         
-#          #rendering the template
-#         return HttpResponse(pdf, content_type='application/pdf')
-
-
-
-# def GeneratePdf(request):
 
 
 

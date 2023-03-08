@@ -9,6 +9,7 @@ from django.core.validators import validate_comma_separated_integer_list
 from django_jalali.db import models as jmodels
 from django.utils.html import format_html 
 from num2fawords import words, ordinal_words
+import re
 
 
 
@@ -141,7 +142,27 @@ class Patient(models.Model):
     paid = models.BooleanField(verbose_name="وضعیت پرداخت", default=False,blank=True, null=True)
     franchising = models.DecimalField (max_digits = 2, decimal_places = 2, verbose_name="فرانشیز (درصد)", default = 0)
     discount = models.BigIntegerField(verbose_name="تخفیف", default=0)
-    
+    canceling = models.BooleanField(verbose_name="وضعیت پذیرش", default=False)
+
+
+
+
+
+    @property
+    def FileNumber(self):
+
+        if self.date_of_admission:
+            s = str(self.date_of_admission)
+            sal = re.findall("\d\d\d\d", s)
+            i = self.id
+            return str(sal[0]) + "_" + str(i)
+        else:
+            message = "ابتدا تاریخ پذیرش را انتخاب کنید"
+            return message
+
+
+
+
 
 
 

@@ -111,6 +111,12 @@ class PaidForm(forms.ModelForm):
         model = Patient
         fields = ["paid"]
 
+
+class CancelingForm(forms.ModelForm):
+    class Meta:
+        model = Patient
+        fields = ["canceling"]
+
 class FundForm(forms.ModelForm):
     class Meta:
         model = Fund
