@@ -202,7 +202,8 @@ class PatientCreateView(CreateView):
     model = Patient
     template_name = 'new_patient.html'
     form_class = PatientForm
-    # jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
+
+
 
 class PatientUpdateView(UpdateView):
     model = Patient
@@ -211,6 +212,32 @@ class PatientUpdateView(UpdateView):
     def get_success_url(self):
           patientid=self.kwargs['pk']
           return reverse_lazy('patient_info', kwargs={'pk': patientid})
+
+
+
+
+def discount(request, pk):
+    obj = get_object_or_404(Patient, pk=pk)
+    context = {'patient' : obj}
+    return render(request,'discount.html',context)
+
+
+
+def dis(request, pk):
+    obj = get_object_or_404(Patient, pk=pk)
+    dis_value = request.POST['dis']
+    if request.method == 'POST':
+        if dis_value != '' and dis_value is not None:
+            obj.discount = dis_value
+            obj.save()
+        else:
+            obj.discount = 0
+            obj.save()
+        return redirect('patient_info', pk=pk)
+    
+
+
+
 
 class MedicalUpdateView(UpdateView):
     model = Patient
@@ -383,7 +410,10 @@ def export_excel(request):
         'نام پزشک',
         'بیمه پایه',
         'نوع عمل بیمار',
-        'وضعیت پرداخت'
+        'وضعیت پرداخت',
+        'تخفیف',
+        'حق بیمار (فرانشیز)',
+        'حق بیمه',
         ]
 
     for col_num in range(len(columns)):
@@ -422,9 +452,27 @@ def export_excel(request):
         'docter_name',
         'basic_insurance',
         'type_of_surgery',
-        'paid'
+        'paid',
+        #  'Franchise',
+        # 'InsurancePremium',
+        'discount',
         )
+        rows2 = Patient.objects.get(first_name__exact=h)
+        F = rows2.Franchise
+        IP = rows2.InsurancePremium
         lis.append(rows)
+        lis.append(F)
+        lis.append(IP)
+
+    # for h2 in li3:
+    #     F = h2.Franchise
+    #     IP = h2.InsurancePremium
+    #     lis.append(F)
+    #     lis.append(IP)
+        
+
+
+
 
     for q in lis:
         for row in q:    

@@ -4,7 +4,7 @@
 <div class="row">
     <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
 </div>
-
+<!-- {{form.as_p}} -->
 <div class="container">
     <h1>اطلاعات بیمار</h1>
     <hr>
@@ -73,6 +73,14 @@
                 <label>شماره پرونده :</label>
                 {{ form.file_number }}
             </div>
+            <div class="col-14">
+                <label>تاریخ ترخیص :</label>
+                {{ form.date_of_discharge }}
+            </div>
+            <div class="col-14">
+                <label>نوع عمل :</label>
+                {{ form.type_of_surgery }}
+            </div>
         </div>
         <div class="row">
             <div class="col-6">
@@ -90,11 +98,33 @@
                 {{ form.description }}
             </div>
         </div>
+        <div class="col-13">
+            <label>فرانشیز (درصد) :</label>
+            {{ form.franchising }}
+        </div>
+        <div class="col-13">
+            <label>پزشک بیهوشی :</label>
+            {{ form.anesthesia_doctor_name }}
+        </div>
+        <div class="col-13">
+            <label>بیمه اصلی :</label>
+            {{ form.supplementary_insurance }}
+        </div>
+        <div class="col-14">
+            <label>بیمه تکمیلی :</label>
+            {{ form.basic_insurance }}
+        </div>
+        <div class="col-14">
+            <label>تخفیف :</label>
+            {{ form.discount }}
+        </div>
         <div class="flex-left">
             <input  type="submit" value="ذخیره" style="width: 18%;"/>
         </div>
     </form>
 </div>
 {% endblock content %}
+
+
 
 

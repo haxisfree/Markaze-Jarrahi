@@ -6,25 +6,36 @@ from jalali_date.fields import JalaliDateField, SplitJalaliDateTimeField
 from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
 
 
+
 class PatientForm(forms.ModelForm):
+    
+
     class Meta:
         model = Patient
         fields = [
-         'first_name',
-         'last_name',
-         'father_name',
-         'sex',
-         'birth_date',
-         'national_code',
-         'phone_number',
-         'home_phone',
-         'date_of_admission',
-         'file_number',
-         'description',
-         'address',
-         'docter_name',
-         'presenter',
-         'payment_tariff',
+        'first_name',
+        'last_name',
+        'father_name',
+        'sex',
+        'birth_date',
+        'national_code',
+        'phone_number',
+        'home_phone',
+        'date_of_admission',
+        'file_number',
+        'description',
+        'address',
+        'docter_name',
+        'presenter',
+        'payment_tariff',
+        'franchising',
+        "anesthesia_doctor_name", 
+        'operator', 
+        'basic_insurance', 
+        'supplementary_insurance', 
+        'date_of_discharge', 
+        'type_of_surgery',
+        'discount',
         ]
 
     def __init__(self, *args, **kwargs):
@@ -51,11 +62,8 @@ class PatientForm(forms.ModelForm):
             widget=AdminJalaliDateWidget # optional, to use default datepicker
         )
         self.fields['date_of_discharge'].required = False
-        
-        self.fields['delivery_date'] = JalaliDateField(label=('تاریخ تحویل'),
-            widget=AdminJalaliDateWidget # optional, to use default datepicker
-        )
-        self.fields['delivery_date'].required = False
+
+
 
 
 
@@ -74,15 +82,15 @@ class InsuranceForm(forms.ModelForm):
 class MedicalForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ["anesthesia_doctor_name", 'operator', 'basic_insurance', 'supplementary_insurance', 'date_of_hospitalization', 'date_of_discharge', 'type_of_surgery']
+        fields = ["anesthesia_doctor_name", 'operator', 'basic_insurance', 'supplementary_insurance', 'date_of_admission', 'date_of_discharge', 'type_of_surgery','franchising']
 
     def __init__(self, *args, **kwargs):
         super(MedicalForm, self).__init__(*args, **kwargs)
 
-        self.fields['date_of_hospitalization'] = JalaliDateField(label=('تاریخ بستری'), # date format is  "yyyy-mm-dd"
+        self.fields['date_of_admission'] = JalaliDateField(label=('تاریخ بستری'), # date format is  "yyyy-mm-dd"
             widget=AdminJalaliDateWidget # optional, to use default datepicker
         )
-        self.fields['date_of_hospitalization'].required = False
+        self.fields['date_of_admission'].required = False
         
         self.fields['date_of_discharge'] = JalaliDateField(label=('تاریخ ترخیص'),
             widget=AdminJalaliDateWidget # optional, to use default datepicker

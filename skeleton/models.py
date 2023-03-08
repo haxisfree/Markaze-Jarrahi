@@ -52,22 +52,15 @@ class Insurance (models.Model):
     slug = models.SlugField(primary_key=True,max_length=100, verbose_name="نام انگلیسی بیمه")
     name = models.CharField(max_length=100, verbose_name="نام بیمه")
     cover = models.ImageField(upload_to='covers/' , blank=True, verbose_name="تصویر بیمه")
-    franchising = models.DecimalField (max_digits = 2, decimal_places = 2, verbose_name="فرانشیز (درصد)")
+    
     bank_account = models.CharField(max_length=100, verbose_name="بانک معرفی شده به بیمه", blank=True, null=True, default = '')
     bank_card_num = models.BigIntegerField(verbose_name="شماره حساب", blank=True, null=True,)
     branchs_name = models.CharField(max_length=100, verbose_name="نام شعبه", blank=True, null=True, default = '')
     total_debits_and_credits = models.BigIntegerField(verbose_name="مجموع بدهکاری و بستانکاری", blank=True, null=True)
     boss_name = models.CharField(max_length=100, verbose_name="نام مدیرعامل مرکز", blank=True, null=True, default = '')
 
-    @property
-    def Fran2(self):
 
-        if self.franchising:
-            f = 100 * self.franchising
-            return int(f)
-        else:
-            message = "ابتدا درصد فرانشیز بیمار را وارد کنید"
-            return message
+
 
 
 
@@ -146,7 +139,8 @@ class Patient(models.Model):
     type_of_surgery = models.CharField(max_length=100, verbose_name="نوع عمل", blank=True, null=True, default = '')
     payment_tariff = models.ForeignKey(Tariff, blank=True, null=True, on_delete=models.PROTECT)
     paid = models.BooleanField(verbose_name="وضعیت پرداخت", default=False,blank=True, null=True)
-
+    franchising = models.DecimalField (max_digits = 2, decimal_places = 2, verbose_name="فرانشیز (درصد)", default = 0)
+    discount = models.BigIntegerField(verbose_name="تخفیف", default=0)
     
 
 
@@ -155,34 +149,35 @@ class Patient(models.Model):
     @property
     def Franchise(self):
 
-        if self.basic_insurance:
+        if self.franchising:
             first_tariff_object = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
-            f = first_tariff_object.TotalTariffWithoutMedicine * self.basic_insurance.franchising
-            return int(f)
+            f1 = first_tariff_object.TotalTariffWithoutMedicine * self.franchising
+            f2 = f1 - self.discount
+            return int(f2)
         else:
-            message = "ابتدا بیمه اصلی را انتخاب کنید"
+            message = "ابتدا بیمه تکمیلی را انتخاب کنید"
             return message
-
+    
 
     @property
     def InsurancePremium(self):
         
-        if self.Franchise == "ابتدا بیمه اصلی را انتخاب کنید" :
-            message_2 = "ابتدا بیمه اصلی را انتخاب کنید"
+        if self.Franchise == "ابتدا بیمه تکمیلی را انتخاب کنید" :
+            message_2 = "ابتدا بیمه تکمیلی را انتخاب کنید"
             return message_2
         else:
             second_tariff_object = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
-            ip = second_tariff_object.TotalTariffWithoutMedicine - self.Franchise
+            ip = second_tariff_object.TotalTariffWithoutMedicine - self.Franchise - self.discount
             return int(ip)
 
     @property
     def InsurancePremiumFa(self):
         
-        if self.Franchise != "ابتدا بیمه اصلی را انتخاب کنید" :
+        if self.Franchise != "ابتدا بیمه تکمیلی را انتخاب کنید" :
             wordnum = words(self.InsurancePremium)
             return wordnum
         else:
-            message = "ابتدا بیمه اصلی را انتخاب کنید"
+            message = "ابتدا بیمه تکمیلی را انتخاب کنید"
             return message
 
 
@@ -226,15 +221,28 @@ class Patient(models.Model):
     @property
     def Fran(self):
         
-        if self.basic_insurance:
-            fran = Insurance.objects.get( slug__exact = self.basic_insurance_id )
-            f = fran.franchising * 100
+        if self.franchising:
+            # fran = Patient.objects.get( slug__exact = self.basic_insurance_id )
+            f = self.franchising * 100
             return int(f)
         else:
-            message = "ابتدا تعرفه را ثبت کنید"
+            message = "ابتدا درصد فرانشیز بیمار را وارد کنید"
             return message
 
             
+
+    # @property
+    # def Fran2(self):
+
+    #     if self.franchising:
+    #         f = 100 * self.franchising
+    #         return int(f)
+    #     else:
+    #         message = "ابتدا درصد فرانشیز بیمار را وارد کنید"
+    #         return message
+
+
+
 
     @property
     def TotalSumForCenter(self):
@@ -264,11 +272,11 @@ class Patient(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('patient_info', args=[str(self.id)])
+        return reverse('discount', args=[str(self.id)])
 
 
 
-    
+
 
 class Fund(models.Model):
 

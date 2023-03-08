@@ -18,6 +18,8 @@ from .views import ( PatientsListView,
                     report_pagination,
                     # checkbox,
                     export_excel,
+                    discount,
+                    dis,
 
 
                     InsuranceListView, 
@@ -75,10 +77,10 @@ urlpatterns = [
     path('export_excel', export_excel, name='export_excel'),
     path('insurance_search/', insurance_searchbar, name='insurance_search'),
     path('insurance_letter/', insurance_letter, name='insurance_letter'),
-
+    path('discount/<int:pk>', discount, name='discount'),
     # path('export', ReportResultView.as_view(), name='export'),
+    path('discount/<int:pk>/done', dis, name='dis'),
     
-
 
 
     path('insurance/<slug:pk>/', InsuranceInfoView.as_view(), name='insurance_info'),
