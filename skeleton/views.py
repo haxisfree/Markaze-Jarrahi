@@ -307,7 +307,7 @@ def insurance_letter(request):
 
     for h in li3:
         try:
-            rows = Patient.objects.get(first_name__exact=h)
+            rows = Patient.objects.get(first_name__exact=h, canceling=False)
             lis.append(rows)
             c += 1
             # count.append(c)
