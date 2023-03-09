@@ -79,29 +79,25 @@
         <hr>
         <div class="row">
             <div class="col-6">
-                <label>شماره پرونده :</label>
-                {{ form.file_number }}
-            </div>
-            <div class="col-6">
                 <label><span style="color: var(--red);">*</span> تاریخ پذیرش :</label>
                 {{ form.date_of_admission }}
             </div>
-        </div>
-        <div class="row">
             <div class="col-6">
                 <label>نوع عمل :</label>
                 {{ form.type_of_surgery }}
             </div>
+        </div>
+        <div class="row">
             <div class="col-6">
                 <label>اپراتور سنگ شکنی :</label>
                 {{ form.operator }}
             </div>
-        </div>
-        <div class="row">
             <div class="col-6">
                 <label>پزشک بیهوشی :</label>
                 {{ form.anesthesia_doctor_name }}
             </div>
+        </div>
+        <div class="row">
             <div class="col-6">
                 <label>تاریخ ترخیص :</label>
                 {{ form.date_of_discharge }}
