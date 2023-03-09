@@ -4,9 +4,19 @@
 {% block content %}
 
 
+<<<<<<< HEAD
 <!-- <div class="row">
     <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
 </div> -->
+=======
+<form method="POST" action="{% url 'canceling' patient.pk %}">
+    {% csrf_token %}
+        <button type="submit" class="btn btn-delete">کنسل</button>
+</form>
+
+
+
+>>>>>>> 07eb3d216b71e137efb9ba1614ec60c7c9b96c28
 
 <div class="container">
     <h1>اطلاعات مالی بیمار</h1>

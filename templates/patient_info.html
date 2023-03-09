@@ -30,7 +30,7 @@
             </div>
             <div class="col-9">
                 <h2>{{ patient.first_name }} {{ patient.last_name }}</h2>
-                <p><span class="sub-title" style="color: var(--black);">شماره پرونده &nbsp; &nbsp; &nbsp;</span>{{ patient.file_number }}</p>
+                <p><span class="sub-title" style="color: var(--black);">شماره پرونده &nbsp; &nbsp; &nbsp;</span>{{ patient.FileNumber }}</p>
                 <p style="color: var(--gray);"><span class="sub-title">تاریخ پذیرش &nbsp; &nbsp; &nbsp;</span>{{patient.date_of_admission}}</p>
                 </br>
                 <a href="{% url 'patient_edit' patient.pk %}"><button class="btn btn-secondary">ویرایش اطلاعات بیمار</button></a>
@@ -51,6 +51,24 @@
                 <p><span class="sub-title">تلفن همراه</span>{{ patient.phone_number }}</p>
                 <p><span class="sub-title">آدرس</span>{{ patient.address}}</p>
                 <p><span class="sub-title">نام معرف</span></span>{{ patient.presenter}}</p>
+<<<<<<< HEAD
+=======
+                <p><span class="sub-title" style="width: 250px;">وضعیت پذیرش بیمار </span>{% if patient.canceling == False %}<span class="status btn-delete" style="margin-right: -5px;">فعال</span>{% else %}<span class="status btn-secondary" style="margin-right: -5px;">کنسل شده</span>
+                    {% endif %}
+                <br>
+                <form method="POST" action="{% url 'canceling' patient.pk %}">
+                    {% csrf_token %}
+                    {% if patient.canceling == False %}
+                        <button type="submit" class="btn btn-delete">کنسل کردن بیمار</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-secondary">فعال کردن بیمار</button>
+                    {% endif %}
+                </form>
+
+
+
+                <a href="{% url 'patient_edit' patient.pk %}"><button class="btn btn-secondary float-left">ویرایش</button></a>
+>>>>>>> 07eb3d216b71e137efb9ba1614ec60c7c9b96c28
             </div>
         </div>
         <br>
