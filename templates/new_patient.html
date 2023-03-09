@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-
 {% block content %}
+
 <div class="row">
     <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
 </div>
@@ -94,7 +94,7 @@
             </div>
             <div class="col-6">
                 <label>اپراتور سنگ شکنی :</label>
-                {{ form.operator}}
+                {{ form.operator }}
             </div>
         </div>
         <div class="row">
@@ -128,6 +128,13 @@
                 {{ form.basic_insurance }}
             </div>
         </div>
+        <div class="row">
+            <div class="col-14">
+                <label>تخفیف :</label>
+                {{ form.discount }}
+            </div>
+        </div>
+        <br>
         <div class="flex-left">
             <input  type="submit" value="ذخیره" style="width: 18%;"/>
         </div>
