@@ -12,11 +12,11 @@
         <hr>
         <div class="row">
             <div class="col-6">
-                <label>نام :</label>
+                <label><span style="color: var(--red);">*</span> نام :</label>
                 {{ form.first_name }}
             </div>
             <div class="col-6">
-                <label>نام خانوادگی :</label>
+                <label><span style="color: var(--red);">*</span> نام خانوادگی :</label>
                 {{ form.last_name }}
             </div>
         </div>
@@ -83,7 +83,7 @@
                 {{ form.file_number }}
             </div>
             <div class="col-6">
-                <label>تاریخ پذیرش :</label>
+                <label><span style="color: var(--red);">*</span> تاریخ پذیرش :</label>
                 {{ form.date_of_admission }}
             </div>
         </div>
@@ -110,11 +110,11 @@
         <br>
         <div class="row">
             <div class="col-6">
-                <label>تعرفه :</label>
+                <label><span style="color: var(--red);">*</span> تعرفه :</label>
                 {{ form.payment_tariff }}
             </div>
             <div class="col-6">
-                <label>فرانشیز (درصد) :</label>
+                <label><span style="color: var(--red);">*</span> فرانشیز (درصد) :</label>
                 {{ form.franchising }}
             </div>
         </div>
@@ -124,7 +124,7 @@
                 {{ form.supplementary_insurance }}
             </div>
             <div class="col-6">
-                <label>بیمه تکمیلی :</label>
+                <label><span style="color: var(--red);">*</span> بیمه تکمیلی :</label>
                 {{ form.basic_insurance }}
             </div>
         </div>
