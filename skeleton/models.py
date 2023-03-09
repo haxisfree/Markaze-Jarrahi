@@ -133,6 +133,7 @@ class Patient(models.Model):
     anesthesia_doctor_name = models.CharField(max_length=100, verbose_name="نام پزشک بیهوشی", blank=True, null=True, default = '')
     presenter = models.CharField(max_length=100, verbose_name="نام معرف", blank=True, null=True, default = '')
     operator = models.CharField(max_length=100, verbose_name="نام اپراتور سنگ شکنی", blank=True, null=True, default = '')
+    anesthesiologist = models.CharField(max_length=100, verbose_name="نام متخصص بیهوشی", blank=True, null=True, default = '')
     basic_insurance = models.ForeignKey(Insurance, blank=True, null=True, on_delete=models.PROTECT)
     supplementary_insurance = models.CharField(max_length=100, verbose_name="بیمه تکمیلی", blank=True, null=True, default = '')
     date_of_hospitalization = jmodels.jDateField(verbose_name="تاریخ بستری", blank=True, null=True)
@@ -143,7 +144,6 @@ class Patient(models.Model):
     franchising = models.DecimalField (max_digits = 2, decimal_places = 2, verbose_name="فرانشیز (درصد)", default = 0)
     discount = models.BigIntegerField(verbose_name="تخفیف", default=0)
     canceling = models.BooleanField(verbose_name="وضعیت پذیرش", default=False)
-
 
 
 

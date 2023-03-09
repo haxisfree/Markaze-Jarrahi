@@ -30,12 +30,12 @@ class PatientForm(forms.ModelForm):
         'payment_tariff',
         'franchising',
         "anesthesia_doctor_name", 
-        'operator', 
+        'operator',
+        'anesthesiologist', 
         'basic_insurance', 
         'supplementary_insurance', 
         'date_of_discharge', 
         'type_of_surgery',
-        'discount',
         ]
 
     def __init__(self, *args, **kwargs):
@@ -82,7 +82,7 @@ class InsuranceForm(forms.ModelForm):
 class MedicalForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ["anesthesia_doctor_name", 'operator', 'basic_insurance', 'supplementary_insurance', 'date_of_admission', 'date_of_discharge', 'type_of_surgery','franchising']
+        fields = ["anesthesia_doctor_name", 'operator', 'basic_insurance', 'supplementary_insurance', 'date_of_admission', 'date_of_discharge', 'type_of_surgery','franchising', 'anesthesiologist']
 
     def __init__(self, *args, **kwargs):
         super(MedicalForm, self).__init__(*args, **kwargs)

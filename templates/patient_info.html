@@ -51,12 +51,7 @@
                 <p><span class="sub-title">تلفن همراه</span>{{ patient.phone_number }}</p>
                 <p><span class="sub-title">آدرس</span>{{ patient.address}}</p>
                 <p><span class="sub-title">نام معرف</span></span>{{ patient.presenter}}</p>
-<<<<<<< HEAD
-                <p><span class="sub-title" style="width: 250px;">وضعیت پذیرش بیمار </span>{% if patient.canceling == False %}<span class="status btn-delete" style="margin-right: -5px;">فعال</span>{% else %}<span class="status btn-secondary" style="margin-right: -5px;">کنسل شده</span>
-                    {% endif %}
-=======
                 <p><span class="sub-title">وضعیت پذیرش بیمار </span>{% if patient.canceling == False %}فعال{% else %}کنسل شده{% endif %}
->>>>>>> main
                 <br>
                 <form method="POST" action="{% url 'canceling' patient.pk %}">
                     {% csrf_token %}
@@ -66,13 +61,6 @@
                         <button type="submit" class="btn btn-secondary" style="margin-top: 10px;">فعال کردن بیمار</button>
                     {% endif %}
                 </form>
-<<<<<<< HEAD
-
-
-
-                <a href="{% url 'patient_edit' patient.pk %}"><button class="btn btn-secondary float-left">ویرایش</button></a>
-=======
->>>>>>> main
             </div>
         </div>
         <br>

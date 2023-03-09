@@ -173,7 +173,7 @@ def Pagination(request, page=1):
     
     patient_list = Patient.objects.all()
     
-    paginator = Paginator(patient_list, 5)
+    paginator = Paginator(patient_list, 30)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
     context = {
@@ -431,7 +431,7 @@ def export_excel(request):
         'وضعیت پرداخت',
         'تخفیف',
         'حق بیمار (فرانشیز)',
-        # 'حق بیمه',
+        'حق بیمه',
         ]
 
     for col_num in range(len(columns)):
@@ -482,19 +482,19 @@ def export_excel(request):
         # lis.append(list(rows))
         
         # rows[-1] = 
-        # lis.append(IP)
+        lis.append(rows)
         
-        rows2 = Patient.objects.get(first_name__exact=h).Franchise
+        # rows2 = Patient.objects.get(first_name__exact=h).Franchise
         
-        tup = []
-        lili = []
-        x = list(rows)
-        for s in x:
-            s = list(s)
-            s[-1] = rows2
-            s = tuple(y)
-            tup.append(s)
-            lili.append(tup)
+        # tup = []
+        # lili = []
+        # x = list(rows)
+        # for s in x:
+        #     s = list(s)
+        #     s[-1] = rows2
+        #     s = tuple(y)
+        #     tup.append(s)
+        #     lili.append(tup)
     
     # lis.append(x)
 
@@ -511,7 +511,7 @@ def export_excel(request):
     # for q, p in zip (lis,lis2):
 
         
-    for q in lili:
+    for q in lis:
         # list[q]
         # q.append[p]
         for row in q:
@@ -596,7 +596,7 @@ def insurance_filter(request, pk):
     
     qh = request.GET.get('x')
     ps = Patient.objects.all().filter(basic_insurance_id__exact=qh)
-    paginator = Paginator(ps, 3)
+    paginator = Paginator(ps, 20)
     page = request.GET.get('screen')
     qs = paginator.get_page(page)
     
@@ -637,7 +637,7 @@ def report_pagination(request, page=1):
     
     patient_list = Patient.objects.all()
     
-    paginator = Paginator(patient_list, 5)
+    paginator = Paginator(patient_list, 30)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
     context = {
