@@ -955,3 +955,9 @@ a:hover .status{
   background-color: unset !important;
   color: var(--gray) !important;
 }
+.pay {
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}

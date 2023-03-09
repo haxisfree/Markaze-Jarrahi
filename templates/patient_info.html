@@ -33,7 +33,7 @@
                 <p><span class="sub-title" style="color: var(--black);">شماره پرونده &nbsp; &nbsp; &nbsp;</span>{{ patient.FileNumber }}</p>
                 <p style="color: var(--gray);"><span class="sub-title">تاریخ پذیرش &nbsp; &nbsp; &nbsp;</span>{{patient.date_of_admission}}</p>
                 </br>
-                <a href="{% url 'medical_edit' patient.pk %}"><button class="btn btn-secondary">تکمیل اطلاعات پزشکی بیمار</button></a>
+                <a href="{% url 'patient_edit' patient.pk %}"><button class="btn btn-secondary">ویرایش اطلاعات بیمار</button></a>
                 &nbsp;
                 <a href="{% url 'patient_delete' patient.pk %}"><button class="btn btn-delete">حذف بیمار</button></a>
             </div>
@@ -51,6 +51,8 @@
                 <p><span class="sub-title">تلفن همراه</span>{{ patient.phone_number }}</p>
                 <p><span class="sub-title">آدرس</span>{{ patient.address}}</p>
                 <p><span class="sub-title">نام معرف</span></span>{{ patient.presenter}}</p>
+<<<<<<< HEAD
+=======
                 <p><span class="sub-title" style="width: 250px;">وضعیت پذیرش بیمار </span>{% if patient.canceling == False %}<span class="status btn-delete" style="margin-right: -5px;">فعال</span>{% else %}<span class="status btn-secondary" style="margin-right: -5px;">کنسل شده</span>
                     {% endif %}
                 <br>
@@ -66,6 +68,7 @@
 
 
                 <a href="{% url 'patient_edit' patient.pk %}"><button class="btn btn-secondary float-left">ویرایش</button></a>
+>>>>>>> 07eb3d216b71e137efb9ba1614ec60c7c9b96c28
             </div>
         </div>
         <br>
@@ -80,8 +83,6 @@
                 <p><span class="sub-title">تاریخ ترخیص</span>{{ patient.date_of_discharge}}</p>
                 <p><span class="sub-title">بیمه اصلی</span>{{ patient.supplementary_insurance }}</p>
                 <p><span class="sub-title">بیمه تکمیلی</span>{{ patient.basic_insurance }}</p>
-                <br>
-                <a href="{% url 'medical_edit' patient.pk %}"><button class="btn btn-secondary float-left">ویرایش</button></a>
             </div>
         </div>
         <br>
@@ -89,14 +90,11 @@
         <div class="row">
             <div class="col-12 second-info">
                 <h2>اطلاعات مالی بیمار</h2>
-                <p><span class="sub-title" style="width: 250px;">فرانشیز (درصد)</span>% {{ patient.Fran }} </p>                
-                <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی توسط بیمار</span>{{ patient.Franchise | intcomma:False}} {% if patient.InsurancePremium == "ابتدا بیمه اصلی را انتخاب کنید" %}{% else %}<span>ریال</span>{% endif %}</p>
-                <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی بیمه </span>{{ patient.InsurancePremium | intcomma:False }} {% if patient.InsurancePremium == "ابتدا بیمه اصلی را انتخاب کنید" %}{% else %}<span>ریال</span>{% endif %}</p>
-                <p><span class="sub-title" style="width: 250px;">وضعیت پرداخت بیمه </span>{% if patient.paid == False %}<span class="status btn-delete" style="margin-right: -5px;">پرداخت نشده</span>{% else %}<span class="status btn-secondary" style="margin-right: -5px;">پرداخت شده</span>
-                    {% endif %}
-                <a href="{% url 'discount' patient.pk %}">اعمال تخفیف</a>
-                
-                </p>
+                <p><span class="sub-title" style="width: 250px;">فرانشیز (درصد)</span>{% if patient.Fran == "ابتدا درصد فرانشیز بیمار را وارد کنید" %}{% else %}%{% endif %}{{ patient.Fran }}</p>                
+                <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی توسط بیمار</span>{{ patient.Franchise | intcomma:False}} {% if patient.InsurancePremium == "ابتدا بیمه تکمیلی را انتخاب کنید" %}{% else %}<span>ریال</span>{% endif %}</p>
+                <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی بیمه </span>{{ patient.InsurancePremium | intcomma:False }} {% if patient.InsurancePremium == "ابتدا بیمه تکمیلی را انتخاب کنید" %}{% else %}<span>ریال</span>{% endif %}</p>
+                <p><span class="sub-title" style="width: 250px;">وضعیت پرداخت بیمه </span>{% if patient.paid == False %}<span class="status btn-delete" style="margin-right: -5px;">پرداخت نشده</span>{% else %}<span class="status btn-secondary" style="margin-right: -5px;">پرداخت شده</span>{% endif %}</p>
+                <a href="{% url 'discount' patient.pk %}"><button class="btn btn-primary" style="margin-top: 10px;">اعمال تخفیف</button></a>
             </div>
         </div>
         <br>
