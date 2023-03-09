@@ -6,10 +6,10 @@
 </div>
 <!-- {{form.as_p}} -->
 <div class="container">
-    <h1>اطلاعات بیمار</h1>
-    <hr>
     <form action="" method="post">
         {% csrf_token %}
+        <h1>اطلاعات شخصی بیمار</h1>
+        <hr>
         <div class="row">
             <div class="col-6">
                 <label>نام :</label>
@@ -56,32 +56,6 @@
                 {{ form.address }}
             </div>
         </div>
-        <br>
-        <br>
-        <div class="row">
-            <div class="col-6">
-                <label>تاریخ پذیرش :</label>
-                {{ form.date_of_admission }}
-            </div>
-            <div class="col-6">
-                <label>تعرفه :</label>
-                {{ form.payment_tariff }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <label>شماره پرونده :</label>
-                {{ form.file_number }}
-            </div>
-            <div class="col-14">
-                <label>تاریخ ترخیص :</label>
-                {{ form.date_of_discharge }}
-            </div>
-            <div class="col-14">
-                <label>نوع عمل :</label>
-                {{ form.type_of_surgery }}
-            </div>
-        </div>
         <div class="row">
             <div class="col-6">
                 <label>نام پزشک معرف :</label>
@@ -92,31 +66,67 @@
                 {{ form.presenter }}
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-12">
                 <label>توضیحات :</label>
                 {{ form.description }}
             </div>
+        </div> -->
+        <br>
+        <br>
+        <br>
+        <h1>اطلاعات پزشکی بیمار</h1>
+        <hr>
+        <div class="row">
+            <div class="col-6">
+                <label>شماره پرونده :</label>
+                {{ form.file_number }}
+            </div>
+            <div class="col-6">
+                <label>تاریخ پذیرش :</label>
+                {{ form.date_of_admission }}
+            </div>
         </div>
-        <div class="col-13">
-            <label>فرانشیز (درصد) :</label>
-            {{ form.franchising }}
+        <div class="row">
+            <div class="col-6">
+                <label>نوع عمل :</label>
+                {{ form.type_of_surgery }}
+            </div>
+            <div class="col-6">
+                <label>اپراتور سنگ شکنی :</label>
+                {{ form.operator}}
+            </div>
         </div>
-        <div class="col-13">
-            <label>پزشک بیهوشی :</label>
-            {{ form.anesthesia_doctor_name }}
+        <div class="row">
+            <div class="col-6">
+                <label>پزشک بیهوشی :</label>
+                {{ form.anesthesia_doctor_name }}
+            </div>
+            <div class="col-6">
+                <label>تاریخ ترخیص :</label>
+                {{ form.date_of_discharge }}
+            </div>
         </div>
-        <div class="col-13">
-            <label>بیمه اصلی :</label>
-            {{ form.supplementary_insurance }}
+        <br>
+        <div class="row">
+            <div class="col-6">
+                <label>تعرفه :</label>
+                {{ form.payment_tariff }}
+            </div>
+            <div class="col-6">
+                <label>فرانشیز (درصد) :</label>
+                {{ form.franchising }}
+            </div>
         </div>
-        <div class="col-14">
-            <label>بیمه تکمیلی :</label>
-            {{ form.basic_insurance }}
-        </div>
-        <div class="col-14">
-            <label>تخفیف :</label>
-            {{ form.discount }}
+        <div class="row">
+            <div class="col-6">
+                <label>بیمه اصلی :</label>
+                {{ form.supplementary_insurance }}
+            </div>
+            <div class="col-6">
+                <label>بیمه تکمیلی :</label>
+                {{ form.basic_insurance }}
+            </div>
         </div>
         <div class="flex-left">
             <input  type="submit" value="ذخیره" style="width: 18%;"/>
