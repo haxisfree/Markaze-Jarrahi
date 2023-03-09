@@ -14,11 +14,11 @@
         <div class="search-result">
             {% for patient in queryset %}
             <a href="{% url 'patient_info' patient.pk %}">
-                <div>
+                <div class="box">
                     <hr>
                     <h3>{{ patient.first_name }} {{ patient.last_name }}</h3>
-                    <p>کدملی: {{ patient.national_code }} &nbsp; &nbsp; شماره پرونده: {{ patient.file_number }} &nbsp; &nbsp; تاریخ پذیرش: {{patient.date_of_admission}} &nbsp; &nbsp;وضعیت پرداخت: {% if patient.paid == False %}<span class="status btn-delete">پرداخت نشده</span>{% else %}<span class="status btn-secondary">پرداخت شده</span>
-                        {% endif %}</p>
+                    <div class="details">کدملی: {{ patient.national_code }} &nbsp; &nbsp; شماره پرونده: <div>{{patient.FileNumber}}</div> &nbsp; &nbsp; تاریخ پذیرش: <div>{{patient.date_of_admission}}</div> &nbsp; &nbsp;وضعیت پرداخت: {% if patient.paid == False %}<span class="status btn-delete">پرداخت نشده</span>{% else %}<span class="status btn-secondary">پرداخت شده</span>
+                        {% endif %}</div>
                 </div>
             </a>
             {% endfor %}
