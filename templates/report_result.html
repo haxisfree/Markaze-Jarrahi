@@ -30,7 +30,7 @@
                                     <td>
                                         <a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a>
                                     </td>
-                                    <td>{{patient.file_number}}</td>
+                                    <td style="direction: ltr;">{{patient.FileNumber}}</td>
                                     <td>{{patient.date_of_admission}}</td>
                                     <td>{{patient.basic_insurance}}</td>
                                     <td class="button">

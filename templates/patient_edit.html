@@ -1,5 +1,5 @@
+
 {% extends 'base.html' %}
-{% load static %}
 {% block content %}
 
 <div class="row">
@@ -13,11 +13,11 @@
         <hr>
         <div class="row">
             <div class="col-6">
-                <label>نام :</label>
+                <label><span style="color: var(--red);">*</span> نام :</label>
                 {{ form.first_name }}
             </div>
             <div class="col-6">
-                <label>نام خانوادگی :</label>
+                <label><span style="color: var(--red);">*</span> نام خانوادگی :</label>
                 {{ form.last_name }}
             </div>
         </div>
@@ -80,29 +80,25 @@
         <hr>
         <div class="row">
             <div class="col-6">
-                <label>شماره پرونده :</label>
-                {{ form.file_number }}
-            </div>
-            <div class="col-6">
-                <label>تاریخ پذیرش :</label>
+                <label><span style="color: var(--red);">*</span> تاریخ پذیرش :</label>
                 {{ form.date_of_admission }}
             </div>
-        </div>
-        <div class="row">
             <div class="col-6">
                 <label>نوع عمل :</label>
                 {{ form.type_of_surgery }}
             </div>
+        </div>
+        <div class="row">
             <div class="col-6">
                 <label>اپراتور سنگ شکنی :</label>
                 {{ form.operator }}
             </div>
-        </div>
-        <div class="row">
             <div class="col-6">
                 <label>پزشک بیهوشی :</label>
                 {{ form.anesthesia_doctor_name }}
             </div>
+        </div>
+        <div class="row">
             <div class="col-6">
                 <label>تاریخ ترخیص :</label>
                 {{ form.date_of_discharge }}
@@ -111,11 +107,11 @@
         <br>
         <div class="row">
             <div class="col-6">
-                <label>تعرفه :</label>
+                <label><span style="color: var(--red);">*</span> تعرفه :</label>
                 {{ form.payment_tariff }}
             </div>
             <div class="col-6">
-                <label>فرانشیز (درصد) :</label>
+                <label><span style="color: var(--red);">*</span> فرانشیز (درصد) :</label>
                 {{ form.franchising }}
             </div>
         </div>
@@ -125,7 +121,7 @@
                 {{ form.supplementary_insurance }}
             </div>
             <div class="col-6">
-                <label>بیمه تکمیلی :</label>
+                <label><span style="color: var(--red);">*</span> بیمه تکمیلی :</label>
                 {{ form.basic_insurance }}
             </div>
         </div>
@@ -142,6 +138,11 @@
     </form>
 </div>
 {% endblock content %}
+
+
+
+
+
 
 
 

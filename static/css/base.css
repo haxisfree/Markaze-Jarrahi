@@ -769,10 +769,14 @@ button img {
 .search-result h3 {
     margin-bottom: 10px;
   }
-.search-result p {
+.search-result  div.details{
     color: var(--gray);
     margin-top: 0;
     margin-bottom: 20px;
+  }
+  .search-result  div.details div{
+    direction: ltr;
+    display: inline;
   }
   .search-result hr {
     margin: 0;
@@ -780,7 +784,7 @@ button img {
   .search-result a:hover div{
     background-color: var(--light-blue);
   }
-  .search-result div {
+  .search-result div.box {
     padding: 0px 20px 5px 10px;
     border-radius: 5px;
   }
