@@ -27,7 +27,7 @@
         <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی بیمه </span>{{ patient.InsurancePremium | intcomma:False }} {% if patient.InsurancePremium == "ابتدا بیمه اصلی را انتخاب کنید" %}{% else %}<span>ریال</span>{% endif %}</p>      
         <p><span class="sub-title" style="width: 250px;">مبلغ تخفیف</span>
             <span>
-                <input onblur="change();" class="form-control py-2" type="text" placeholder="تخفیف" aria-label="Search" name="dis" value="{{ patient.discount | intcomma:False}}" style="margin: 15px -10px;">
+                <input class="form-control py-2" type="text" placeholder="تخفیف" aria-label="Search" name="dis" value="{{ patient.discount | intcomma:False}}" style="margin: 15px -10px;">
             </span>
         </p>
         <hr style="margin-bottom: 40px;">
