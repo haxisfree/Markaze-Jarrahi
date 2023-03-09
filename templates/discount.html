@@ -4,11 +4,6 @@
 {% block content %}
 
 
-<<<<<<< HEAD
-<!-- <div class="row">
-    <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
-</div> -->
-=======
 <form method="POST" action="{% url 'canceling' patient.pk %}">
     {% csrf_token %}
         <button type="submit" class="btn btn-delete">کنسل</button>
@@ -16,15 +11,14 @@
 
 
 
->>>>>>> 07eb3d216b71e137efb9ba1614ec60c7c9b96c28
 
 <div class="container">
     <h1>اطلاعات مالی بیمار</h1>
     <hr style="margin-bottom: 40px;">
     <form method="POST" action="{% url 'dis' patient.pk %}">
         {% csrf_token %}
-        <p><span class="sub-title" style="width: 250px;">حق العمل سنگ شکنی</span> </p>   
-        <p><span class="sub-title" style="width: 250px;">حق العمل بیهوشی</span> </p>   
+        <p><span class="sub-title" style="width: 250px;">حق العمل سنگ شکنی</span></p>   
+        <p><span class="sub-title" style="width: 250px;">حق العمل بیهوشی</span></p>   
         <p><span class="sub-title" style="width: 250px;">هزینه دارو و لوازم مصرفی</span> </p>  
         <p><span class="sub-title" style="width: 250px;">جمع تعرفه مرکز</span> </p>  
         <p><span class="sub-title" style="width: 250px;">فرانشیز (درصد)</span>% {{ patient.Fran }} </p>                

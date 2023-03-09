@@ -218,7 +218,10 @@ class PatientUpdateView(UpdateView):
 
 def discount(request, pk):
     obj = get_object_or_404(Patient, pk=pk)
-    context = {'patient' : obj}
+    # tar = Tarrif.objects.get(tarrif_exact = obj.payment_tariff_id)
+    
+    # tar = obj.payment_tariff_id
+    context = {'patient' : obj }
     return render(request,'discount.html',context)
 
 
