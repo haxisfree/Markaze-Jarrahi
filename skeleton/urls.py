@@ -21,6 +21,7 @@ from .views import ( PatientsListView,
                     export_excel,
                     discount,
                     dis,
+                    shutdown,
 
 
                     InsuranceListView, 
@@ -82,8 +83,8 @@ urlpatterns = [
     path('discount/<int:pk>', discount, name='discount'),
     # path('export', ReportResultView.as_view(), name='export'),
     path('discount/<int:pk>/done', dis, name='dis'),
+    path('shutdown', shutdown, name='shutdown'),
     
-
 
     path('insurance/<slug:pk>/', InsuranceInfoView.as_view(), name='insurance_info'),
     path('insurancelist', InsuranceListView.as_view(), name='insurance_list'),

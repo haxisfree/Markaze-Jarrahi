@@ -19,15 +19,15 @@
     <hr style="margin-bottom: 40px;">
     <form method="POST" action="{% url 'dis' patient.pk %}">
         {% csrf_token %}
-        <p><span class="sub-title" style="width: 250px;">حق العمل سنگ شکنی</span></p>   
-        <p><span class="sub-title" style="width: 250px;">حق العمل بیهوشی</span></p>   
-        <p><span class="sub-title" style="width: 250px;">هزینه دارو و لوازم مصرفی</span> </p>  
-        <p><span class="sub-title" style="width: 250px;">جمع تعرفه مرکز</span> </p>  
+        <p><span class="sub-title" style="width: 250px;">حق العمل سنگ شکنی</span>{{ tar.kidney_crusher_cost | intcomma:False }}    ریال</p>   
+        <p><span class="sub-title" style="width: 250px;">حق العمل بیهوشی</span>{{ tar.anesthetic_cost | intcomma:False }}    ریال</p>   
+        <p><span class="sub-title" style="width: 250px;">هزینه دارو و لوازم مصرفی</span>{{ tar.drug_and_consumables_cost | intcomma:False }}    ریال</p></p>  
+        <p><span class="sub-title" style="width: 250px;">جمع تعرفه مرکز</span>{{ tar.TotalSumForCenter | intcomma:False }}    ریال</p>  
         <p><span class="sub-title" style="width: 250px;">فرانشیز (درصد)</span>% {{ patient.Fran }} </p>                
         <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی بیمه </span>{{ patient.InsurancePremium | intcomma:False }} {% if patient.InsurancePremium == "ابتدا بیمه اصلی را انتخاب کنید" %}{% else %}<span>ریال</span>{% endif %}</p>      
         <p><span class="sub-title" style="width: 250px;">مبلغ تخفیف</span>
             <span>
-                <input class="form-control py-2" type="text" placeholder="تخفیف" aria-label="Search" name="dis" value="{{ patient.discount | intcomma:False}}" style="margin: 15px -10px;">
+                <input onblur="change();" class="form-control py-2" type="text" placeholder="تخفیف" aria-label="Search" name="dis" value="{{ patient.discount | intcomma:False}}" style="margin: 15px -10px;">
             </span>
             <span class="btn btn-secondary" onclick="change();">اعمال تخفیف</span>
         </p>

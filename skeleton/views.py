@@ -22,7 +22,7 @@ import datetime
 import xlwt
 import re
 from num2fawords import words, ordinal_words
-
+import os
 
 
 #importing get_template from loader
@@ -218,10 +218,10 @@ class PatientUpdateView(UpdateView):
 
 def discount(request, pk):
     obj = get_object_or_404(Patient, pk=pk)
-    # tar = Tarrif.objects.get(tarrif_exact = obj.payment_tariff_id)
+    tar = Tariff.objects.get(tariff__exact = obj.payment_tariff_id)
     
     # tar = obj.payment_tariff_id
-    context = {'patient' : obj }
+    context = {'patient' : obj , 'tar':tar }
     return render(request,'discount.html',context)
 
 
@@ -753,5 +753,9 @@ class SupportView(TemplateView):
     template_name = 'support.html'
 
 
+# from django.core.management.base import BaseCommand
 
+def shutdown(request):
 
+    os.system("sudo shutdown -h +1")
+    return HttpResponse(request.META.get('HTTP_REFERER'))
