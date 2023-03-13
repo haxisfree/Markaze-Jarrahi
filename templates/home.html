@@ -33,15 +33,33 @@
                     </div>
                 </div>
             </div>
-
-            <a class="help-button"href="{% url 'shutdown' %}">
-                <button class="btn btn-primary"><img class="" src="{% static 'pic/icon/help.png' %}">خاموش کردن سیستم </button>
+            <a class="shutdown-button" onclick="show();">
+                <img class="" src="{% static 'pic/icon/power-button.png' %}">
             </a>
             <a class="help-button"href="{% url 'support' %}">
                 <button class="btn btn-primary"><img class="" src="{% static 'pic/icon/help.png' %}">پشتیبانی </button>
             </a>
         </div>
+        <div class="shade">
+            <div class="container">
+                <h2 class="center">آیا از خاموش کردن سیستم مطمئن هستید؟</h2>
+                <div class="row">
+                    <a href="{% url 'shutdown' %}"><button class="btn btn-delete">بله</button></a>
+                    <button class="btn btn-secondary" onclick="hide();">خیر</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function show(){
+                document.querySelector(".shade").style.display="block" 
+            }
+            function hide(){
+                document.querySelector(".shade").style.display="none" 
+            }
+        </script>
     </body>
+    
 </html>
 
 

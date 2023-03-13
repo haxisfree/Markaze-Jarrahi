@@ -24,7 +24,7 @@
         <p><span class="sub-title" style="width: 250px;">هزینه دارو و لوازم مصرفی</span>{{ tar.drug_and_consumables_cost | intcomma:False }}    ریال</p></p>  
         <p><span class="sub-title" style="width: 250px;">جمع تعرفه مرکز</span>{{ tar.TotalSumForCenter | intcomma:False }}    ریال</p>  
         <p><span class="sub-title" style="width: 250px;">فرانشیز (درصد)</span>% {{ patient.Fran }} </p>                
-        <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی بیمه </span>{{ patient.InsurancePremium | intcomma:False }} {% if patient.InsurancePremium == "ابتدا بیمه اصلی را انتخاب کنید" %}{% else %}<span>ریال</span>{% endif %}</p>      
+        <p><span class="sub-title" style="width: 250px;" >مبلغ پرداختی بیمه </span >{{ patient.InsurancePremium | intcomma:False }} {% if patient.InsurancePremium == "ابتدا بیمه اصلی را انتخاب کنید" %}{% else %}<span>ریال</span>{% endif %}</p>      
         <p><span class="sub-title" style="width: 250px;">مبلغ تخفیف</span>
             <span>
                 <input onblur="change();" class="form-control py-2" type="text" placeholder="تخفیف" aria-label="Search" name="dis" value="{{ patient.discount | intcomma:False}}" style="margin: 15px -10px;">
@@ -41,11 +41,13 @@
 </div>
 
 <script>
+    var patientFranchise = parseInt(document.querySelector(".pay span").innerText.replace(",",""));
+    var firstValue = parseInt(document.querySelector("span input").value.replace(",",""))
     function change(){
-
-        var patientFranchise = parseInt(document.querySelector(".pay span").innerText.replace(",",""));
-        var discount = parseInt(document.querySelector("span input").value);
-        document.querySelector(".pay span").innerText = (patientFranchise-discount).toLocaleString();
+        var newValue = parseInt(document.querySelector("span input").value.replace(",",""))
+        if (newValue){
+            document.querySelector(".pay span").innerText = (patientFranchise + firstValue - newValue).toLocaleString();
+        }
     }
 
 
