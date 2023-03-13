@@ -14,7 +14,7 @@
 
 
     <div class="row">
-        <button class="btn btn-primary back" onclick="history.back()">بازگشت</button>
+        <button class="btn btn-primary back" onclick="goBack();">بازگشت</button>
     </div>
     <div class="container">
         <div class="row patient-header">
@@ -70,6 +70,7 @@
                 <h2>اطلاعات پزشکی بیمار</h2>
                 <p><span class="sub-title">نوع عمل</span>{{ patient.type_of_surgery}}</p>
                 <p><span class="sub-title">پزشک بیهوشی</span>{{ patient.anesthesia_doctor_name}}</p>
+                <p><span class="sub-title">اپراتور بیهوشی</span>{{ patient.anesthesiologist}}</p>
                 <p><span class="sub-title">اپراتور سنگ شکنی</span>{{ patient.operator}}</p>
                 <p><span class="sub-title">تاریخ بستری</span>{{ patient.date_of_admission }}</p>
                 <p><span class="sub-title">تاریخ ترخیص</span>{{ patient.date_of_discharge}}</p>
@@ -82,7 +83,7 @@
         <div class="row">
             <div class="col-12 second-info">
                 <h2>اطلاعات مالی بیمار</h2>
-                <p><span class="sub-title" style="width: 250px;">فرانشیز (درصد)</span>{% if patient.Fran == "ابتدا درصد فرانشیز بیمار را وارد کنید" %}{% else %}%{% endif %}{{ patient.Fran }}</p>                
+                <p><span class="sub-title" style="width: 250px;">فرانشیز (درصد)</span>{{ patient.Fran }}{% if patient.Fran == "ابتدا درصد فرانشیز بیمار را وارد کنید" %}{% else %}%{% endif %}</p>                
                 <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی توسط بیمار</span>{{ patient.Franchise | intcomma:False}} {% if patient.InsurancePremium == "ابتدا بیمه تکمیلی را انتخاب کنید" %}{% else %}<span>ریال</span>{% endif %}</p>
                 <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی بیمه </span>{{ patient.InsurancePremium | intcomma:False }} {% if patient.InsurancePremium == "ابتدا بیمه تکمیلی را انتخاب کنید" %}{% else %}<span>ریال</span>{% endif %}</p>
                 <p><span class="sub-title" style="width: 250px;">وضعیت پرداخت بیمه </span>{% if patient.paid == False %}<span class="status btn-delete" style="margin-right: -5px;">پرداخت نشده</span>{% else %}<span class="status btn-secondary" style="margin-right: -5px;">پرداخت شده</span>{% endif %}</p>

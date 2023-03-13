@@ -13,6 +13,17 @@ function documentLoad(){
 
 }
 
+function goBack(){
+    var value = document.referrer.match(/edit/);
+    if(value){
+        history.go(-3);
+    }
+    else{
+        history.go(-1);
+    }
+
+}
+
 
 // function searchPatient(x) {
 //     var input, filter, patients, name, i;
