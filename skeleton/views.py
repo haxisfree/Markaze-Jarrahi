@@ -306,13 +306,8 @@ def insurance_letter(request):
                 rows = Patient.objects.get(id__exact=h)
                 li1.append(rows)
                 c += 1
-<<<<<<< HEAD
 
 
-=======
-
-
->>>>>>> main
             except Exception:
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         
