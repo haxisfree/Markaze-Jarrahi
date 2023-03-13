@@ -161,7 +161,12 @@ def insurance_searchbar(request):
     elif unpaid_search_query == 'on':
         qs = qs.filter(paid=False)
 
-    context = {'queryset' : qs}
+    li = []
+    for q in qs:
+        li.append(q.id)
+
+
+    context = {'queryset' : qs, 'qid':li}
 
     return render(request,'insurance_search.html',context)
 
@@ -284,49 +289,33 @@ def canceling(request, pk):
 def insurance_letter(request):
     
     qs = request.GET.get('n')
-
-    y = re.findall("\[(.*?)\]", qs)
-    for y in y:
-        x = re.split(",", y)
-
-
-    li1 = []
-    li2 = []
-    li3 = []
-    for z in x:
-        f = re.sub(r"^\s+", "", z)
-        li1.append(f)
-    for s in li1:
-        g = re.sub(r"\s+$", "", s)
-        li2.append(g)
-
-    for r in li2:
-        li3.append(r[10:-1])
-
     
+    
+    x = re.split(",", qs)
+
     lis = []
-    # count = []
-    c = 0
-
-    for h in li3:
-        try:
-            rows = Patient.objects.get(first_name__exact=h, canceling=False)
-            lis.append(rows)
-            c += 1
-            # count.append(c)
-
-        except Exception:
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))    
-
-
-    # k = 0
-    # for w in range(len(lis)):
-    #     k += 1
+    for y in x: 
+        z=re.findall('[1-9]+', y)
+        lis.append(z)
     
-    # num = words(k)
-    # num2 = ordinal_words(k)
+    li1 = []
+    c = 0
+    for li in lis:
+        for h in li:
+            try:
+                rows = Patient.objects.get(id__exact=h)
+                li1.append(rows)
+                c += 1
+
+
+            except Exception:
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        
+    
+    
+    
     k = 0
-    for p in lis:
+    for p in li1:
         try:
             if p.InsurancePremium is not None:
                 k += p.InsurancePremium
@@ -336,9 +325,11 @@ def insurance_letter(request):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
     num = words(k)
-
-    lis_firstone = lis[0]
-    insu = Insurance.objects.get(slug__exact=lis_firstone.basic_insurance_id)
+    # num2 = ordinal_words(k)
+    
+    
+    lis_firstid = li1[0]
+    insu = Insurance.objects.get(slug__exact=lis_firstid.basic_insurance_id)
 
     month = {
         '-01-' : "فروردین",
@@ -358,8 +349,8 @@ def insurance_letter(request):
     mah = ""
     sal = ""
 
-    if lis_firstone:
-        date = str(lis_firstone.date_of_admission)
+    if lis_firstid:
+        date = str(lis_firstid.date_of_admission)
         x = re.findall("\-.*\-", date)
         y = re.findall("\d\d\d\d", date)
     
@@ -372,6 +363,110 @@ def insurance_letter(request):
 
 
     sal = y[0]
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    # y = re.findall("\[(.*?)\]", qs)
+    # for y in y:
+    #     x = re.split(",", y)
+
+
+    # li1 = []
+    # li2 = []
+    # li3 = []
+    # li4 = []
+    # for z in x:
+    #     f = re.sub(r"^\s+", "", z)
+    #     li1.append(f)
+    # for s in li1:
+    #     g = re.sub(r"\s+$", "", s)
+    #     li2.append(g)
+
+    # for r in li2:
+    #     li3.append(r[10:-1])
+
+
+    # for q in qs:
+    #     li4.append(q)
+    
+    # lis = []
+    # count = []
+    # c = 0
+
+    # for h in qslist:
+        # try:
+            # rows = Patient.objects.get(id__exact=h)
+            # lis.append(rows)
+            # c += 1
+            # count.append(c)
+
+        # except Exception:
+        #     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))    
+
+
+    # k = 0
+    # for p in lis:
+    #     try:
+    #         if p.InsurancePremium is not None:
+    #             k += p.InsurancePremium
+    #         else:
+    #             pass
+    #     except:
+    #         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    
+    # num = words(k)
+
+
+
+    # lis_firstone = lis[0]
+    # insu = Insurance.objects.get(slug__exact=lis_firstone.basic_insurance_id)
+
+    # month = {
+    #     '-01-' : "فروردین",
+    #     '-02-' : "اردیبهشت",
+    #     '-03-' : "خرداد",
+    #     '-04-' : "تیر",
+    #     '-05-' : "مرداد",
+    #     '-06-' : "شهریور",
+    #     '-07-' : "مهر",
+    #     '-08-' : "آبان",
+    #     '-09-' : "آذر",
+    #     '-10-' : "دی",
+    #     '-11-' : "بهمن",
+    #     '-12-' : "اسفند"
+    # }
+   
+    # mah = ""
+    # sal = ""
+
+    # if lis_firstone:
+    #     date = str(lis_firstone.date_of_admission)
+    #     x = re.findall("\-.*\-", date)
+    #     y = re.findall("\d\d\d\d", date)
+    
+    # for key, value in month.items():
+    #     try:
+    #         if key == x[0]:
+    #             mah = value
+    #     except:
+    #         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+    # sal = y[0]
 
 
     # template_path = 'insurance_letter.html'
@@ -395,13 +490,14 @@ def insurance_letter(request):
 
 
     context = {
-        "patient" : lis,
+        "patient" : li1,
         'insurance': insu,
         "leng":c,
         "sumIP" : k,
         "numword" : num,
         "mah" : mah,
         "sal":sal,
+        'qs': lis
         }
 
     return render(request, 'insurance_letter.html', context)
