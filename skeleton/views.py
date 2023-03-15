@@ -10,7 +10,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Patient, Insurance, Tariff, Fund
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
-from .forms import PatientForm, InsuranceForm, MedicalForm, TariffForm, PaidForm, FundForm
+from .forms import PatientForm, InsuranceForm, MedicalForm, TariffForm, PaidForm, FundForm, DiscountForm
 from jalali_date import datetime2jalali, date2jalali
 from django.db.models import Q 
 import datetime
@@ -57,7 +57,7 @@ def searchbar(request):
 
     if is_valid_queryparam(name_contains_query) :
         qs = qs.filter(Q(first_name__icontains=name_contains_query)
-        | Q(last_name__icontains=name_contains_query)).distinct()
+        , Q(last_name__icontains=name_contains_query)).distinct()
     
     elif is_valid_queryparam(national_code_search_contains_query) :
         qs = qs.filter(national_code__icontains=national_code_search_contains_query)
@@ -235,17 +235,21 @@ def dis(request, pk):
     obj = get_object_or_404(Patient, pk=pk)
     dis_value = request.POST['dis']
     if request.method == 'POST':
-        if dis_value != '' and dis_value is not None:
+        if 'update' in request.POST:
             obj.discount = dis_value
             obj.save()
-        else:
-            obj.discount = 0
-            obj.save()
-        return redirect('patient_info', pk=pk)
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        
+        elif 'submit' in request.POST:
+            if dis_value != '' and dis_value is not None:
+                obj.discount = dis_value
+                obj.save()
+            else:
+                obj.discount = 0
+                obj.save()
+    return redirect('patient_info', pk=pk)
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
-
-
-
 
 class MedicalUpdateView(UpdateView):
     model = Patient
@@ -269,6 +273,25 @@ def paid(request, pk):
         return redirect('paid', pk=pk)
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+def disc(request, pk):
+    obj = get_object_or_404(Patient, pk=pk)
+    qs = request.POST.get('disc')
+    
+    if request.method == 'POST':
+        obj.discount == qs
+        obj.save()
+        return redirect('discount', pk=pk)
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+
+
+
 
 
 

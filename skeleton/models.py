@@ -10,6 +10,8 @@ from django_jalali.db import models as jmodels
 from django.utils.html import format_html 
 from num2fawords import words, ordinal_words
 import re
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 
 
@@ -141,7 +143,7 @@ class Patient(models.Model):
     type_of_surgery = models.CharField(max_length=100, verbose_name="نوع عمل", blank=True, null=True, default = '')
     payment_tariff = models.ForeignKey(Tariff, blank=True, null=True, on_delete=models.PROTECT)
     paid = models.BooleanField(verbose_name="وضعیت پرداخت", default=False,blank=True, null=True)
-    franchising = models.DecimalField (max_digits = 2, decimal_places = 2, verbose_name="فرانشیز (درصد)", default = 0)
+    franchising = models.PositiveIntegerField (validators=[MinValueValidator(0), MaxValueValidator(100)], verbose_name="فرانشیز (درصد)", default = 0)
     discount = models.BigIntegerField(verbose_name="تخفیف", default=0)
     canceling = models.BooleanField(verbose_name="وضعیت پذیرش", default=False)
 
@@ -172,7 +174,7 @@ class Patient(models.Model):
 
         if self.franchising:
             first_tariff_object = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
-            f1 = first_tariff_object.TotalTariffWithoutMedicine * self.franchising
+            f1 = first_tariff_object.TotalTariffWithoutMedicine * self.franchising / 100
             f2 = f1 - self.discount
             return int(f2)
         else:
@@ -244,7 +246,7 @@ class Patient(models.Model):
         
         if self.franchising:
             # fran = Patient.objects.get( slug__exact = self.basic_insurance_id )
-            f = self.franchising * 100
+            f = self.franchising #* 100
             return int(f)
         else:
             message = "ابتدا درصد فرانشیز بیمار را وارد کنید"
