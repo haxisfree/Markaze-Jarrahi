@@ -22,6 +22,7 @@ from .views import ( PatientsListView,
                     discount,
                     dis,
                     shutdown,
+                    disc,
 
 
                     InsuranceListView, 
@@ -84,6 +85,7 @@ urlpatterns = [
     # path('export', ReportResultView.as_view(), name='export'),
     path('discount/<int:pk>/done', dis, name='dis'),
     path('shutdown', shutdown, name='shutdown'),
+    path('patient/<int:pk>/disc/', disc, name='disc'),
     
 
     path('insurance/<slug:pk>/', InsuranceInfoView.as_view(), name='insurance_info'),
