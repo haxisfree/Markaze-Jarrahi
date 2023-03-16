@@ -29,8 +29,9 @@
             </div>
             <div class="col-9">
                 <h2>{{ patient.first_name }} {{ patient.last_name }}</h2>
-                <span class="sub-title" style="color: var(--black);">شماره پرونده &nbsp; &nbsp; &nbsp;</span><div style="display: inline;
-                direction: ltr;">{{ patient.FileNumber }}</div>
+                <!-- <span class="sub-title" style="color: var(--black);">شماره پرونده &nbsp; &nbsp; &nbsp;</span><div style="display: inline;
+                direction: ltr;">{{ patient.FileNumber }}</div> -->
+                <div style="direction: ltr;">{{ patient.FileNumber }} &nbsp; &nbsp; &nbsp; <span class="sub-title" style="color: var(--black);">شماره پرونده</span></div>
                 <p style="color: var(--gray);"><span class="sub-title">تاریخ پذیرش &nbsp; &nbsp; &nbsp;</span>{{patient.date_of_admission}}</p>
                 </br>
                 <a href="{% url 'patient_edit' patient.pk %}"><button class="btn btn-secondary">ویرایش اطلاعات بیمار</button></a>

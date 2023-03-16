@@ -14,9 +14,13 @@ function documentLoad(){
 }
 
 function goBack(){
-    var value = document.referrer.match(/edit/);
+    var value = document.referrer.match(/edit/) || document.referrer.match(/discount/);
     if(value){
         history.go(-3);
+        // if(window.location.toString().includes("edit"))
+        // {
+        //     history.go(-2);
+        // }
     }
     else{
         history.go(-1);
