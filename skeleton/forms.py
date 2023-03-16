@@ -117,6 +117,11 @@ class CancelingForm(forms.ModelForm):
         model = Patient
         fields = ["canceling"]
 
+class DiscountForm(forms.ModelForm):
+    class Meta:
+        model = Patient
+        fields = ["discount"]
+
 class FundForm(forms.ModelForm):
     class Meta:
         model = Fund
