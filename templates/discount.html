@@ -11,7 +11,7 @@
 <div class="row">
     <form method="POST" action="{% url 'canceling' patient.pk %}" style="display: inline;">
         {% csrf_token %}
-            <button type="submit" class="btn btn-primary back">کنسل</button>
+            <button type="submit" class="btn btn-primary back" style="background-color: var(--yellow);">کنسل</button>
     </form>
 </div>
 <div class="container">
@@ -30,7 +30,7 @@
                 <input onblur="change();" class="form-control py-2" type="text" placeholder="تخفیف" aria-label="Search" name="dis" value="{{ patient.discount}}" style="margin: 15px -10px;">
             </span>
             
-            <button type="submit" class="btn btn-delete" style="margin-top: 10px;" name="update" >اعمال</button>
+            <!-- <button type="submit" class="btn btn-delete" style="margin-top: 10px;" name="update" >اعمال</button> -->
            
         </p>
         <hr style="margin-bottom: 40px;">
@@ -53,7 +53,7 @@
             document.querySelector(".pay span").innerText = (patientFranchise + firstValue - newValue).toLocaleString();
         }
         else{
-            document.querySelector(".pay span").innerText = patientFranchise.toLocaleString()
+            document.querySelector(".pay span").innerText = (patientFranchise + firstValue).toLocaleString()
         }
     }
 

@@ -57,9 +57,9 @@
                 <form method="POST" action="{% url 'canceling' patient.pk %}">
                     {% csrf_token %}
                     {% if patient.canceling == False %}
-                        <button type="submit" class="btn btn-delete" style="margin-top: 10px;">کنسل کردن بیمار</button>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 10px; background-color: var(--yellow);">کنسل کردن بیمار</button>
                     {% else %}
-                        <button type="submit" class="btn btn-secondary" style="margin-top: 10px;">فعال کردن بیمار</button>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">فعال کردن بیمار</button>
                     {% endif %}
                 </form>
             </div>
