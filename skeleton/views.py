@@ -492,22 +492,6 @@ def insurance_letter(request):
     # sal = y[0]
 
 
-    # template_path = 'insurance_letter.html'
-    # context = {
-    #     "patient" : lis,
-    #     'insurance': insu,
-    #     "leng":k
-    #     }
-    # response = HttpResponse(content_type='application/pdf')
-    # response['Content-Disposition'] = 'filename="نامه بیمه"'
-    # template = get_template(template_path)
-    # html = template.render(context)
-    # pisa_status = pisa.CreatePDF(
-    #     html, dest=response
-    # )
-    # if pisa_status.err:
-    #     return HttpResponse('we had some errors <pre>' + html + '</pre>')
-    # return response
 
 
 
