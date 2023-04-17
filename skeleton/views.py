@@ -7,10 +7,10 @@ from django.shortcuts import render, redirect
 
 from django.views.generic import ListView, DetailView, TemplateView, View, FormView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Patient, Insurance, Tariff, Fund
+from .models import Patient, Insurance, Tariff, Fund, EPayment
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
-from .forms import PatientForm, InsuranceForm, MedicalForm, TariffForm, PaidForm, FundForm, DiscountForm
+from .forms import PatientForm, InsuranceForm, MedicalForm, TariffForm, PaidForm, FundForm, DiscountForm, EPaymentForm
 from jalali_date import datetime2jalali, date2jalali
 from django.db.models import Q 
 import datetime
@@ -862,3 +862,38 @@ def shutdown(request):
 
     os.system("sudo shutdown -h +1")
     return HttpResponse(request.META.get('HTTP_REFERER'))
+
+
+
+
+
+
+
+
+class EPaymentListView(ListView):
+    model = EPayment
+    context_object_name = 'epayment_obj'
+    template_name = 'epayment_list.html'
+
+class EPaymentInfoView(DetailView):
+    model = EPayment
+    template_name = 'epayment_info.html'
+
+class EPaymentCreateView(CreateView):
+    model = EPayment
+    template_name = 'new_epayment.html'
+    form_class = EPaymentForm
+    success_url = reverse_lazy('epayment_list')
+
+class EPaymentUpdateView(UpdateView):
+    model = EPayment
+    template_name = 'epayment_edit.html'
+    form_class = EPaymentForm
+    def get_success_url(self):
+          epaymentid=self.kwargs['pk']
+          return reverse_lazy('epayment_info', kwargs={'pk': epaymentid})
+
+class EPaymentDeleteView(DeleteView):
+    model = EPayment
+    template_name = 'delete_epayment.html'
+    success_url = reverse_lazy('epayment_list')

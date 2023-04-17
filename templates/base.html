@@ -71,6 +71,12 @@
                     {% endif %}
                     ><img class="icon" src="{% static 'pic/icon/wallet-filled-money-tool.png' %}">تنخواه</a>
 
+                    <a href="{% url 'epayment_list' %}" 
+                    {% if request.path == "/epaymentlist" %}
+                        class="active"
+                    {% endif %}
+                    ><img class="icon" src="{% static 'pic/icon/wallet-filled-money-tool.png' %}">پرداختی همکاران</a>
+
                     <a class="help-button-base"href="{% url 'support' %}" >
                         <button class="btn btn-primary"><img class="" src="{% static 'pic/icon/help.png' %}">پشتیبانی </button>
                     </a>

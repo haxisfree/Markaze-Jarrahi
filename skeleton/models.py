@@ -322,3 +322,23 @@ class Fund(models.Model):
     def get_absolute_url(self):
         return reverse('fund_info', args=[str(self.id)])
 
+
+class EPayment(models.Model):
+
+    id = models.AutoField(primary_key=True, verbose_name="شناسه")
+    title = models.CharField(max_length=100, verbose_name="نام")
+    description = models.TextField(verbose_name="توضیحات", blank=True, null=True, default = '')    
+    price = models.BigIntegerField(verbose_name="مبلغ پرداختی")
+    date = jmodels.jDateField(default = timezone.now, verbose_name="تاریخ پرداخت")
+
+
+
+
+    class Meta: 
+        ordering = ['-date']
+    
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('epayment_info', args=[str(self.id)])
