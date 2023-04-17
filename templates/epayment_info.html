@@ -1,0 +1,42 @@
+
+
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+{% block content %}
+{% load humanize %}
+
+    <!-- <button onclick="window.print()">Print this page</button> -->
+    <!-- <img src="{% static 'icon/img1.jpg' %}" alt="Girl with ampool" width="500" height="200"> -->
+
+    <div class="row">
+        <button class="btn btn-primary back" onclick="goBack();">بازگشت</button>
+    </div>
+    
+    <div class="container">
+        <h1><span style="display: inline-block;"> نام پزشک/اپراتور </span> {{ epayment.title }}</h1>
+        <hr>
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <p><span class="sub-title" style="width: 180px;">توضیحات &nbsp;</span><span>{{ epayment.description }}</span></p>
+                <p><span class="sub-title" style="width: 180px;">مبلغ پرداخت شده &nbsp;</span>{{ epayment.price | intcomma:False }}</p>
+                <p><span class="sub-title" style="width: 180px;">تاریخ پرداخت &nbsp;</span>{{ epayment.date }}</p>
+                <br>
+                <div class="float-left">
+                    <a href="{% url 'epayment_edit' epayment.pk %}"><button class="btn btn-secondary">ویرایش</button></a>
+                    &nbsp;
+                    <a href="{% url 'epayment_delete' epayment.pk %}"><button class="btn btn-delete">حذف</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    {% endblock content %}
+

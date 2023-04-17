@@ -1,0 +1,66 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% load jalali_tags %}
+
+{% load humanize %}
+
+<div class="row">
+  <div class="col-12">
+    <a href="{% url 'new_epayment' %}"><button class="btn btn-primary float-left">افزودن پرداختی جدید</button></a>
+  </div>
+</div>
+<div class="patients-container">
+  <div class="row">
+      <div class="col-12">
+          <div id="patientslist">
+              <table>
+                  <thead>
+                      <tr>
+                          <th>نام پزشک/اپراتور</th>
+                          <th>مبلغ پرداختی</th>
+                          <th>تاریخ</th>
+
+                          <th></th>
+                          <th></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for t in epayment_obj %}
+                      <tr class="patient">
+                          <td style="width: 25% !important;">
+                            <a href="{% url 'epayment_info' t.pk %}">{{ t.title}}</a>
+                          </td>
+                          <!-- <td>{{ t.description }}</td> -->
+                          <td>{{ t.price | intcomma:False }}</td>
+                          <td>{{ t.date }}</td>
+
+                          <td class="button">
+                              <a href="{% url 'epayment_edit' t.pk %}"><button class="show-patient">ویرایش</button></a>
+                          </td>
+                          <td class="button">
+                              <a href="{% url 'epayment_delete' t.pk %}"><button class="btn-delete">حذف</button></a>
+                          </td>
+                      </tr>
+                      {% endfor %}
+                      <tr class="empty-table patient">
+                        <td colspan="6"></td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+{% endblock content %}

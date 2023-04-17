@@ -55,6 +55,13 @@ from .views import ( PatientsListView,
                     FundUpdateView,
                     FundDeleteView,
                     SupportView,
+
+
+                    EPaymentInfoView,
+                    EPaymentListView,
+                    EPaymentCreateView,
+                    EPaymentUpdateView,
+                    EPaymentDeleteView,
 )
 
 
@@ -111,6 +118,13 @@ urlpatterns = [
     path('fund/<int:pk>/delete/', FundDeleteView.as_view(), name='fund_delete'),
 
     path('support', SupportView.as_view(), name='support'),
+
+
+    path('epayment/<int:pk>/', EPaymentInfoView.as_view(), name='epayment_info'),
+    path('epaymentlist', EPaymentListView.as_view(), name='epayment_list'),
+    path('new_epayment/', EPaymentCreateView.as_view(), name='new_epayment'),
+    path('epayment/<int:pk>/edit/', EPaymentUpdateView.as_view(), name='epayment_edit'),
+    path('epayment/<int:pk>/delete/', EPaymentDeleteView.as_view(), name='epayment_delete'),
 
 ]
 
