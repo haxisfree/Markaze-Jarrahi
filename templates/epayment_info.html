@@ -15,14 +15,15 @@
     </div>
     
     <div class="container">
-        <h1><span style="display: inline-block;"> نام پزشک/اپراتور </span> {{ epayment.title }}</h1>
+        <h1>اطلاعات پرداخت</h1>
         <hr>
         <br>
         <div class="row">
             <div class="col-12">
-                <p><span class="sub-title" style="width: 180px;">توضیحات &nbsp;</span><span>{{ epayment.description }}</span></p>
+                <p><span class="sub-title" style="width: 180px;"> نام پزشک/اپراتور &nbsp;</span><span>{{ epayment.title }}</span></p>
                 <p><span class="sub-title" style="width: 180px;">مبلغ پرداخت شده &nbsp;</span>{{ epayment.price | intcomma:False }}</p>
                 <p><span class="sub-title" style="width: 180px;">تاریخ پرداخت &nbsp;</span>{{ epayment.date }}</p>
+                <p><span class="sub-title" style="width: 180px;">توضیحات &nbsp;</span><span>{{ epayment.description }}</span></p>
                 <br>
                 <div class="float-left">
                     <a href="{% url 'epayment_edit' epayment.pk %}"><button class="btn btn-secondary">ویرایش</button></a>

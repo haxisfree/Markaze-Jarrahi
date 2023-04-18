@@ -6,7 +6,7 @@
 </div>
 
 <div class="container">
-    <h1>اطلاعات پرداختی همکاران</h1>
+    <h1>اطلاعات پرداخت</h1>
     <hr>
     <form action="" method="post">
         {% csrf_token %}
@@ -17,21 +17,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
-                <label>توضیحات :</label>
-                {{ form.description }}
-            </div>
-        </div>
-        <div class="row">
             <div class="col-6">
                 <label>مبلغ پرداختی :</label>
                 {{ form.price }}
             </div>
-        </div>
-        <div class="row">
             <div class="col-6">
                 <label>تاریخ پرداخت :</label>
                 {{ form.date }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label>توضیحات :</label>
+                {{ form.description }}
             </div>
         </div>
 

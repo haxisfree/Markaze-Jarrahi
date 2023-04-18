@@ -80,7 +80,7 @@ button{
 	color: var(--gray);
 	display: block;
 	padding: 14px;
-	margin: 15px 0px;
+	margin: 10px 0px;
 	border-right: 6px solid var(--white);
 	transition: 0.3s;
 }
@@ -95,7 +95,7 @@ button{
 	margin-bottom: 25px;
 	*/
 	width: 300px;
-	margin-bottom: 15px;
+	margin-top: -20px;
 }
 .main {
 	height: 100%;
