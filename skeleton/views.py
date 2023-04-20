@@ -47,6 +47,7 @@ def is_valid_queryparam(param):
 def searchbar(request):
     qs = Patient.objects.all()
     name_contains_query = request.GET.get('name search')
+    family_contains_query = request.GET.get('family search')
     national_code_search_contains_query = request.GET.get('national code search')
     file_number_search_contains_query = request.GET.get('file number search')
     date_min = request.GET.get('date_min')
@@ -56,8 +57,10 @@ def searchbar(request):
 
 
     if is_valid_queryparam(name_contains_query) :
-        qs = qs.filter(Q(first_name__icontains=name_contains_query)
-        , Q(last_name__icontains=name_contains_query)).distinct()
+        qs = qs.filter(first_name__icontains=name_contains_query)
+    
+    elif is_valid_queryparam(family_contains_query) :
+        qs = qs.filter(last_name__icontains=family_contains_query)
     
     elif is_valid_queryparam(national_code_search_contains_query) :
         qs = qs.filter(national_code__icontains=national_code_search_contains_query)
@@ -87,6 +90,7 @@ def searchbar(request):
 def insurance_searchbar_filters(request):
     qs = Patient.objects.all()
     name_contains_query = request.GET.get('name search')
+    family_contains_query = request.GET.get('family search')
     national_code_search_contains_query = request.GET.get('national code search')
     file_number_search_contains_query = request.GET.get('file number search')
     date_min = request.GET.get('date_min')
@@ -96,8 +100,10 @@ def insurance_searchbar_filters(request):
 
 
     if is_valid_queryparam(name_contains_query) :
-        qs = qs.filter(Q(first_name__icontains=name_contains_query)
-        | Q(last_name__icontains=name_contains_query)).distinct()
+        qs = qs.filter(first_name__icontains=name_contains_query)
+
+    elif is_valid_queryparam(family_contains_query) :
+        qs = qs.filter(last_name__icontains=family_contains_query)
     
     elif is_valid_queryparam(national_code_search_contains_query) :
         qs = qs.filter(national_code__icontains=national_code_search_contains_query)
@@ -130,6 +136,7 @@ def insurance_searchbar(request):
     qh = request.GET.get('m')
     qs = Patient.objects.all().filter(basic_insurance_id__exact=qh)
     name_contains_query = request.GET.get('name search')
+    family_contains_query = request.GET.get('family search')
     national_code_search_contains_query = request.GET.get('national code search')
     file_number_search_contains_query = request.GET.get('file number search')
     date_min = request.GET.get('date_min')
@@ -139,8 +146,10 @@ def insurance_searchbar(request):
 
     
     if is_valid_queryparam(name_contains_query) :
-        qs = qs.filter(Q(first_name__icontains=name_contains_query)
-        | Q(last_name__icontains=name_contains_query)).distinct()
+        qs = qs.filter(first_name__icontains=name_contains_query)
+
+    elif is_valid_queryparam(family_contains_query) :
+        qs = qs.filter(last_name__icontains=family_contains_query)
         
     elif is_valid_queryparam(national_code_search_contains_query) :
         qs = qs.filter(national_code__icontains=national_code_search_contains_query)
@@ -753,6 +762,7 @@ def report_pagination(request, page=1):
 def report_searchbar(request):
     qs = Patient.objects.all()
     name_contains_query = request.GET.get('name search')
+    family_contains_query = request.GET.get('family search')
     national_code_search_contains_query = request.GET.get('national code search')
     file_number_search_contains_query = request.GET.get('file number search')
     date_min = request.GET.get('date_min')
@@ -768,8 +778,10 @@ def report_searchbar(request):
     qf = Insurance.objects.filter(name__icontains=basic_insurance_search_query).values()[:][0]["slug"]
 
     if is_valid_queryparam(name_contains_query) :
-        qs = qs.filter(Q(first_name__icontains=name_contains_query)
-        | Q(last_name__icontains=name_contains_query)).distinct()
+        qs = qs.filter(first_name__icontains=name_contains_query)
+
+    elif is_valid_queryparam(family_contains_query) :
+        qs = qs.filter(last_name__icontains=family_contains_query)
     
     elif is_valid_queryparam(national_code_search_contains_query) :
         qs = qs.filter(national_code__icontains=national_code_search_contains_query)
