@@ -25,6 +25,7 @@
                           <th>حق العمل سنگ شکنی</th>
                           <th>حق العمل بیهوشی</th>
                           <th>دارو و لوازم مصرفی</th>
+                          <th>تخت</th>
                           <th></th>
                           <th></th>
                       </tr>
@@ -36,6 +37,7 @@
                           <td>{{ t.kidney_crusher_cost | intcomma:False }}</td>
                           <td>{{ t.anesthetic_cost | intcomma:False }}</td>
                           <td>{{ t.drug_and_consumables_cost | intcomma:False }}</td>
+                          <td>{{ t.bed | intcomma:False }}</td>
                           <td class="button">
                               <a href="{% url 'tariff_edit' t.pk %}"><button class="show-patient">ویرایش</button></a>
                           </td>

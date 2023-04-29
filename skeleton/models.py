@@ -20,6 +20,7 @@ class Tariff(models.Model):
     kidney_crusher_cost = models.BigIntegerField(verbose_name="حق العمل سنگ شکنی", blank=True, null=True)
     anesthetic_cost = models.BigIntegerField(verbose_name="حق العمل بیهوشی", blank=True, null=True)
     drug_and_consumables_cost = models.BigIntegerField(verbose_name="هزینه دارو و لوازم مصرفی", blank=True, null=True)
+    bed = models.BigIntegerField(verbose_name="هزینه تخت", blank=True, null=True)
 
     @property
     def TotalTariffWithoutMedicine(self):
@@ -32,7 +33,7 @@ class Tariff(models.Model):
     @property
     def TotalSumForCenter(self):
 
-        ttsfc = self.TotalTariffWithoutMedicine + self.drug_and_consumables_cost
+        ttsfc = self.TotalTariffWithoutMedicine + self.drug_and_consumables_cost + self.bed
 
         return ttsfc
 
@@ -239,6 +240,21 @@ class Patient(models.Model):
         else:
             message = "ابتدا تعرفه را ثبت کنید"
             return message
+
+
+    
+    @property
+    def BedCost(self):
+        
+        if self.payment_tariff:
+            bed = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
+            b = bed.bed
+            return int(b)
+        else:
+            message = "ابتدا تعرفه را ثبت کنید"
+            return message
+
+
 
 
     @property
