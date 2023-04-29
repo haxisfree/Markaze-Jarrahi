@@ -35,7 +35,7 @@
            
         </p>
         <hr style="margin-bottom: 40px;">
-            <p><span class="sub-title" style="width: 250px; color: black; font-size: 18px;">مبلغ پرداختی توسط بیمار</span><span class="pay btn-secondary"><span>{{ patient.Franchise | intcomma:False}} {% if patient.InsurancePremium == "ابتدا بیمه اصلی را انتخاب کنید" %}{% else %}</span><span> ریال</span>{% endif %}</span></p>
+            <p><span class="sub-title" style="width: 250px; color: black; font-size: 18px;">مبلغ پرداختی توسط بیمار</span><span class="pay btn-secondary"><span>{{ patient.PatientPaid | intcomma:False}} {% if patient.InsurancePremium == "ابتدا بیمه اصلی را انتخاب کنید" %}{% else %}</span><span> ریال</span>{% endif %}</span></p>
         <br>
 
         <div class="flex-left">

@@ -297,6 +297,19 @@ class Patient(models.Model):
 
 
 
+    @property
+    def PatientPaid(self):
+
+        if self.payment_tariff:
+            pp = self.Franchise + self.DrugCost + self.BedCost
+            return int(pp)
+        else:
+            message = "ابتدا تعرفه را ثبت کنید"
+            return message
+
+
+
+
 
 
 
