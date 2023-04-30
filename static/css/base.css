@@ -385,7 +385,7 @@ form [class^="col-"]{
 	right: 570px;
   }
 #bills-form .InsurancePremiumFa {
-	top: 721px;
+	top: 731px;
 	right: 147px;
 }
 #bills-form .file-number {
@@ -409,11 +409,11 @@ form [class^="col-"]{
 	right: 594px;
 }
 #bills-form .discharge-date {
-	top: 92px;
+	top: 97px;
 	right: 617px;
 }
 #bills-form .national-code {
-	top: 71px;
+	top: 76px;
 	right: 626px;
 }
 #bills-form .admission-date {
@@ -421,27 +421,27 @@ form [class^="col-"]{
 	right: 136px;
 }
 #bills-form .surgery-type {
-	top: 103px;
+	top: 108px;
 	right: 109px;
 }
 #bills-form .KidneyKruser {
-	top: 624px;
+	top: 634px;
 	right: 370px;
 }
 #bills-form .AnestheticCost {
-	top: 642px;
+	top: 652px;
 	right: 370px;
 }
 #bills-form .InsurancePremium {
-	top: 699px;
+	top: 709px;
 	right: 370px;
 }
 #bills-form .bedCost {
-	top: 100px;
+	top: 110px;
 	right: 370px;
 }
 #bills-form .drugCost {
-	top: 280px;
+	top: 290px;
 	right: 370px;
 }
 #surgery-report-form .file-number {
