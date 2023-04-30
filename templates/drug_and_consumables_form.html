@@ -21,11 +21,11 @@
         <p class="DrugCost">{{ patient.DrugCost | intcomma:False}}</p>
         <p class="AnestheticCost ">{{ patient.AnestheticCost | intcomma:False}}</p>
         <p class="patient-Franchise-percent">{{ patient.Fran | intcomma:False}}%</p>
-        <p class="patient-Franchise">{{ patient.Franchise | intcomma:False}}</p>
+        <p class="patient-Franchise">{{ patient.PatientPaid | intcomma:False}}</p>
         <p class="InsurancePremium">{{ patient.InsurancePremium | intcomma:False}}</p>
         <p class="total-tariff">{{ patient.TotalSumForCenter | intcomma:False}}</p>
 
-        <p class="DrugCost">{{ patient.BedCost | intcomma:False}}</p>
+        <p class="bedCost">{{ patient.BedCost | intcomma:False}}</p>
 </div>
 </div>
 {% endblock content %}

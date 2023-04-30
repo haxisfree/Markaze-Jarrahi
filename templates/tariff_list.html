@@ -21,7 +21,7 @@
               <table>
                   <thead>
                       <tr>
-                          <th>نام تعرفه</th>
+                          <th style="width: 15% !important;">نام تعرفه</th>
                           <th>حق العمل سنگ شکنی</th>
                           <th>حق العمل بیهوشی</th>
                           <th>دارو و لوازم مصرفی</th>
@@ -33,13 +33,13 @@
                   <tbody>
                       {% for t in tariff_obj %}
                       <tr class="patient">
-                          <td style="width: 25% !important;">{{ t.tariff}}</td>
-                          <td>{{ t.kidney_crusher_cost | intcomma:False }}</td>
-                          <td>{{ t.anesthetic_cost | intcomma:False }}</td>
-                          <td>{{ t.drug_and_consumables_cost | intcomma:False }}</td>
-                          <td>{{ t.bed | intcomma:False }}</td>
-                          <td class="button">
-                              <a href="{% url 'tariff_edit' t.pk %}"><button class="show-patient">ویرایش</button></a>
+                          <td style="width: 15% !important;">{{ t.tariff}}</td>
+                          <td style="width: fit-content !important;">{{ t.kidney_crusher_cost | intcomma:False }}</td>
+                          <td style="width: fit-content !important;">{{ t.anesthetic_cost | intcomma:False }}</td>
+                          <td style="width: fit-content !important;">{{ t.drug_and_consumables_cost | intcomma:False }}</td>
+                          <td style="width: fit-content !important;">{{ t.bed | intcomma:False }}</td>
+                          <td class="button" style="padding-left: 0;">
+                              <a href="{% url 'tariff_edit' t.pk %}" style="float: left;"><button class="show-patient">ویرایش</button></a>
                           </td>
                           <td class="button">
                               <a href="{% url 'tariff_delete' t.pk %}"><button class="btn-delete">حذف</button></a>
