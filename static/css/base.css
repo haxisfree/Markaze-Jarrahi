@@ -28,7 +28,11 @@
 		padding: 0 !important;
 		margin: 0 !important;
 	}
+	body::-webkit-scrollbar, main::-webkit-scrollbar, ::-webkit-scrollbar{
+		display: none;
+	}
 }
+
 @font-face {
 	font-family: iransans;
 	src: url(../font/IRANSans.ttf);
@@ -444,6 +448,11 @@ form [class^="col-"]{
 	top: 290px;
 	right: 370px;
 }
+
+#surgery-report-form  .date {
+	top: 108px;
+	right: 590px;
+  }
 #surgery-report-form .file-number {
 	top: 130px;
 	right: 115px;
