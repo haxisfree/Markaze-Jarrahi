@@ -77,7 +77,7 @@
                                 <a href="{% url 'patient_info' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a>
                             </td>
                             <td>{{patient.national_code}}</td>
-                            <td style="direction: ltr;">{{patient.FileNumber}}</td>
+                            <td style="direction: ltr;">{{patient.file_number}}</td>
                             <td>{{patient.date_of_admission}}</td>
                             <td class="button">
                                 <a href="{% url 'patient_info' patient.pk %}"><button class="show-patient">مشاهده</button></a>
