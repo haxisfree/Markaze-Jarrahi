@@ -82,13 +82,15 @@
                 <label><span style="color: var(--red);">*</span> تاریخ پذیرش :</label>
                 {{ form.date_of_admission }}
             </div>
+            <div class="col-6 file-number">
+                <label><span style="color: var(--red);">*</span>شماره پرونده :</label>
+                {{ form.file_number }}
+            </div>
+        </div>
+        <div class="row">
             <div class="col-6">
                 <label>تاریخ ترخیص :</label>
                 {{ form.date_of_discharge }}
-            </div>
-            <div class="col-6">
-                <label>شماره پرونده :</label>
-                {{ form.file_number }}
             </div>
         </div>
         <div class="row">

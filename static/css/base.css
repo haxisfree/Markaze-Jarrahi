@@ -975,3 +975,6 @@ a:hover .status{
 	font-size: 18px;
 	font-weight: bold;
 }
+.file-number input{
+	direction: ltr;
+}
