@@ -39,6 +39,7 @@
                 <!-- <p><span class="sub-title" style="width: 250px;">فرانشیز (درصد)</span>% {{ insurance.Fran2 }} </p> -->
                 <p><span class="sub-title" style="width: 250px;">مجموع بدهکاری و بستانکاری</span>{{ insurance.total_debits_and_credits }}</p>
                 <p><span class="sub-title" style="width: 250px;">نام مدیر مرکز</span>{{ insurance.boss_name }}</p>
+                <p><span class="sub-title" style="width: 250px;">سمت</span>{{ insurance.boss_position }}</p>
                 <br>
                 <div class="float-left">
                     <a href="{% url 'insurance_edit' insurance.slug %}"><button class="btn btn-secondary">ویرایش</button></a>

@@ -62,6 +62,8 @@ class Insurance (models.Model):
     branchs_name = models.CharField(max_length=100, verbose_name="نام شعبه", blank=True, null=True, default = '')
     total_debits_and_credits = models.BigIntegerField(verbose_name="مجموع بدهکاری و بستانکاری", blank=True, null=True)
     boss_name = models.CharField(max_length=100, verbose_name="نام مدیرعامل مرکز", blank=True, null=True, default = '')
+    boss_position = models.CharField(max_length=100, verbose_name="سمت", blank=True, null=True, default = '')
+
 
 
 
@@ -179,8 +181,10 @@ class Patient(models.Model):
             f2 = f1 - self.discount
             return int(f2)
         else:
-            message = "ابتدا بیمه تکمیلی را انتخاب کنید"
-            return message
+            first_tariff_object = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
+            f1 = first_tariff_object.TotalTariffWithoutMedicine
+            return int(f1)
+            
     
 
     @property
@@ -191,7 +195,10 @@ class Patient(models.Model):
             return message_2
         else:
             second_tariff_object = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
-            ip = second_tariff_object.TotalTariffWithoutMedicine - self.Franchise - self.discount
+            if self.Franchise == second_tariff_object.TotalTariffWithoutMedicine:
+                ip = second_tariff_object.TotalSumForCenter
+            else :
+                ip = second_tariff_object.TotalTariffWithoutMedicine - self.Franchise - self.discount
             return int(ip)
 
     @property
@@ -265,8 +272,8 @@ class Patient(models.Model):
             f = self.franchising #* 100
             return int(f)
         else:
-            message = "ابتدا درصد فرانشیز بیمار را وارد کنید"
-            return message
+            f = 0
+            return int(f)
 
             
 
@@ -301,8 +308,12 @@ class Patient(models.Model):
     def PatientPaid(self):
 
         if self.payment_tariff:
-            pp = self.Franchise + self.DrugCost + self.BedCost
-            return int(pp)
+            if self.franchising:
+                pp = self.Franchise + self.DrugCost + self.BedCost
+                return int(pp)
+            else:
+                pp = 0
+                return int(pp)
         else:
             message = "ابتدا تعرفه را ثبت کنید"
             return message
