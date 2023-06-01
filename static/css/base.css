@@ -284,6 +284,14 @@ form [class^="col-"]{
 .file-number{
 	direction: ltr;
 }
+#admission-form .date {
+	top: -192;
+	right: 484;
+}
+#admission-form .doctor-name {
+	top: -114;
+	right: 139;
+}
 #admission-form .total-tariff{
 	top: 400px;
 	right: 300px;

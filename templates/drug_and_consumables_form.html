@@ -26,6 +26,8 @@
         <p class="total-tariff">{{ patient.TotalSumForCenter | intcomma:False}}</p>
 
         <p class="bedCost">{{ patient.BedCost | intcomma:False}}</p>
+        <p class="date">{{ patient.date_of_admission }}</p>
+        <p class="doctor-name">{{ patient.docter_name }}</p>
 </div>
 </div>
 {% endblock content %}
