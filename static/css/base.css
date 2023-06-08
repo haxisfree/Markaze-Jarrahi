@@ -285,11 +285,11 @@ form [class^="col-"]{
 	direction: ltr;
 }
 #admission-form .date {
-	top: -192;
+	top: -162;
 	right: 484;
 }
 #admission-form .doctor-name {
-	top: -114;
+	top: -84;
 	right: 139;
 }
 #admission-form .total-tariff{
