@@ -174,8 +174,29 @@ def insurance_searchbar(request):
     for q in qs:
         li.append(q.id)
 
+    # y=type(li)
 
-    context = {'queryset' : qs, 'qid':li}
+    # li2 = str(li)
+    # x = re.split(",", li2)
+
+    
+    # lis = []
+    # for y in x: 
+    #     z=re.findall('[1-9]+', y)
+    #     lis.append(z)
+    
+    # li1 = []
+    # c = 0
+    # for lig in lis:
+    #     for h in lig:
+    # #         # try:
+    #         h2 = int(h)
+    #         rows = Patient.objects.get(id__exact=h2)
+    #         li1.append(rows)
+    #         c += 1
+
+
+    context = {'queryset' : qs, 'qid':li,}#!'x':x, 'lis':lis, 'li1':li1}
 
     return render(request,'insurance_search.html',context)
 
@@ -327,15 +348,16 @@ def insurance_letter(request):
 
     lis = []
     for y in x: 
-        z=re.findall('[1-9]+', y)
-        lis.append(z)
+        z=re.findall('[0-9]+', y)
+        lis.append(z[0])
     
     li1 = []
     c = 0
     for li in lis:
-        for h in li:
+        # for h in li:
             try:
-                rows = Patient.objects.get(id__exact=h)
+            # lx=int(h)
+                rows = Patient.objects.get(id__exact=li)
                 li1.append(rows)
                 c += 1
 
@@ -501,7 +523,7 @@ def insurance_letter(request):
     # sal = y[0]
 
 
-
+ 
 
 
 
