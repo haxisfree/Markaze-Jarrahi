@@ -8,7 +8,7 @@
     <div>
         <h1 style="color: var(--black); padding-right: 12px;">نتایج جستجو :</h1>
         <form method="GET" action="{% url 'export_excel' %}" class="excel-btn">
-            <button class="btn btn-primary" type="submit" name='y' value="{{queryset}}" >خروجی اکسل</button> 
+            <button class="btn btn-primary" type="submit" name='y' value="{{qid}}" >خروجی اکسل</button> 
         </form>
         <form method="GET" action="{% url 'insurance_letter' %}">
             <button class="btn btn-primary float-left" type="submit" name='n' value="{{qid}}" >نامه بیمه</button> 

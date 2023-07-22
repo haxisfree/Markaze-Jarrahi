@@ -555,71 +555,205 @@ def export_excel(request):
     columns = [
         'نام',
         'نام خانوادگی',
+        'نام پدر',
         'کد ملی',
+        'تاریخ تولد',
+        'جنسیت',
         'تلفن همراه',
+        'تلفن منزل',
+        'آدرس',
         'شماره پرونده',
         'تاریخ پذیرش',
         'نام پزشک',
+        'نام پزشک بیهوشی',
+        'نام اپراتور',
+        "نام متخصص بیهوشی",
+        'نام معرف',
+        'نوع عمل',
+        'بیمه تکمیلی',
         'بیمه پایه',
-        'نوع عمل بیمار',
-        'وضعیت پرداخت',
+        'تعرفه',
+        'درصد فرانشیز',
+        'مبلغ فرانشیز',
+        'سهم بیمار',
+        'سهم بیمه',
+        'جمع هزینه مرکز',
+        'تعرفه سنگ شکنی',
+        'تعرفه بیهوشی',
+        "هزینه دارو و لوازم مصرفی",
+        'هزینه تخت',
         'تخفیف',
-        'حق بیمار (فرانشیز)',
-        'حق بیمه',
+        'وضعیت پرداخت بیمه',
+        'وضعیت بیمار (کنسلی)',
+        'توضیحات',
         ]
 
     for col_num in range(len(columns)):
         ws.write(row_num,col_num,columns[col_num], font_style)
 
     font_style = xlwt.XFStyle()
+    
+    
+    
     qs = request.GET.get('y')
 
-    y = re.findall("\[(.*?)\]", qs)
-    for y in y:
-        x = re.split(",", y)
-
-
-    li1 = []
-    li2 = []
-    li3 = []
-    for z in x:
-        f = re.sub(r"^\s+", "", z)
-        li1.append(f)
-    for s in li1:
-        g = re.sub(r"\s+$", "", s)
-        li2.append(g)
-
-    for r in li2:
-        li3.append(r[10:-1])
+    y = re.split(",", qs)
 
     lis = []
+    for x in y: 
+        z=re.findall('[0-9]+', x)
+        lis.append(z[0])
+
+    # y = re.findall("\[(.*?)\]", qs)
+    # for y in y:
+    #     x = re.split(",", y)
+
+
+    # li1 = []
+    # li2 = []
+    # li3 = []
+    # for z in x:
+    #     f = re.sub(r"^\s+", "", z)
+    #     li1.append(f)
+    # for s in li1:
+    #     g = re.sub(r"\s+$", "", s)
+    #     li2.append(g)
+
+    # for r in li2:
+    #     li3.append(r[10:-1])
+
+
     lis2 = []
-    for h in li3:
-        rows = Patient.objects.filter(first_name__exact=h).values_list(
-        'first_name',
-        'last_name',
-        'national_code',
-        'phone_number',
-        'file_number',
-        'date_of_admission',
-        'docter_name',
-        'basic_insurance',
-        'type_of_surgery',
-        'paid',
-        #  'Franchise',
-        # 'InsurancePremium',
-        'discount',
-        )
+    for h in lis:
+        # rows = Patient.objects.get(id__exact=h).values_list(
+        # 'first_name',
+        # 'last_name',
+        # 'national_code',
+        # 'phone_number',
+        # 'file_number',
+        # 'date_of_admission',
+        # 'docter_name',
+        # 'basic_insurance',
+        # 'type_of_surgery',
+        # 'paid',
+        # 'discount',
+        # #  'Franchise',
+        # # 'InsurancePremium',
+        # )
+
+        lislis= []
+
+        first_name = Patient.objects.get(id__exact=h).first_name
+        lislis.append(first_name)
+        last_name = Patient.objects.get(id__exact=h).last_name
+        lislis.append(last_name)
+        father_name = Patient.objects.get(id__exact=h).father_name
+        lislis.append(father_name)
+        national_code = Patient.objects.get(id__exact=h).national_code
+        lislis.append(national_code)
+        birth_date = Patient.objects.get(id__exact=h).birth_date
+        lislis.append(birth_date)
+        sex = Patient.objects.get(id__exact=h).sex
+        lislis.append(sex)
+        phone_number = Patient.objects.get(id__exact=h).phone_number
+        lislis.append(phone_number)
+        home_phone = Patient.objects.get(id__exact=h).home_phone
+        lislis.append(home_phone)
+        address = Patient.objects.get(id__exact=h).address
+        lislis.append(address)
+        file_number = Patient.objects.get(id__exact=h).file_number
+        lislis.append(file_number)
+        date_of_admission = Patient.objects.get(id__exact=h).date_of_admission
+        lislis.append(date_of_admission)
+        docter_name = Patient.objects.get(id__exact=h).docter_name
+        lislis.append(docter_name)
+        anesthesia_doctor_name = Patient.objects.get(id__exact=h).anesthesia_doctor_name
+        lislis.append(anesthesia_doctor_name)
+        operator = Patient.objects.get(id__exact=h).operator
+        lislis.append(operator)
+        anesthesiologist = Patient.objects.get(id__exact=h).anesthesiologist
+        lislis.append(anesthesiologist)
+        presenter = Patient.objects.get(id__exact=h).presenter
+        lislis.append(presenter)
+        type_of_surgery = Patient.objects.get(id__exact=h).type_of_surgery
+        lislis.append(type_of_surgery)
+        basic_insurance = Patient.objects.get(id__exact=h).basic_insurance
+        lislis.append(basic_insurance)
+        supplementary_insurance = Patient.objects.get(id__exact=h).supplementary_insurance
+        lislis.append(supplementary_insurance)
+        payment_tariff = Patient.objects.get(id__exact=h).payment_tariff
+        lislis.append(payment_tariff)
+        Fran = Patient.objects.get(id__exact=h).Fran
+        lislis.append(Fran)
+        Franchise = Patient.objects.get(id__exact=h).Franchise
+        lislis.append(Franchise)
+        PatientPaid = Patient.objects.get(id__exact=h).PatientPaid
+        lislis.append(PatientPaid)
+        InsurancePremium = Patient.objects.get(id__exact=h).InsurancePremium        
+        lislis.append(InsurancePremium)
+        TotalSumForCenter = Patient.objects.get(id__exact=h).TotalSumForCenter
+        lislis.append(TotalSumForCenter)
+        KidneyKruser = Patient.objects.get(id__exact=h).KidneyKruser
+        lislis.append(KidneyKruser)
+        AnestheticCost = Patient.objects.get(id__exact=h).AnestheticCost
+        lislis.append(AnestheticCost)
+        DrugCost = Patient.objects.get(id__exact=h).DrugCost
+        lislis.append(DrugCost)
+        BedCost = Patient.objects.get(id__exact=h).BedCost
+        lislis.append(BedCost)
+        discount = Patient.objects.get(id__exact=h).discount
+        lislis.append(discount)
+        paid = Patient.objects.get(id__exact=h).paid
+        lislis.append(paid)
+        canceling = Patient.objects.get(id__exact=h).canceling        
+        lislis.append(canceling)
+        description = Patient.objects.get(id__exact=h).description
+        lislis.append(description)
         
-        # F = rows2.Franchise
-        # IP = rows2.InsurancePremium
-        # lis.append(list(rows))
+        lis2.append(lislis)
         
-        # rows[-1] = 
-        lis.append(rows)
+
+
+ 
+
+
+
+
+
+
+        # som = []
+        # F = Patient.objects.get(id__exact=h).Franchise
+        # IP = Patient.objects.get(id__exact=h).InsurancePremium
         
-        # rows2 = Patient.objects.get(first_name__exact=h).Franchise
+        # rows.append(F)
+        # rows.append(IP)
         
+
+
+
+
+
+
+
+        # F = []
+        # IP = []
+
+        # for so in som:
+        #     rows.append(so.Franchise) 
+        #     rows.append(so.InsurancePremium) 
+        
+        
+        
+        
+        
+        # lis2.append(rows)
+
+
+
+
+        # rows.append(F)
+        # rows.append(IP)
+
         # tup = []
         # lili = []
         # x = list(rows)
@@ -642,17 +776,82 @@ def export_excel(request):
         
 
 
+
+
+
+
+
+
+
+
+
+    # qs = request.GET.get('n')
+    
+    
+    # x = re.split(",", qs)
+
+    # lis = []
+    # for y in x: 
+    #     z=re.findall('[0-9]+', y)
+    #     lis.append(z[0])
+    
+    # li1 = []
+    # c = 0
+    # for li in lis:
+    #     # for h in li:
+    #         try:
+    #         # lx=int(h)
+    #             rows = Patient.objects.get(id__exact=li)
+    #             li1.append(rows)
+    #             c += 1
+
+
+    #         except Exception:
+    #             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        
+    
+    
+    
+    # k = 0
+    # for p in li1:
+    #     try:
+    #         if p.InsurancePremium is not None:
+    #             k += p.InsurancePremium
+    #         else:
+    #             pass
+    #     except:
+    #         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     # for q, p in zip (lis,lis2):
 
         
-    for q in lis:
+    for q in lis2:
         # list[q]
         # q.append[p]
-        for row in q:
+        # for row in q:
             
-            row_num += 1
-            for col_num in range(len(row)):
-                ws.write(row_num, col_num, str(row[col_num]), font_style)
+        row_num += 1
+        for col_num in range(len(q)):
+            ws.write(row_num, col_num, str(q[col_num]), font_style)
     wb.save(response)
     return response
 
@@ -844,9 +1043,11 @@ def report_searchbar(request):
     elif unpaid_search_query == 'on':
         qs = qs.filter(paid=False)
 
+    li = []
+    for q in qs:
+        li.append(q.id)
 
-
-    context = {'queryset' : qs}
+    context = {'queryset' : qs, 'qid':li}
 
     return render(request,'report_result.html',context)
 
