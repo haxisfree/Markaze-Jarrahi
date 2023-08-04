@@ -25,7 +25,7 @@ class Tariff(models.Model):
     @property
     def TotalTariffWithoutMedicine(self):
 
-        ttwm = self.kidney_crusher_cost + self.anesthetic_cost
+        ttwm = self.kidney_crusher_cost + self.anesthetic_cost + self.bed
 
         return ttwm
 
@@ -33,7 +33,7 @@ class Tariff(models.Model):
     @property
     def TotalSumForCenter(self):
 
-        ttsfc = self.TotalTariffWithoutMedicine + self.drug_and_consumables_cost + self.bed
+        ttsfc = self.TotalTariffWithoutMedicine + self.drug_and_consumables_cost
 
         return ttsfc
 
@@ -185,7 +185,21 @@ class Patient(models.Model):
             f1 = first_tariff_object.TotalTariffWithoutMedicine
             return int(f1)
             
-    
+    @property
+    def FranC(self):
+
+        if self.discount:
+            first_tariff_object = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
+            f1 = first_tariff_object.TotalTariffWithoutMedicine * self.franchising / 100
+            return int(f1)
+        else:
+            first_tariff_object = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
+            f1 = first_tariff_object.TotalTariffWithoutMedicine * self.franchising / 100
+            return int(f1)
+            
+
+
+
 
     @property
     def InsurancePremium(self):
@@ -302,6 +316,18 @@ class Patient(models.Model):
             return message
 
 
+    @property
+    def TotalTariffWithoutMedicine(self):
+
+        if self.payment_tariff:
+            tar = Tariff.objects.get( tariff__exact = self.payment_tariff_id )
+            d = tar.TotalTariffWithoutMedicine
+            return int(d)
+        else:
+            message = "ابتدا تعرفه را ثبت کنید"
+            return message
+
+
 
 
     @property
@@ -309,7 +335,7 @@ class Patient(models.Model):
 
         if self.payment_tariff:
             if self.franchising:
-                pp = self.Franchise + self.DrugCost + self.BedCost
+                pp = self.Franchise + self.DrugCost
                 return int(pp)
             else:
                 pp = 0
