@@ -21,9 +21,7 @@
         <p class="surgery-type">{{ patient.type_of_surgery }}</p>
         <p class="KidneyKruser">{{ patient.KidneyKruser | intcomma:False}}</p>
         <p class="AnestheticCost ">{{ patient.AnestheticCost | intcomma:False}}</p>
-        <p class="InsurancePremium">{{ patient.TotalTariffWithoutMedicine | intcomma:False}}</p>
-        <p class="InsurancePremium">{{ patient.FranC | intcomma:False}}</p>
-        <p class="InsurancePremium">{{ patient.InsurancePremium | intcomma:False}}</p>
+        <p class="InsurancePremium">{{ patient.TotalTariffWithoutMedicine | intcomma:False}} - {{ patient.FranC | intcomma:False}} = {{ patient.InsurancePremium | intcomma:False}}</p>
         <p class="InsurancePremiumFa">{{ patient.InsurancePremiumFa }} ریال</p>
         <p class="bedCost">{{ patient.BedCost | intcomma:False}}</p>
         <p class="drugCost">{{ patient.DrugCost | intcomma:False}}</p>

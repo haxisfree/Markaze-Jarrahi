@@ -446,7 +446,8 @@ form [class^="col-"]{
 }
 #bills-form .InsurancePremium {
 	top: 709px;
-	right: 370px;
+	right: 425px;
+	direction: ltr;
 }
 #bills-form .bedCost {
 	top: 110px;
