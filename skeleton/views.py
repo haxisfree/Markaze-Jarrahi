@@ -351,6 +351,8 @@ def insurance_letter(request):
         z=re.findall('[0-9]+', y)
         lis.append(z[0])
     
+    lis.reverse()
+    
     li1 = []
     c = 0
     for li in lis:
