@@ -89,7 +89,11 @@
                 <p><span class="sub-title" style="width: 250px; vertical-align: middle;">مبلغ پرداختی توسط بیمار<br> (بدون هزینه دارو و تخت)</span>{{ patient.Franchise | intcomma:False}} {% if patient.InsurancePremium == "ابتدا بیمه تکمیلی را انتخاب کنید" %}{% else %}<span>ریال</span>{% endif %}</p>
                 <p><span class="sub-title" style="width: 250px; vertical-align: middle;">مبلغ پرداختی توسط بیمار<br> (با احتساب هزینه دارو و تخت)</span>{{ patient.PatientPaid | intcomma:False}} {% if patient.InsurancePremium == "ابتدا بیمه تکمیلی را انتخاب کنید" %}{% else %}<span>ریال</span>{% endif %}</p>
                 <p><span class="sub-title" style="width: 250px;">مبلغ پرداختی بیمه </span>{{ patient.InsurancePremium | intcomma:False }} {% if patient.InsurancePremium == "ابتدا بیمه تکمیلی را انتخاب کنید" %}{% else %}<span>ریال</span>{% endif %}</p>
-                <p><span class="sub-title" style="width: 250px;">وضعیت پرداخت بیمه </span>{% if patient.paid == False %}<span class="status btn-delete" style="margin-right: -5px;">پرداخت نشده</span>{% else %}<span class="status btn-secondary" style="margin-right: -5px;">پرداخت شده</span>{% endif %}</p>
+                <p><span class="sub-title" style="width: 250px;">وضعیت پرداخت بیمه </span>{% if patient.paid == False %}<span>پرداخت نشده</span>{% else %}<span>پرداخت شده</span>{% endif %}</p>
+                <form class="change-status" method="POST" action="{% url 'paid' patient.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-delete">تغییر وضعیت پرداخت</button>
+                </form>
                 <a href="{% url 'discount' patient.pk %}"><button class="btn btn-primary" style="margin-top: 10px;">اعمال تخفیف</button></a>
             </div>
         </div>

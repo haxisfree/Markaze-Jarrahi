@@ -97,20 +97,16 @@ button{
 	border-right: 6px solid var(--blue);
 }
 #logo {
-	/* width: 90px;
-	margin-bottom: 25px;
-	*/
 	width: 300px;
 	margin-top: -20px;
 }
 .main {
-	/* height: 100%; */
+	height: 100%;
 	width: 74%;
 	position: absolute;
 	top: 0;
 	right: 26%;
 	background-color: var(--light-gray);
-	/* overflow: scroll; */
 }
 .wrapper{
 	padding: 3%;
@@ -266,9 +262,6 @@ form [class^="col-"]{
 	background-image: url("../pic/BG/surgery_report_form2.jpg");
 }
 .forms{
-	/* height: 1118px;
-	width: 791px;
-	*/
 	height: 297mm;
 	width: 210mm;
 	margin: 2% auto;
@@ -847,13 +840,6 @@ a:hover div.insurance-container{
 	display: none;
 	height: 200px;
 }
-/* .empty-table p{
-	text-align: center;
-	padding: 50px;
-	font-size: 22px;
-	color: var(--gray);
-}
-*/
 .p-0{
 	padding: 0 !important;
 }
@@ -991,4 +977,12 @@ a:hover .status{
 }
 .file-number input{
 	direction: ltr;
+}
+.change-status{
+  position: absolute;
+  right: 374px;
+  bottom: 45px;
+}
+.second-info{
+  position: relative;
 }
